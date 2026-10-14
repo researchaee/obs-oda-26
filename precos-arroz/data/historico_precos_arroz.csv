@@ -1,0 +1,392 @@
+data,cadeia,tipo,segmento,marca,nome,peso_g,preco,eur_kg,preco_ref,promo,n_lojas,preco_min_lojas,preco_max_lojas,ean,id,url,nota
+2026-10-13,Continente,Carolino,Marca própria,Continente,Arroz Carolino Caravela Continente,1000.0,1.15,1.15,,False,,,,,8385342,,
+2026-10-13,Continente,Basmati,Marca própria,Continente,Arroz Basmati Continente,1000.0,1.89,1.89,,False,,,,,4949515,,
+2026-10-13,Continente,Agulha,Marca própria,Continente,Arroz Agulha Continente,1000.0,1.15,1.15,,False,,,,,6927230,,
+2026-10-13,Continente,Basmati,Premium / Bio,Origens Bio,Arroz Basmati Himalaias Origens Bio,500.0,3.27,6.54,,False,,,,,7731772,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Cigala,Arroz Agulha Cigala,1000.0,1.64,1.64,,False,,,,,2305902,,
+2026-10-13,Continente,Vaporizado / Estufado,Marca própria,Continente,Arroz Vaporizado Continente,1000.0,1.35,1.35,,False,,,,,8773537,,
+2026-10-13,Continente,Carolino,Marca própria,Continente,Arroz Carolino Continente,1000.0,1.05,1.05,,False,,,,,8966552,,
+2026-10-13,Continente,Carolino,Marca de fabricante,Caçarola,Arroz Carolino Caçarola,1000.0,1.49,1.49,,False,,,,,2203031,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Caçarola,Arroz Basmati Caçarola,2500.0,5.91,2.36,7.5,True,,,,,3040677,,
+2026-10-13,Continente,Agulha,Marca própria,Continente,Arroz Agulha Selecionado Continente,1000.0,1.39,1.39,,False,,,,,4954132,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Caçarola,Arroz Agulha Extra Longo Caçarola,1000.0,1.57,1.57,,False,,,,,2203036,,
+2026-10-13,Continente,Carolino,Marca de fabricante,Saludães,Arroz Carolino Extra Longo Saludães,1000.0,1.54,1.54,,False,,,,,4837862,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Saludães,Arroz Agulha Saludães,1000.0,1.55,1.55,,False,,,,,4837858,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Cigala,Arroz Basmati Brajma Cigala,1000.0,2.98,2.98,,False,,,,,2699873,,
+2026-10-13,Continente,Basmati,Marca própria,Continente,Arroz Basmati Pack Poupança Continente,5000.0,8.69,1.74,,False,,,,,8488866,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca própria,Continente,Arroz Thai Jasmim Continente,1000.0,1.99,1.99,,False,,,,,4949517,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Caçarola,Arroz Basmati Premium Caçarola,5000.0,12.95,2.59,16.19,True,,,,,8118613,,
+2026-10-13,Continente,Vaporizado / Estufado,Marca de fabricante,Cigala,Arroz Vaporizado Cigala,1000.0,1.63,1.63,,False,,,,,2005617,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Cigala,Arroz Basmati Cigala,2000.0,3.99,2.0,,False,,,,,7406680,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Caçarola,Arroz Basmati Extra Longo Caçarola,1000.0,2.39,2.39,2.99,True,,,,,2232813,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca de fabricante,Cigala,Arroz Basmati Brajma Pronto a Comer sem Glúten Cigala,250.0,1.35,5.4,1.55,True,,,,,2700058,,
+2026-10-13,Continente,Carolino,Marca de fabricante,Pato Real,Arroz Carolino Malandrinho Pato Real,1000.0,1.89,1.89,,False,,,,,2003662,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Oriente,Arroz Basmati Oriente,2000.0,3.99,2.0,,False,,,,,7994153,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Caçarola,Arroz Basmati Caçarola,500.0,1.23,2.46,1.56,True,,,,,2735673,,
+2026-10-13,Continente,Vaporizado / Estufado,Marca de fabricante,Oriente,Arroz Vaporizado Oriente,2000.0,2.69,1.34,,False,,,,,7994152,,
+2026-10-13,Continente,Basmati,Marca própria,Continente Bio,Arroz Basmati Longo Continente Bio,500.0,1.74,3.48,,False,,,,,6866580,,
+2026-10-13,Continente,Agulha,Marca própria,Continente,Arroz Agulha Pack Poupança Continente,5000.0,5.39,1.08,,False,,,,,8252351,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Saludães,Arroz Basmati Saludães,1000.0,2.89,2.89,,False,,,,,4905373,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Bom Sucesso,Arroz Agulha Bom Sucesso,1000.0,1.69,1.69,,False,,,,,2769747,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Pato Real,Arroz Agulha Pato Real,1000.0,1.68,1.68,,False,,,,,2003658,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Oriente,Arroz Thai Jasmim Oriente,2000.0,3.89,1.95,,False,,,,,7994154,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Caçarola,Arroz Agulha Extra Longo Caçarola,2000.0,2.49,1.25,,False,,,,,7830661,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Oriente,Arroz Basmati Oriente,500.0,1.89,3.78,,False,,,,,8394456,,
+2026-10-13,Continente,Carolino,Marca de fabricante,Cigala,Arroz Carolino Extra Longo Cigala,1000.0,1.54,1.54,,False,,,,,2414320,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca de fabricante,Cigala,Arroz Agulha Pronto a Comer Cigala,250.0,1.35,5.4,1.45,True,,,,,7771393,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca de fabricante,Cigala,Arroz Integral Pronto a Comer sem Glúten Cigala,250.0,1.35,5.4,1.45,True,,,,,3643622,,
+2026-10-13,Continente,Vaporizado / Estufado,Marca de fabricante,Caçarola,Arroz Vaporizado Estufado Caçarola,1000.0,1.61,1.61,,False,,,,,2203136,,
+2026-10-13,Continente,"Risotto (arbório, carnaroli)",Premium / Bio,Scotti,Arroz Risotto Arbório Scotti,500.0,1.89,3.78,,False,,,,,5498832,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Oriente,Arroz Agulha Oriente,2000.0,2.38,1.19,,False,,,,,7907491,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Tio João,Arroz Branqueado Longo Tio João,5000.0,10.99,2.2,,False,,,,,7825600,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Cigala,Arroz Thai Jasmim Cigala,1000.0,2.39,2.39,,False,,,,,7406696,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Caçarola,Arroz Thai Perfumado Caçarola,500.0,1.21,2.42,1.51,True,,,,,2735678,,
+2026-10-13,Continente,Carolino,Marca própria,Continente,Arroz Carolino Pack Poupança Continente,5000.0,4.95,0.99,,False,,,,,8966612,,
+2026-10-13,Continente,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,Caçarola,Arroz Selvagem Caçarola,500.0,3.45,6.9,4.33,True,,,,,2735689,,
+2026-10-13,Continente,Vaporizado / Estufado,Marca de fabricante,Caçarola,Arroz Vaporizado Carolino Caçarola,1000.0,1.76,1.76,,False,,,,,6581986,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Touch,Arroz Jasmim Perfumado Extra Longo Touch,5000.0,7.99,1.6,,False,,,,,8967108,,
+2026-10-13,Continente,Integral,Premium / Bio,Seara,Arroz Integral Longo Seara,1000.0,5.08,5.08,,False,,,,,2963044,,
+2026-10-13,Continente,"Risotto (arbório, carnaroli)",Marca própria,Continente,Arroz Risotto Continente,500.0,0.99,1.98,,False,,,,,8457480,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Oriente,Arroz Agulha Branqueado Extra Longo Oriente,1000.0,1.55,1.55,,False,,,,,2005625,,
+2026-10-13,Continente,Carolino,Marca de fabricante,Oriente,Arroz Carolino Oriente,2000.0,2.49,1.25,,False,,,,,7907492,,
+2026-10-13,Continente,Agulha,Premium / Bio,Seara,Arroz Branco Seara,1000.0,5.38,5.38,,False,,,,,2510588,,
+2026-10-13,Continente,Vaporizado / Estufado,Marca própria,Continente,Arroz Basmati Vaporizado Continente,1000.0,2.29,2.29,,False,,,,,8087989,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Caçarola,Arroz Thai Perfumado Caçarola,2500.0,5.84,2.34,7.3,True,,,,,3040640,,
+2026-10-13,Continente,Integral,Premium / Bio,Seara,Arroz Integral Seara,1000.0,4.93,4.93,,False,,,,,2232432,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Dragon Fortune,Arroz Thai Jasmim Dragon Fortune,5000.0,7.99,1.6,,False,,,,,8211792,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Oriente,Arroz Basmati Oriente,1000.0,2.49,2.49,,False,,,,,2605008,,
+2026-10-13,Continente,"Risotto (arbório, carnaroli)",Marca de fabricante,Bom Sucesso,Arroz Risotto Bom Sucesso,1000.0,3.09,3.09,,False,,,,,6097423,,
+2026-10-13,Continente,Integral,Marca própria,Continente Equilíbrio,Arroz Basmati Integral Continente Equilíbrio,1000.0,2.69,2.69,,False,,,,,6368465,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca de fabricante,Louro,Arroz com Feijão Pronto a Comer Louro,250.0,1.59,6.36,1.99,True,,,,,7798001,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca de fabricante,Louro,Arroz Basmati Pronto a Comer Louro,250.0,1.55,6.2,,False,,,,,8239322,,
+2026-10-13,Continente,Integral,Marca de fabricante,Saludães,Arroz Integral Extra Longo Saludães,1000.0,1.49,1.49,,False,,,,,4837863,,
+2026-10-13,Continente,Basmati,Premium / Bio,Tilda,Arroz Basmati Tilda,1000.0,2.99,2.99,3.59,True,,,,,8769292,,
+2026-10-13,Continente,Carolino,Marca de fabricante,Saludães,Arroz Doce Especial Saludães,500.0,0.99,1.98,,False,,,,,5827626,,
+2026-10-13,Continente,Basmati,Marca de fabricante,Caçarola,Arroz Basmati Premium Caçarola,1000.0,3.74,3.74,,False,,,,,8186669,,
+2026-10-13,Continente,Sushi / Poke,Marca de fabricante,Caçarola,Arroz Sushi Extra Médio Caçarola,1000.0,1.91,1.91,2.39,True,,,,,5580643,,
+2026-10-13,Continente,"Risotto (arbório, carnaroli)",Marca de fabricante,Caçarola,Arroz Risotto Caçarola,500.0,1.7,3.4,,False,,,,,3040717,,
+2026-10-13,Continente,Integral,Marca própria,Continente Equilíbrio,Arroz Integral Extra Longo Continente Equilíbrio,1000.0,1.48,1.48,,False,,,,,5340773,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca de fabricante,Trevijano,Risotto de Cogumelos sem Sal Adicionado Trevijano,280.0,3.66,13.07,,False,,,,,7004277,,
+2026-10-13,Continente,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,Caçarola,Arroz Vaporizado Negro Integral Extra Longo Caçarola,500.0,3.08,6.16,3.86,True,,,,,6191859,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Oriente,Arroz Thai Jasmin Oriente,1000.0,2.48,2.48,,False,,,,,4681337,,
+2026-10-13,Continente,Agulha,Marca de fabricante,Tio João,Arroz Branqueado Longo Tio João,1000.0,2.39,2.39,,False,,,,,7820811,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca própria,Continente,Arroz Agulha Pronto a Comer sem Glúten Continente,250.0,1.45,5.8,,False,,,,,4613405,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca própria,Continente Seleção,Risotto com Trufa Pronto a Comer Continente Seleção,280.0,2.78,9.93,,False,,,,,7475619,,
+2026-10-13,Continente,Carolino,Marca de fabricante,Bom Sucesso,Arroz Carolino Bom Sucesso,1000.0,1.79,1.79,,False,,,,,2769753,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Super Dragão,Arroz Jasmine Perumado Super Dragão,5000.0,7.99,1.6,,False,,,,,8780775,,
+2026-10-13,Continente,Vaporizado / Estufado,Marca de fabricante,Oriente,Arroz Vaporizado Oriente,1000.0,1.68,1.68,,False,,,,,7907470,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca própria,Continente Seleção,Risotto de Cogumelos Pronto a Comer Continente Seleção,280.0,2.78,9.93,,False,,,,,7475617,,
+2026-10-13,Continente,Sushi / Poke,Marca de fabricante,Saitaku,Arroz Sushi Saitaku,500.0,2.59,5.18,,False,,,,,6385400,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca de fabricante,Trevijano,Risotto Mediterrâneo Pronto a Comer sem Sal Adicionado Trevijano,280.0,3.89,13.89,,False,,,,,7004272,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Bom Sucesso,Arroz Aromático Bom Sucesso,500.0,1.14,2.28,,False,,,,,3617999,,
+2026-10-13,Continente,Carolino,Marca de fabricante,Oriente,Arroz Carolino Oriente,1000.0,1.29,1.29,,False,,,,,7907437,,
+2026-10-13,Continente,Thai / Jasmim / Aromático,Marca de fabricante,Touch,Arroz Jasmim Perfumado Premium Touch,2000.0,4.19,2.1,,False,,,,,8967268,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca de fabricante,Louro,Arroz Primavera Pronto a Comer Louro,250.0,1.59,6.36,1.99,True,,,,,7798007,,
+2026-10-13,Continente,Pronto a comer / preparados,Marca própria,Continente Seleção,Risotto de Legumes Pronto a Comer Continente Seleção,280.0,2.78,9.93,,False,,,,,7475618,,
+2026-10-13,Continente,Integral,Marca de fabricante,Caçarola,Arroz Integral Extra Longo Caçarola,1000.0,1.58,1.58,,False,,,,,6580640,,
+2026-10-13,Continente,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,Caçarola,Arroz Pink Caçarola,500.0,3.74,7.48,,False,,,,,8186670,,
+2026-10-13,Continente,Integral,Marca de fabricante,Oriente,Arroz Integral Oriente,1000.0,1.54,1.54,,False,,,,,8504817,,
+2026-10-13,Continente,Sushi / Poke,Marca de fabricante,Shiro,Arroz Poke Bowl Shiro,500.0,1.19,2.38,,False,,,,,8547897,,
+2026-10-13,Pingo Doce,Basmati,Marca própria,Pingo Doce,Arroz Basmati,1000.0,1.89,1.89,,False,,,,,651101,,
+2026-10-13,Pingo Doce,Agulha,Marca de fabricante,Cigala,Arroz Agulha,1000.0,1.25,1.25,1.64,True,,,,,623900,,
+2026-10-13,Pingo Doce,Agulha,Marca própria,Pingo Doce,Arroz Agulha Europa,1000.0,1.15,1.15,,False,,,,,651178,,
+2026-10-13,Pingo Doce,Vaporizado / Estufado,Marca própria,Pingo Doce,Arroz Vaporizado,1000.0,1.09,1.09,1.35,True,,,,,651179,,
+2026-10-13,Pingo Doce,Agulha,Marca de fabricante,Bom Sucesso,Arroz Agulha,1000.0,1.69,1.69,,False,,,,,443504,,
+2026-10-13,Pingo Doce,Agulha,Marca de fabricante,Caçarola,Arroz Agulha,1000.0,1.57,1.57,,False,,,,,104671,,
+2026-10-13,Pingo Doce,Agulha,Marca própria,Pingo Doce,Arroz Agulha Uruguai,1000.0,1.39,1.39,,False,,,,,719536,,
+2026-10-13,Pingo Doce,Basmati,Marca de fabricante,Cigala,Arroz Basmati Brajma,1000.0,2.54,2.54,2.98,True,,,,,804038,,
+2026-10-13,Pingo Doce,Carolino,Marca de fabricante,Cigala,Arroz Carolino,1000.0,1.14,1.14,1.54,True,,,,,739490,,
+2026-10-13,Pingo Doce,Carolino,Marca de fabricante,Bom Sucesso,Arroz Carolino,1000.0,1.79,1.79,,False,,,,,443505,,
+2026-10-13,Pingo Doce,Carolino,Marca própria,Pingo Doce,Arroz Carolino,1000.0,1.15,1.15,,False,,,,,918813,,
+2026-10-13,Pingo Doce,Thai / Jasmim / Aromático,Marca própria,Pingo Doce,Arroz Thai Jasmine,1000.0,1.49,1.49,1.99,True,,,,,622555,,
+2026-10-13,Pingo Doce,Agulha,Marca de fabricante,Cozinha Velha,Arroz Agulha,1000.0,1.49,1.49,,False,,,,,735379,,
+2026-10-13,Pingo Doce,Agulha,Marca de fabricante,Saludães,Arroz Agulha,1000.0,1.22,1.22,1.55,True,,,,,616258,,
+2026-10-13,Pingo Doce,Basmati,Marca de fabricante,Caçarola,Arroz Basmati,1000.0,2.99,2.99,,False,,,,,943554,,
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Marca de fabricante,Cigala,Arroz Basmati Pronto a Comer,250.0,1.35,5.4,1.55,True,,,,,410666,,
+2026-10-13,Pingo Doce,Carolino,Marca de fabricante,Saludães,Arroz Carolino,1000.0,1.14,1.14,1.54,True,,,,,616259,,
+2026-10-13,Pingo Doce,Carolino,Marca de fabricante,Caçarola,Arroz Carolino,1000.0,1.49,1.49,,False,,,,,38781,,
+2026-10-13,Pingo Doce,"Risotto (arbório, carnaroli)",Marca própria,Pingo Doce,Arroz Risotto,1000.0,1.99,1.99,,False,,,,,906210,,
+2026-10-13,Pingo Doce,Vaporizado / Estufado,Marca de fabricante,Cigala,Arroz Vaporizado,1000.0,1.63,1.63,,False,,,,,907911,,
+2026-10-13,Pingo Doce,Vaporizado / Estufado,Marca de fabricante,Cozinha Velha,Arroz Vaporizado,1000.0,1.69,1.69,,False,,,,,735377,,
+2026-10-13,Pingo Doce,Integral,Marca própria,Pingo Doce,Arroz Integral,1000.0,1.48,1.48,,False,,,,,987745,,
+2026-10-13,Pingo Doce,Basmati,Marca própria,Pingo Doce Biológico,Arroz Basmati Biológico,500.0,1.98,3.96,,False,,,,,964229,,
+2026-10-13,Pingo Doce,"Especialidades (selvagem, negro, vermelho)",Marca própria,Pingo Doce,Arroz Selvagem,500.0,2.39,4.78,,False,,,,,776342,,
+2026-10-13,Pingo Doce,Agulha,Marca de fabricante,Oriente,Arroz Agulha,1500.0,2.24,1.49,,False,,,,,1013757,,Peso inferido (o site indica «Un»)
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Marca de fabricante,Cigala,Arroz Agulha Pronto a Comer,250.0,1.35,5.4,1.45,True,,,,,957381,,
+2026-10-13,Pingo Doce,"Risotto (arbório, carnaroli)",Marca de fabricante,Le Chef,Arroz Atlantic Risotto,500.0,1.14,2.28,,False,,,,,722404,,
+2026-10-13,Pingo Doce,Sushi / Poke,Marca de fabricante,Le Chef,Arroz Atlantic Sushi,500.0,1.14,2.28,,False,,,,,722367,,
+2026-10-13,Pingo Doce,Basmati,Marca de fabricante,Oriente,Arroz Basmati,1500.0,3.74,2.49,,False,,,,,1013864,,Peso inferido (o site indica «Un»)
+2026-10-13,Pingo Doce,Basmati,Marca de fabricante,Le Chef,Arroz Basmati,500.0,1.24,2.48,,False,,,,,756964,,
+2026-10-13,Pingo Doce,Basmati,Marca de fabricante,Saludães,Arroz Basmati,1000.0,2.49,2.49,2.88,True,,,,,744360,,
+2026-10-13,Pingo Doce,Basmati,Premium / Bio,Lal Qilla,Arroz Basmati Extra Longo Majestic,5000.0,12.5,2.5,,False,,,,,1005777,,
+2026-10-13,Pingo Doce,Basmati,Marca de fabricante,Caçarola,Arroz Basmati Premium,1000.0,2.99,2.99,3.74,True,,,,,992105,,
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Premium / Bio,Riso Gallo,Arroz Basmati Pronto a Comer,250.0,3.19,12.76,,False,,,,,973196,,
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Marca de fabricante,Louro,Arroz Basmati Pronto a Comer,250.0,1.55,6.2,,False,,,,,992291,,
+2026-10-13,Pingo Doce,Carolino,Marca de fabricante,Louro,Arroz Calorino,1250.0,1.39,1.11,1.89,True,,,,,961619,,
+2026-10-13,Pingo Doce,Vaporizado / Estufado,Marca de fabricante,Caçarola,Arroz Carolino Vaporizado,1000.0,1.76,1.76,,False,,,,,865298,,
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Marca de fabricante,Louro,Arroz com Feijão Pronto a Comer,250.0,1.99,7.96,,False,,,,,973599,,
+2026-10-13,Pingo Doce,Carolino,Marca de fabricante,Saludães,Arroz Doce Especial,500.0,0.83,1.66,0.99,True,,,,,972936,,
+2026-10-13,Pingo Doce,Basmati,Marca de fabricante,Oriente,Arroz Gran Basmati Royal,2000.0,4.75,2.38,4.99,True,,,,,1009662,,
+2026-10-13,Pingo Doce,Integral,Marca de fabricante,Cigala,Arroz Integral,1000.0,1.29,1.29,1.59,True,,,,,933142,,
+2026-10-13,Pingo Doce,Integral,Marca de fabricante,Bom Sucesso,Arroz Integral,500.0,0.89,1.78,,False,,,,,650165,,
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Marca de fabricante,Cigala,Arroz Integral Pronto a Comer,250.0,1.35,5.4,1.45,True,,,,,523262,,
+2026-10-13,Pingo Doce,Thai / Jasmim / Aromático,Marca de fabricante,Oriente,Arroz Jasmine,1500.0,3.62,2.41,,False,,,,,1013758,,Peso inferido (o site indica «Un»)
+2026-10-13,Pingo Doce,Thai / Jasmim / Aromático,Marca de fabricante,Sontu,Arroz Jasmine Perfumado,5000.0,8.95,1.79,,False,,,,,1005778,,
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Premium / Bio,Riso Gallo,Arroz Negro Pronto a Comer,250.0,3.19,12.76,,False,,,,,973194,,
+2026-10-13,Pingo Doce,Carolino,Marca de fabricante,Louro,Arroz para Arroz Doce,500.0,0.99,1.98,,False,,,,,969056,,
+2026-10-13,Pingo Doce,"Risotto (arbório, carnaroli)",Marca de fabricante,Bom Sucesso,Arroz para Risotto,1000.0,3.09,3.09,,False,,,,,885558,,
+2026-10-13,Pingo Doce,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,Caçarola,Arroz Pink Rice,500.0,3.74,7.48,,False,,,,,992065,,
+2026-10-13,Pingo Doce,Sushi / Poke,Marca de fabricante,Shiro,Arroz Poke Bowl,250.0,1.19,4.76,,False,,,,,992292,,
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Marca de fabricante,Louro,Arroz Primavera Pronto a Comer,250.0,1.99,7.96,,False,,,,,973896,,
+2026-10-13,Pingo Doce,"Especialidades (selvagem, negro, vermelho)",Premium / Bio,Riso Gallo,Arroz Risotto Negro,500.0,3.99,7.98,,False,,,,,973192,,
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Premium / Bio,Riso Gallo,Arroz Risotto Pronto a Comer,250.0,3.19,12.76,,False,,,,,973195,,
+2026-10-13,Pingo Doce,Thai / Jasmim / Aromático,Marca de fabricante,Li Lin,Arroz Thai Grain Flower,5000.0,11.49,2.3,,False,,,,,985217,,
+2026-10-13,Pingo Doce,Thai / Jasmim / Aromático,Marca de fabricante,Li Lin,Arroz Thai Jasmine Perfumado,5000.0,7.99,1.6,,False,,,,,631776,,
+2026-10-13,Pingo Doce,Vaporizado / Estufado,Marca de fabricante,Oriente,Arroz Vaporizado,1500.0,2.49,1.66,,False,,,,,1013946,,Peso inferido (o site indica «Un»)
+2026-10-13,Pingo Doce,Pronto a comer / preparados,Premium / Bio,Riso Gallo,Arroz Vermelho Pronto a Comer,220.0,3.19,14.5,,False,,,,,973193,,
+2026-10-13,Auchan,Basmati,Marca própria,AUCHAN,arroz basmati auchan extra longo 1kg,1000.0,1.89,1.89,,False,,,,,548510,,
+2026-10-13,Auchan,Agulha,Marca de fabricante,CIGALA,arroz agulha cigala 1kg,1000.0,1.64,1.64,,False,,,,,40299,,
+2026-10-13,Auchan,Agulha,Marca própria,AUCHAN,arroz agulha auchan extra longo branqueado 1kg,1000.0,1.15,1.15,,False,,,,,1193801,,
+2026-10-13,Auchan,Carolino,Marca própria,AUCHAN,arroz carolino auchan extra longo 1kg,1000.0,1.09,1.09,,False,,,,,56832,,
+2026-10-13,Auchan,Vaporizado / Estufado,Marca própria,AUCHAN,arroz estufado auchan extra longo 1kg,1000.0,1.35,1.35,,False,,,,,556565,,
+2026-10-13,Auchan,Vaporizado / Estufado,Marca de fabricante,CIGALA,arroz vaporizado cigala extra longo 1kg,1000.0,1.63,1.63,,False,,,,,732951,,
+2026-10-13,Auchan,Agulha,Marca de fabricante,AGULHITA,arroz agulhita extra longo 1kg,1000.0,1,1.0,,False,,,,,3245289,,
+2026-10-13,Auchan,Carolino,Marca de fabricante,CIGALA,arroz carolino cigala 1kg,1000.0,1.54,1.54,,False,,,,,40305,,
+2026-10-13,Auchan,Basmati,Premium / Bio,PROVIDA,arroz provida basmati bio 1kg,1000.0,4.99,4.99,,False,,,,,3111671,,
+2026-10-13,Auchan,Carolino,Marca de fabricante,SALUDÃES,arroz carolino saludães 1kg,1000.0,1.54,1.54,,False,,,,,3358,,
+2026-10-13,Auchan,Thai / Jasmim / Aromático,Marca própria,AUCHAN,arroz jasmim auchan extra longo 1kg,1000.0,1.99,1.99,,False,,,,,598340,,
+2026-10-13,Auchan,Agulha,Marca de fabricante,POLEGAR,arroz longo comum polegar 1kg,1000.0,0.89,0.89,,False,,,,,3962270,,
+2026-10-13,Auchan,"Risotto (arbório, carnaroli)",Marca própria,AUCHAN,arroz risotto auchan 500g,500.0,0.99,1.98,,False,,,,,3037588,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,CAÇAROLA,arroz basmati caçarola 500g,500.0,1.56,3.12,,False,,,,,557819,,
+2026-10-13,Auchan,Basmati,Marca própria,AUCHAN,arroz basmati auchan extra longo 500g,500.0,1.19,2.38,,False,,,,,936049,,
+2026-10-13,Auchan,Agulha,Marca de fabricante,CAÇAROLA,arroz agulha caçarola extra longo 1kg,1000.0,1.27,1.27,1.57,True,,,,,820163,,
+2026-10-13,Auchan,Vaporizado / Estufado,Marca de fabricante,ORIENTE,arroz vaporizado oriente d'oro 1.5kg,1500.0,1.99,1.33,2.49,True,,,,,4059289,,
+2026-10-13,Auchan,Carolino,Marca própria,AUCHAN BIO,arroz carolino auchan bio cultivamos o bom longo extra 500g,500.0,1.39,2.78,,False,,,,,3277644,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,ORIENTE,arroz basmati oriente 2kg,2000.0,3.99,2.0,,False,,,,,3711297,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,CIGALA,arroz basmati cigala brajma 1kg,1000.0,2.98,2.98,,False,,,,,536853,,
+2026-10-13,Auchan,Carolino,Marca própria,AUCHAN COB,arroz carolino vida auchan extra longo branqueado cultivamos o bom 1kg,1000.0,1.19,1.19,,False,,,,,561427,,
+2026-10-13,Auchan,Agulha,Marca de fabricante,BOM SUCESSO,arroz agulha bom sucesso 1kg,1000.0,1.69,1.69,,False,,,,,708884,,
+2026-10-13,Auchan,Basmati,Marca própria,AUCHAN BIO,arroz basmati auchan bio cultivamos bom longo extra 500g,500.0,1.75,3.5,,False,,,,,3280660,,
+2026-10-13,Auchan,Vaporizado / Estufado,Marca de fabricante,COZINHA VELHA,arroz vaporizado cozinha velha 1kg,1000.0,1.69,1.69,,False,,,,,410499,,
+2026-10-13,Auchan,Carolino,Marca de fabricante,CAÇAROLA,arroz carolino caçarola extra longo 1kg,1000.0,1.19,1.19,1.49,True,,,,,820159,,
+2026-10-13,Auchan,Agulha,Marca própria,AUCHAN BIO,arroz auchan agulha bio cultivamos o bom longo extra 500g,500.0,1.39,2.78,,False,,,,,3280729,,
+2026-10-13,Auchan,Agulha,Marca própria,AUCHAN,arroz agulha auchan extra longo suriname 1kg,1000.0,1.39,1.39,,False,,,,,56812,,
+2026-10-13,Auchan,Thai / Jasmim / Aromático,Marca de fabricante,CIGALA,arroz thai cigala 1kg,1000.0,2.39,2.39,,False,,,,,3366307,,
+2026-10-13,Auchan,Paelha / Bomba,Premium / Bio,NOMEN,arroz nomen bomba 1kg,1000.0,6.9,6.9,,False,,,,,3492859,,
+2026-10-13,Auchan,Integral,Marca própria,AUCHAN BIO,arroz integral auchan bio cultivamos o bom longo extra 500g,500.0,1.69,3.38,,False,,,,,3280673,,
+2026-10-13,Auchan,Sushi / Poke,Marca de fabricante,CAÇAROLA,arroz sushi caçarola branqueado 1kg,1000.0,2.39,2.39,,False,,,,,2173978,,
+2026-10-13,Auchan,Thai / Jasmim / Aromático,Marca de fabricante,ORIENTE,arroz thai jasmin oriente fragrant jade 1.5kg,1500.0,2.89,1.93,3.62,True,,,,,4059284,,
+2026-10-13,Auchan,"Especialidades (selvagem, negro, vermelho)",Marca própria,AUCHAN,arroz selvagem auchan 500g,500.0,2.29,4.58,,False,,,,,3036436,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,ORIENTE,arroz basmati oriente taj 1.5kg,1500.0,2.99,1.99,3.74,True,,,,,4059287,,
+2026-10-13,Auchan,Agulha,Marca de fabricante,ORIENTE,arroz agulha oriente pampa 1.5kg,1500.0,1.79,1.19,2.24,True,,,,,4059290,,
+2026-10-13,Auchan,Integral,Marca própria,AUCHAN AMP,arroz integral auchan à mesa em portugal cultivamos o bom 1kg,1000.0,1.48,1.48,,False,,,,,2484067,,
+2026-10-13,Auchan,Carolino,Marca de fabricante,PATO REAL,arroz malandrino pato real 1kg,1000.0,1.89,1.89,,False,,,,,627882,,
+2026-10-13,Auchan,"Risotto (arbório, carnaroli)",Premium / Bio,SCOTTI,arroz risotto scotti arbóreo 500g,500.0,1.89,3.78,,False,,,,,2153179,,
+2026-10-13,Auchan,"Risotto (arbório, carnaroli)",Marca de fabricante,CAÇAROLA,arroz risotto caçarola 500g,500.0,1.7,3.4,,False,,,,,676277,,
+2026-10-13,Auchan,Agulha,Marca de fabricante,SALUDÃES,arroz agulha saludães extra longo 1kg,1000.0,1.55,1.55,,False,,,,,3353,,
+2026-10-13,Auchan,Thai / Jasmim / Aromático,Marca de fabricante,CAÇAROLA,arroz thai caçarola perfumado 500g,500.0,1.51,3.02,,False,,,,,557817,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,CAÇAROLA,arroz basmati caçarola 1kg,1000.0,2.99,2.99,,False,,,,,98905,,
+2026-10-13,Auchan,Agulha,Marca de fabricante,COZINHA VELHA,arroz agulha cozinha velha 1kg,1000.0,1.49,1.49,,False,,,,,8972,,
+2026-10-13,Auchan,"Risotto (arbório, carnaroli)",Marca de fabricante,CIGALA,arroz risotto cigala 1kg,1000.0,2.39,2.39,,False,,,,,3366310,,
+2026-10-13,Auchan,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,CAÇAROLA,arroz negro integral caçarola extra longo 500g,500.0,3.86,7.72,,False,,,,,2608306,,
+2026-10-13,Auchan,Integral,Marca de fabricante,SALUDÃES,arroz integral saludães 1kg,1000.0,1.49,1.49,,False,,,,,2488456,,
+2026-10-13,Auchan,Sushi / Poke,Marca de fabricante,SHIRO,arroz sushi shiro poke bowl 500 g,500.0,1.19,2.38,,False,,,,,3930687,,
+2026-10-13,Auchan,Agulha,Marca própria,VIDA AUCHAN COB,arroz agulha vida auchan extra longo branqueado cultivamos o bom1kg,1000.0,1.29,1.29,,False,,,,,1105426,,
+2026-10-13,Auchan,Carolino,Marca de fabricante,SALUDÃES,arroz doce saludães 500g,500.0,0.99,1.98,,False,,,,,2232626,,
+2026-10-13,Auchan,Thai / Jasmim / Aromático,Marca de fabricante,CAÇAROLA,arroz thai caçarola 2.5kg,2500.0,7.3,2.92,,False,,,,,671047,,
+2026-10-13,Auchan,Vaporizado / Estufado,Premium / Bio,UNCLE BEN?S,arroz vaporizado uncle ben?s grão longo 1kg,1000.0,9.9,9.9,,False,,,,,42457,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,ORIENTE,arroz basmati oriente 1kg,1000.0,2.49,2.49,,False,,,,,472110,,
+2026-10-13,Auchan,Pronto a comer / preparados,Premium / Bio,RISO GALLO,risotto riso gallo pronto com cogumelos porcini 175g,175.0,2.8,16.0,,False,,,,,997166,,
+2026-10-13,Auchan,Thai / Jasmim / Aromático,Marca de fabricante,BOM SUCESSO,arroz agulha bom sucesso aromático extra longo 500g,500.0,1.14,2.28,,False,,,,,708887,,
+2026-10-13,Auchan,Vaporizado / Estufado,Marca de fabricante,CAÇAROLA,arroz estufado caçarola extra longo 1kg,1000.0,1.61,1.61,,False,,,,,10916,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,ORIENTE,arroz gran basmati oriente,1000,3.24,3.24,,False,,,,,3759964,,
+2026-10-13,Auchan,Integral,Marca de fabricante,BOM SUCESSO,arroz integral bom sucesso 500g,500.0,0.89,1.78,,False,,,,,986921,,
+2026-10-13,Auchan,Vaporizado / Estufado,Marca de fabricante,CAÇAROLA,arroz vaporizado caçarola extra longo 1kg,1000.0,1.76,1.76,,False,,,,,2678703,,
+2026-10-13,Auchan,Integral,Marca de fabricante,CIGALA,arroz integral cigala 1kg,1000.0,1.59,1.59,,False,,,,,3366304,,
+2026-10-13,Auchan,Basmati,Premium / Bio,ORIGENS BIO,arroz basmati himal origens bio 500g,500.0,3.27,6.54,,False,,,,,3685501,,
+2026-10-13,Auchan,Paelha / Bomba,Marca de fabricante,ORIENTE,arroz p/paella oriente 1kg,1000.0,1.89,1.89,2.39,True,,,,,1010345,,
+2026-10-13,Auchan,"Especialidades (selvagem, negro, vermelho)",Premium / Bio,RISO GALLO,arroz integral preto riso gallo 500g,500.0,3.99,7.98,,False,,,,,981435,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,VEETEE,arroz basmati veetee 1kg,1000.0,2.79,2.79,,False,,,,,956077,,
+2026-10-13,Auchan,"Risotto (arbório, carnaroli)",Marca de fabricante,TREVIJANO,risotto trevijanos mediterrâneo sem glúten vegan 280g,280.0,3.89,13.89,,False,,,,,3286641,,
+2026-10-13,Auchan,Basmati,Premium / Bio,TILDA,arroz basmati tilda 1kg,1000.0,3.59,3.59,,False,,,,,4026041,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,CAÇAROLA,arroz basmati caçarola premium caçarola 1 kg,1000.0,3.74,3.74,,False,,,,,3834399,,
+2026-10-13,Auchan,Pronto a comer / preparados,Premium / Bio,RISO GALLO,risotto riso gallo 4 queijos 175g,175.0,2.8,16.0,,False,,,,,997170,,
+2026-10-13,Auchan,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,CAÇAROLA,arroz selvagem caçarola 500g,500.0,4.33,8.66,,False,,,,,557821,,
+2026-10-13,Auchan,Pronto a comer / preparados,Premium / Bio,RISO GALLO,risotto riso gallo com trufa 175g,175.0,2.8,16.0,,False,,,,,3084038,,
+2026-10-13,Auchan,"Risotto (arbório, carnaroli)",Premium / Bio,RISO GALLO,arroz arbóreo riso gallo 500g,500.0,3.01,6.02,,False,,,,,683133,,
+2026-10-13,Auchan,Pronto a comer / preparados,Premium / Bio,RISO GALLO,risotto riso gallo cogumelos 250g,250.0,3.19,12.76,,False,,,,,3679895,,
+2026-10-13,Auchan,"Especialidades (selvagem, negro, vermelho)",Premium / Bio,RISO GALLO,arroz basmati riso gallo vermelho integral 500g,500.0,4.49,8.98,,False,,,,,3785243,,
+2026-10-13,Auchan,"Risotto (arbório, carnaroli)",Premium / Bio,RISO GALLO,arroz riso gallo carnaroli 500g,500.0,3.95,7.9,,False,,,,,3910622,,
+2026-10-13,Auchan,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,CAÇAROLA,arroz caçarola pink rice 500g,500.0,3.74,7.48,,False,,,,,3834398,,
+2026-10-13,Auchan,Pronto a comer / preparados,Marca de fabricante,VEETEE,preparado de arroz veetee korean gochujang 250g,250.0,2.99,11.96,,False,,,,,3926005,,
+2026-10-13,Auchan,Carolino,Marca de fabricante,SALUDÃES,arroz malandrino saludães especial caldoso 500g,500.0,0.99,1.98,,False,,,,,2232633,,
+2026-10-13,Auchan,Paelha / Bomba,Marca própria,AUCHAN,arroz bomba auchan categoria extra 1 kg,1000.0,5.79,5.79,,False,,,,,4069787,,
+2026-10-13,Auchan,Pronto a comer / preparados,Marca de fabricante,VEETEE,preparado de arroz veetee japanese togarashi 280g,280.0,2.49,8.89,,False,,,,,3926007,,
+2026-10-13,Auchan,Carolino,Marca de fabricante,LOURO,arroz carolino louro 1kg+25%,1250.0,1.89,1.51,,False,,,,,3608939,,
+2026-10-13,Auchan,Carolino,Marca de fabricante,BOM SUCESSO,arroz carolino bom sucesso 1kg,1000.0,1.79,1.79,,False,,,,,708886,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,VEETEE,arroz basmati veetee 5kg,5000.0,13.75,2.75,,False,,,,,1145315,,
+2026-10-13,Auchan,Carolino,Marca de fabricante,CIGALA,arroz carolino cigala gigante 1kg,1000.0,1.58,1.58,,False,,,,,2528445,,
+2026-10-13,Auchan,Vaporizado / Estufado,Marca de fabricante,SALUDÃES,arroz vaporizado saludães especial saladas 500g,500.0,1.49,2.98,,False,,,,,2232638,,
+2026-10-13,Auchan,Pronto a comer / preparados,Marca de fabricante,TREVIJANO,risotto trevijano cogumelos 280g,280.0,3.66,13.07,,False,,,,,3278556,,
+2026-10-13,Auchan,Basmati,Marca de fabricante,ORIENTE,arroz oriente gran basmati royal 2kg,2000.0,4.99,2.5,5.99,True,,,,,4056087,,
+2026-10-13,Auchan,Paelha / Bomba,Marca de fabricante,LOURO,arroz para paella louro 500 g,500.0,1.59,3.18,,False,,,,,3755106,,
+2026-10-13,Auchan,Basmati,Marca própria,AUCHAN,arroz basmati auchan em saquetas 500g(4x125g),500.0,1.99,3.98,,False,,,,,4019458,,
+2026-10-13,Auchan,Vaporizado / Estufado,Marca de fabricante,COZINHA VELHA,arroz vaporizado cozinha velha 5kg,5000.0,8,1.6,,False,,,,,1091001,,
+2026-10-13,Auchan,Vaporizado / Estufado,Marca de fabricante,PATO REAL,arroz vaporizado pato real 1kg,1000.0,1.78,1.78,,False,,,,,738852,,
+2026-10-13,Auchan,Agulha,Marca de fabricante,PATO REAL,arroz agulha pato real extra longo 1kg,1000.0,1.68,1.68,,False,,,,,627880,,
+2026-10-13,Auchan,Thai / Jasmim / Aromático,Marca própria,AUCHAN BIO,arroz auchan bio thai 500g,500.0,1.99,3.98,,False,,,,,3709851,,
+2026-10-13,Auchan,"Risotto (arbório, carnaroli)",Marca de fabricante,GWIKER,risotto legumes gwiker economia circular 280 g,280.0,3.19,11.39,,False,,,,,3771364,,
+2026-10-13,Auchan,Pronto a comer / preparados,Marca de fabricante,VEETEE,preparado de arroz veetee thai sriracha 250g,250.0,2.99,11.96,,False,,,,,3926004,,
+2026-10-13,El Corte Inglés,Basmati,Marca própria,El Corte Inglés,Arroz Basmati,1000.0,1.99,1.99,,False,,,,,052018005801529,https://www.elcorteingles.pt/supermercado/B052018005801529-el-corte-ingles-arroz-basmati-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Agulha,Marca de fabricante,Cigala,Arroz Agulha Extra Longo,1000.0,1.25,1.25,,False,,,,,052018053400323,https://www.elcorteingles.pt/supermercado/B052018053400323-cigala-arroz-agulha-extra-longo-1-kg/,
+2026-10-13,El Corte Inglés,Carolino,Marca de fabricante,Bom Sucesso,Arroz Carolino Extra Longo,1000.0,1.79,1.79,,False,,,,,052018053400554,https://www.elcorteingles.pt/supermercado/B052018053400554-bom-sucesso-arroz-carolino-extra-longo-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Basmati,Marca de fabricante,Cigala,Arroz Basmati Brajma,1000.0,2.54,2.54,,False,,,,,052018005800166,https://www.elcorteingles.pt/supermercado/B052018005800166-cigala-arroz-basmati-brajma-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Agulha,Marca própria,El Corte Inglés,Arroz Agulha,1000.0,1.35,1.35,,False,,,,,052018005801222,https://www.elcorteingles.pt/supermercado/B052018005801222-el-corte-ingles-arroz-agulha-1-kg/,
+2026-10-13,El Corte Inglés,Carolino,Marca de fabricante,Cigala,Arroz Carolino Extra Longo,1000.0,1.54,1.54,,False,,,,,052018053400331,https://www.elcorteingles.pt/supermercado/B052018053400331-cigala-arroz-carolino-extra-longo-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Agulha,Marca de fabricante,Ceifeira,Arroz Agulha Extra Longo,1000.0,1.25,1.25,,False,,,,,052018053400521,https://www.elcorteingles.pt/supermercado/B052018053400521-ceifeira-arroz-agulha-extra-longo-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Basmati,Marca de fabricante,Cigala,Arroz Basmati Brajma Pack 2 uniddaes,250.0,1.35,5.4,,False,,,,,052018005800174,https://www.elcorteingles.pt/supermercado/B052018005800174-cigala-arroz-basmati-brajma-pack-2-uniddaes-embalagem-250-g/,
+2026-10-13,El Corte Inglés,Vaporizado / Estufado,Marca de fabricante,Cigala,Arroz Vaporizado Extra Longo,1000.0,1.69,1.69,,False,,,,,052018053400349,https://www.elcorteingles.pt/supermercado/B052018053400349-cigala-arroz-vaporizado-extra-longo-1-kg/,
+2026-10-13,El Corte Inglés,Thai / Jasmim / Aromático,Marca de fabricante,Oriente,Arroz Oriente Thai Jasmin,1000.0,2.55,2.55,,False,,,,,052018005801354,https://www.elcorteingles.pt/supermercado/B052018005801354-oriente-arroz-oriente-thai-jasmin-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Thai / Jasmim / Aromático,Marca de fabricante,Cigala,Arroz Thai Jasmim,1000.0,2.09,2.09,2.59,True,,,,,052018005802519,https://www.elcorteingles.pt/supermercado/B052018005802519-cigala-arroz-thai-jasmim-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Basmati,Marca de fabricante,Oriente,Arroz Basmati Taj,1000.0,3.05,3.05,,False,,,,,052018005800141,https://www.elcorteingles.pt/supermercado/B052018005800141-oriente-arroz-basmati-taj-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Vaporizado / Estufado,Marca própria,El Corte Inglés,Arroz Vaporizado,1000.0,1.45,1.45,,False,,,,,052018005801057,https://www.elcorteingles.pt/supermercado/B052018005801057-el-corte-ingles-arroz-vaporizado-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Carolino,Marca de fabricante,Ceifeira,Arroz Carolino,1000.0,1.59,1.59,,False,,,,,052018053400539,https://www.elcorteingles.pt/supermercado/B052018053400539-ceifeira-arroz-carolino-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Basmati,Marca de fabricante,Ceifeira,Arroz Basmati Extra Longo,1000.0,2.89,2.89,,False,,,,,052018005800737,https://www.elcorteingles.pt/supermercado/B052018005800737-ceifeira-arroz-basmati-extra-longo-1-kg/,
+2026-10-13,El Corte Inglés,Carolino,Marca própria,El Corte Inglés,Arroz Carolino,1000.0,1.15,1.15,,False,,,,,052018005801214,https://www.elcorteingles.pt/supermercado/B052018005801214-el-corte-ingles-arroz-carolino-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Agulha,Marca de fabricante,Oriente,Arroz Oriente Agulha,1000.0,1.75,1.75,,False,,,,,052018053400299,https://www.elcorteingles.pt/supermercado/B052018053400299-oriente-arroz-oriente-agulha-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Carolino,Marca de fabricante,Saludães,Arroz Carolino Extra Longo,1000.0,1.59,1.59,,False,,,,,052018053400315,https://www.elcorteingles.pt/supermercado/B052018053400315-saludaes-arroz-carolino-extra-longo-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Basmati,Premium / Bio,Oriente,Arroz Basmati Biológico Taj,500.0,1.99,3.98,,False,,,,,052018006000048,https://www.elcorteingles.pt/supermercado/B052018006000048-oriente-arroz-basmati-biologico-taj-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Thai / Jasmim / Aromático,Marca de fabricante,Ceifeira,Arroz Thai Jasmine Extra Longo,1000.0,2.39,2.39,,False,,,,,052018005801065,https://www.elcorteingles.pt/supermercado/B052018005801065-ceifeira-arroz-thai-jasmine-extra-longo-1-kg/,
+2026-10-13,El Corte Inglés,Basmati,Marca de fabricante,Caçarola,Arroz Basmati,1000.0,3.05,3.05,,False,,,,,052018005800281,https://www.elcorteingles.pt/supermercado/B052018005800281-cacarola-arroz-basmati-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Basmati,Marca de fabricante,Oriente,Arroz Basmati Gran Royal,1000.0,3.45,3.45,,False,,,,,052018053400851,https://www.elcorteingles.pt/supermercado/B052018053400851-oriente-arroz-basmati-gran-royal-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,"Risotto (arbório, carnaroli)",Marca de fabricante,Pato Real,Risotto,1000.0,1.89,1.89,,False,,,,,052018005801628,https://www.elcorteingles.pt/supermercado/B052018005801628-pato-real-risotto-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Agulha,Marca de fabricante,Caçarola,Arroz Agulha Extra Longo,1000.0,1.6,1.6,,False,,,,,052018053400745,https://www.elcorteingles.pt/supermercado/B052018053400745-cacarola-arroz-agulha-extra-longo-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Vaporizado / Estufado,Marca de fabricante,Oriente,Arroz Vaporizado,1000.0,1.85,1.85,,False,,,,,052018053400828,https://www.elcorteingles.pt/supermercado/B052018053400828-oriente-arroz-vaporizado-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,Le Chef Atlantic,Arroz Selvagem,500.0,3.45,6.9,,False,,,,,052018005801719,https://www.elcorteingles.pt/supermercado/B052018005801719-le-chef-atlantic-arroz-selvagem-embalagem-500-g/,
+2026-10-13,El Corte Inglés,"Risotto (arbório, carnaroli)",Premium / Bio,Riso Gallo,Arroz Arborio Risotto,500.0,3.45,6.9,,False,,,,,052018005800950,https://www.elcorteingles.pt/supermercado/B052018005800950-riso-gallo-arroz-arborio-risotto-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Basmati,Premium / Bio,Tilda,Arroz Basmati,1000.0,3.25,3.25,3.75,True,,,,,052018060904424,https://www.elcorteingles.pt/supermercado/B052018060904424-tilda-arroz-basmati-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Louro,Arroz Preparado de Feijão,250.0,2.15,8.6,,False,,,,,052018032900088,https://www.elcorteingles.pt/supermercado/B052018032900088-louro-arroz-preparado-de-feijao-embalagem-250-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Pato Real Minuto,Arroz de Legumes,260.0,3.35,12.88,,False,,,,,052018005801115,https://www.elcorteingles.pt/supermercado/B052018005801115-pato-real-minuto-arroz-de-legumes-embalagem-260-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Pato Real Minuto,Arroz de Coentros,260.0,3.35,12.88,,False,,,,,052018005801107,https://www.elcorteingles.pt/supermercado/B052018005801107-pato-real-minuto-arroz-de-coentros-embalagem-260-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Pato Real Minuto,Arroz Basmati,260.0,3.75,14.42,,False,,,,,052018005801081,https://www.elcorteingles.pt/supermercado/B052018005801081-pato-real-minuto-arroz-basmati-embalagem-260-g/,
+2026-10-13,El Corte Inglés,"Especialidades (selvagem, negro, vermelho)",Premium / Bio,Gallo,Arroz Negro Integral,500.0,4.49,8.98,,False,,,,,052018005802204,https://www.elcorteingles.pt/supermercado/B052018005802204-gallo-arroz-negro-integral-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Paelha / Bomba,Marca própria,El Corte Inglés Selection,Arroz Bomba da Foz do Ebro Extra,1000.0,6.39,6.39,,False,,,,,052018005801230,https://www.elcorteingles.pt/supermercado/B052018005801230-el-corte-ingles-selection-arroz-bomba-da-foz-do-ebro-extra-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Carolino,Marca de fabricante,Saludães,Arroz Doce,500.0,1.05,2.1,,False,,,,,052018005802154,https://www.elcorteingles.pt/supermercado/B052018005802154-saludaes-arroz-doce-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Vaporizado / Estufado,Marca de fabricante,Cozinha Velha,Arroz Vaporizado Cozinha Velha,1000.0,1.85,1.85,,False,,,,,052018053400802,https://www.elcorteingles.pt/supermercado/B052018053400802-cozinha-velha-arroz-vaporizado-cozinha-velha-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Carolino,Marca de fabricante,Oriente,Arroz Carolino,1000.0,1.89,1.89,,False,,,,,052018053400844,https://www.elcorteingles.pt/supermercado/B052018053400844-oriente-arroz-carolino-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,"Risotto (arbório, carnaroli)",Premium / Bio,Riso Gallo,Arroz para Risotto,500.0,2.99,5.98,,False,,,,,052018005801818,https://www.elcorteingles.pt/supermercado/B052018005801818-riso-gallo-arroz-para-risotto-embalagem-500-g/,
+2026-10-13,El Corte Inglés,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,Caçarola,Arroz Negro,500.0,4.89,9.78,,False,,,,,052018005802337,https://www.elcorteingles.pt/supermercado/B052018005802337-cacarola-arroz-negro-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Louro,Arroz Pronto Basmati,250.0,1.69,6.76,,False,,,,,052018032900120,https://www.elcorteingles.pt/supermercado/B052018032900120-louro-arroz-pronto-basmati-embalagem-250-g/,
+2026-10-13,El Corte Inglés,Paelha / Bomba,Premium / Bio,La Fallera,Arroz de Valência Especial para Paelha,1000.0,3.25,3.25,,False,,,,,052018005800703,https://www.elcorteingles.pt/supermercado/B052018005800703-la-fallera-arroz-de-valencia-especial-para-paelha-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,"Especialidades (selvagem, negro, vermelho)",Premium / Bio,Riso Gallo,Arroz Vermelho Integral,500.0,5.09,10.18,,False,,,,,052018005802212,https://www.elcorteingles.pt/supermercado/B052018005802212-riso-gallo-arroz-vermelho-integral-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Louro,Arroz Pronto Agulha,250.0,1.49,5.96,,False,,,,,052018032900112,https://www.elcorteingles.pt/supermercado/B052018032900112-louro-arroz-pronto-agulha-embalagem-250-g/,
+2026-10-13,El Corte Inglés,Thai / Jasmim / Aromático,Marca de fabricante,Bom Sucesso,Arroz Aromático,500.0,1.45,2.9,,False,,,,,052018005802386,https://www.elcorteingles.pt/supermercado/B052018005802386-bom-sucesso-arroz-aromatico-embalagem-500-g/,
+2026-10-13,El Corte Inglés,"Risotto (arbório, carnaroli)",Premium / Bio,Riso Gallo,Arroz Carnaroli Risotto,500.0,4.49,8.98,,False,,,,,052018005800943,https://www.elcorteingles.pt/supermercado/B052018005800943-riso-gallo-arroz-carnaroli-risotto-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Riso Gallo,Risotto Pronto de 4 Queijos,175.0,3.19,18.23,,False,,,,,052018005801123,https://www.elcorteingles.pt/supermercado/B052018005801123-riso-gallo-risotto-pronto-de-4-queijos-embalagem-175-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Riso Gallo,Risotto Pronto de Cogumelos,175.0,3.19,18.23,,False,,,,,052018005801149,https://www.elcorteingles.pt/supermercado/B052018005801149-riso-gallo-risotto-pronto-de-cogumelos-embalagem-175-g/,
+2026-10-13,El Corte Inglés,Carolino,Marca de fabricante,Saludães,Arroz Malandrinho,500.0,1.09,2.18,,False,,,,,052018053400703,https://www.elcorteingles.pt/supermercado/B052018053400703-saludaes-arroz-malandrinho-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Terrazza Mediterranean,Risotto de Cogumelos,175.0,3.89,22.23,,False,,,,,052018005802022,https://www.elcorteingles.pt/supermercado/B052018005802022-terrazza-mediterranean-risotto-de-cogumelos-embalagem-175-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Knorr,Risoto de Espargos,175.0,3.29,18.8,,False,,,,,052018005802675,https://www.elcorteingles.pt/supermercado/B052018005802675-knorr-risoto-de-espargos-embalagem-175-g/,
+2026-10-13,El Corte Inglés,Integral,Marca de fabricante,Oriente,Arroz Integral Complet,1000.0,1.6,1.6,,False,,,,,052018005802691,https://www.elcorteingles.pt/supermercado/B052018005802691-oriente-arroz-integral-complet-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Cigala,Arroz Agulha Pronto a Comer Pack 2 unidades,250,1.55,6.2,,False,,,,,052018053400836,https://www.elcorteingles.pt/supermercado/B052018053400836-cigala-arroz-agulha-pronto-a-comer-pack-2-unidades-embalagem-125-g/,
+2026-10-13,El Corte Inglés,Integral,Marca de fabricante,Saludães,Arroz Integral,1000.0,1.65,1.65,,False,,,,,052018005800711,https://www.elcorteingles.pt/supermercado/B052018005800711-saludaes-arroz-integral-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Pato Real Minuto,Arroz Integral,250.0,3.35,13.4,,False,,,,,052018005801933,https://www.elcorteingles.pt/supermercado/B052018005801933-pato-real-minuto-arroz-integral-embalagem-250-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Terrazza Mediterranean,Risotto de Trufa,175.0,4.59,26.23,,False,,,,,052018005802055,https://www.elcorteingles.pt/supermercado/B052018005802055-terrazza-mediterranean-risotto-de-trufa-embalagem-175-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Riso Gallo,Risotto Pronto com Trufas,175.0,3.29,18.8,,False,,,,,052018005802410,https://www.elcorteingles.pt/supermercado/B052018005802410-riso-gallo-risotto-pronto-com-trufas-embalagem-175-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Terrazza Mediterranean,Risotto de Tomate,175.0,3.89,22.23,,False,,,,,052018005802030,https://www.elcorteingles.pt/supermercado/B052018005802030-terrazza-mediterranean-risotto-de-tomate-embalagem-175-g/,
+2026-10-13,El Corte Inglés,"Risotto (arbório, carnaroli)",Marca de fabricante,Oriente,Arroz Risotto,1000.0,2.59,2.59,,False,,,,,052018032900146,https://www.elcorteingles.pt/supermercado/B052018032900146-oriente-arroz-risotto-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Carolino,Marca de fabricante,Pato Real,Arroz Carolino Malandrinho,1000.0,1.99,1.99,,False,,,,,052018053400711,https://www.elcorteingles.pt/supermercado/B052018053400711-pato-real-arroz-carolino-malandrinho-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Paelha / Bomba,Premium / Bio,Esperanza,Arroz Calasparra,1000.0,4.19,4.19,,False,,,,,052018005700010,https://www.elcorteingles.pt/supermercado/B052018005700010-esperanza-arroz-calasparra-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,Sushi / Poke,Marca de fabricante,Izidoro,Arroz Shiro Poke Bowl,500.0,1.15,2.3,1.29,True,,,,,052018005802709,https://www.elcorteingles.pt/supermercado/B052018005802709-izidoro-arroz-shiro-poke-bowl-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Riso Gallo,Risoto de Cogumelos,250.0,3.45,13.8,,False,,,,,052018005802733,https://www.elcorteingles.pt/supermercado/B052018005802733-riso-gallo-risoto-de-cogumelos-embalagem-250-g/,
+2026-10-13,El Corte Inglés,"Especialidades (selvagem, negro, vermelho)",Premium / Bio,Riso Gallo,Arroz Negro,250.0,3.45,13.8,,False,,,,,052018005802741,https://www.elcorteingles.pt/supermercado/B052018005802741-riso-gallo-arroz-negro-embalagem-250-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Terrazza Mediterranean,Risotto Marinheiro,175.0,4.65,26.57,,False,,,,,052018005802048,https://www.elcorteingles.pt/supermercado/B052018005802048-terrazza-mediterranean-risotto-marinheiro-embalagem-175-g/,
+2026-10-13,El Corte Inglés,Carolino,Marca de fabricante,Louro,Arroz Doce,500.0,1.09,2.18,,False,,,,,052018005802576,https://www.elcorteingles.pt/supermercado/B052018005802576-louro-arroz-doce-embalagem-500-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Chef Tellini,Risoto Queijo Trufa,70.0,2.1,30.0,,False,,,,,052018036001297,https://www.elcorteingles.pt/supermercado/B052018036001297-chef-tellini-risoto-queijo-trufa-embalagem-70-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Marca de fabricante,Knorr,Risoto Cogumelos,175.0,3.29,18.8,,False,,,,,052018005802758,https://www.elcorteingles.pt/supermercado/B052018005802758-knorr-risoto-cogumelos-embalagem-175-g/,
+2026-10-13,El Corte Inglés,Paelha / Bomba,Marca de fabricante,Oriente,Arroz Paelha,1000.0,3.45,3.45,,False,,,,,052018032900138,https://www.elcorteingles.pt/supermercado/B052018032900138-oriente-arroz-paelha-embalagem-1-kg/,
+2026-10-13,El Corte Inglés,"Especialidades (selvagem, negro, vermelho)",Premium / Bio,Riso Gallo,Arroz Vermelho,220.0,3.45,15.68,,False,,,,,052018005802725,https://www.elcorteingles.pt/supermercado/B052018005802725-riso-gallo-arroz-vermelho-embalagem-220-g/,
+2026-10-13,El Corte Inglés,Pronto a comer / preparados,Premium / Bio,Chef Tellini,Risoto 4 Queijos,70.0,2.1,30.0,,False,,,,,052018036001263,https://www.elcorteingles.pt/supermercado/B052018036001263-chef-tellini-risoto-4-queijos-embalagem-70-g/,
+2026-10-13,Intermarché,Carolino,Marca de fabricante,Pato real,Arroz carolino malandrinho | Embalagem de 1 kg,1000,1.49,1.49,,False,141,1.29,1.89,5601326000122,5601326000122,,Preço = mediana entre 141 lojas
+2026-10-13,Intermarché,Agulha,Marca de fabricante,Cigala,"Arroz agulha, embalagem de 1 kg",1000,1.64,1.64,,False,145,1.39,1.69,5601260037109,5601260037109,,Preço = mediana entre 145 lojas
+2026-10-13,Intermarché,Carolino,Marca de fabricante,Caçarola,"Arroz Carolino, emb. 1 kg",1000,1.49,1.49,,False,146,1.15,1.49,5601255312112,5601255312112,,Preço = mediana entre 146 lojas
+2026-10-13,Intermarché,Agulha,Marca de fabricante,Caçarola,"Arroz Agulha Extra Longo, emb. 1 kg",1000,1.19,1.19,,False,146,1.19,1.35,5601255322128,5601255322128,,Preço = mediana entre 146 lojas
+2026-10-13,Intermarché,Agulha,Marca de fabricante,Oriente,"Arroz Agulha Branqueado Extra Longo, emb. 1 kg",1000,1.55,1.55,,False,124,1.17,1.79,5601228228013,5601228228013,,Preço = mediana entre 124 lojas
+2026-10-13,Intermarché,Vaporizado / Estufado,Marca de fabricante,Caçarola,"Arroz Vaporizado Estufado, emb. 1 kg",1000,1.61,1.61,,False,134,1.22,1.71,5601255323125,5601255323125,,Preço = mediana entre 134 lojas
+2026-10-13,Intermarché,Basmati,Marca de fabricante,Cigala,"Arroz Basmati, embalagem de 1 kg",1000,2.98,2.98,,False,133,2.49,3.13,5601260038106,5601260038106,,Preço = mediana entre 133 lojas
+2026-10-13,Intermarché,Carolino,Marca de fabricante,Saludães,Arroz Carolino | Embalagem de 1 kg,1000,1.54,1.54,,False,139,1.16,1.99,5601260046101,5601260046101,,Preço = mediana entre 139 lojas
+2026-10-13,Intermarché,Thai / Jasmim / Aromático,Marca própria,Saint Eloi,Arroz Thai Jasmim 1000g,1000,1.99,1.99,,False,100,1.99,2.51,5604260340897,5604260340897,,Preço = mediana entre 100 lojas
+2026-10-13,Intermarché,Carolino,Marca de fabricante,Cigala,"Arroz carolino, embalagem de 1 kg",1000,1.54,1.54,,False,146,1.15,1.69,5601260036102,5601260036102,,Preço = mediana entre 146 lojas
+2026-10-13,Intermarché,Agulha,Marca de fabricante,Saludães,Arroz agulha | Embalagem de 1kg,1000,1.55,1.55,,False,140,1.35,1.62,5601260047108,5601260047108,,Preço = mediana entre 140 lojas
+2026-10-13,Intermarché,Integral,Marca própria,Porsi Viva Bem,Arroz Integral 1000g,1000,1.48,1.48,,False,133,1.19,1.9,5604260310364,5604260310364,,Preço = mediana entre 133 lojas
+2026-10-13,Intermarché,Carolino,Marca de fabricante,Louro,"Arroz Carolino Extra Longo, emb. 1 kg",1000,1.89,1.89,,False,101,1.29,2.01,5601537332739,5601537332739,,Preço = mediana entre 101 lojas
+2026-10-13,Intermarché,Carolino,Marca própria,PorSi,Arroz Carolino 5000g,5000,5.39,1.08,,False,128,4.05,6.09,5604260294350,5604260294350,,Preço = mediana entre 128 lojas
+2026-10-13,Intermarché,Vaporizado / Estufado,Marca própria,PorSi,Arroz Vaporizado 4x125g,500,1.59,3.18,,False,141,1.2,1.82,5604260319503,5604260319503,,Preço = mediana entre 141 lojas
+2026-10-13,Intermarché,Sushi / Poke,Marca de fabricante,Caçarola,"Arroz sushi, embalagem de 1 kg",1000,2.39,2.39,,False,91,1.2,2.49,5601255625069,5601255625069,,Preço = mediana entre 91 lojas
+2026-10-13,Intermarché,Integral,Marca de fabricante,Cigala,"Arroz agulha integral, embalagem de 1 kg",1000,1.59,1.59,,False,93,1.2,1.69,5601260105105,5601260105105,,Preço = mediana entre 93 lojas
+2026-10-13,Intermarché,Vaporizado / Estufado,Marca de fabricante,Cigala,"Arroz vaporizado, embalagem de 1 kg",1000,1.38,1.38,,False,135,1.38,1.63,5601260127107,5601260127107,,Preço = mediana entre 135 lojas
+2026-10-13,Intermarché,Agulha,Marca de fabricante,Pato real,Arroz agulha | Embalagem de 1 kg,1000,1.33,1.33,,False,131,1.19,1.68,5601326000214,5601326000214,,Preço = mediana entre 131 lojas
+2026-10-13,Intermarché,Basmati,Marca própria,Itinéraire des Saveurs,Arroz Aromático de Punjab Basmati 1000g,1000,2.49,2.49,,False,116,2.39,2.79,5604260341023,5604260341023,,Preço = mediana entre 116 lojas
+2026-10-13,Intermarché,Agulha,Marca de fabricante,Palmeirinha,Arroz agulha longo comum | Embalagem de 1 kg,1000,0.89,0.89,,False,133,0.89,1.09,5601432040203,5601432040203,,Preço = mediana entre 133 lojas
+2026-10-13,Intermarché,Agulha,Marca própria,PorSi,Arroz Agulha América do Sul 1000g,1000,1.39,1.39,,False,146,1.39,1.67,5604260294374,5604260294374,,Preço = mediana entre 146 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca de fabricante,Cigala,"Arroz brajma pronto a comer, embalagem de 250g",250,1.55,6.2,,False,106,1.55,1.74,5601260338022,5601260338022,,Preço = mediana entre 106 lojas
+2026-10-13,Intermarché,Basmati,Marca de fabricante,Saludães,"Arroz basmati, embalagem de 1 kg",1000,2.88,2.88,,False,105,2.49,3.05,5601260048105,5601260048105,,Preço = mediana entre 105 lojas
+2026-10-13,Intermarché,"Risotto (arbório, carnaroli)",Marca de fabricante,Cigala,"Arroz risotto, embalagem de 1 kg",1000,2.39,2.39,,False,82,2.19,2.53,5601260026103,5601260026103,,Preço = mediana entre 82 lojas
+2026-10-13,Intermarché,Carolino,Marca de fabricante,Saludães,"Arroz doce especial, embalagem de 500g",500,0.99,1.98,,False,130,0.85,1.09,5601260254056,5601260254056,,Preço = mediana entre 130 lojas
+2026-10-13,Intermarché,Carolino,Marca de fabricante,Bom sucesso,"Arroz carolino, embalagem de 1 kg",1000,1.79,1.79,,False,61,1.29,1.79,5601692071429,5601692071429,,Preço = mediana entre 61 lojas
+2026-10-13,Intermarché,Basmati,Marca de fabricante,Caçarola,"Arroz basmati, embalagem de 1 kg",1000,2.99,2.99,,False,112,2.39,3.14,5601255322210,5601255322210,,Preço = mediana entre 112 lojas
+2026-10-13,Intermarché,Thai / Jasmim / Aromático,Marca de fabricante,Cigala,"Arroz thai jasmim, embalagem de 1 kg",1000,2.39,2.39,,False,83,1.79,2.53,5601260018108,5601260018108,,Preço = mediana entre 83 lojas
+2026-10-13,Intermarché,Agulha,Marca própria,Saint Eloi,Arroz Agulha Europa 5000g,5000,5.39,1.08,,False,88,5.39,6.59,5604260340941,5604260340941,,Preço = mediana entre 88 lojas
+2026-10-13,Intermarché,Agulha,Marca própria,PorSi,Arroz Agulha América do Sul 5000g,5000,6.95,1.39,,False,129,6.95,7.73,5604260294381,5604260294381,,Preço = mediana entre 129 lojas
+2026-10-13,Intermarché,Agulha,Marca de fabricante,Bom sucesso,"Arroz agulha, embalagem de 1 kg",1000,1.69,1.69,,False,139,1.34,1.79,5601692071214,5601692071214,,Preço = mediana entre 139 lojas
+2026-10-13,Intermarché,"Risotto (arbório, carnaroli)",Marca de fabricante,Bom sucesso,Arroz para risotto bom sucesso | Embalagem de 1 kg,1000,3.09,3.09,,False,111,2.47,3.99,5601692071498,5601692071498,,Preço = mediana entre 111 lojas
+2026-10-13,Intermarché,Integral,Marca de fabricante,Cemporcento,Arroz integral extra longo | Embalagem de 1 kg,1000,1.75,1.75,,False,56,1.65,1.99,5604321002160,5604321002160,,Preço = mediana entre 56 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca de fabricante,Louro,"Arroz Agulha Pronto a Comer, emb. 250 gr",250,1.45,5.8,,False,34,1.45,1.45,5601537143113,5601537143113,,Preço = mediana entre 34 lojas
+2026-10-13,Intermarché,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,Caçarola,"Arroz negro extra longo integral vaporizado, 500g",500,4.29,8.58,,False,28,3.79,4.29,5601255500045,5601255500045,,Preço = mediana entre 28 lojas
+2026-10-13,Intermarché,Agulha,Marca de fabricante,Oriente,"Arroz Agulha Pampa, emb. 1.5 kg",1500,2.24,1.49,,False,45,1.79,2.25,5601228210193,5601228210193,,Preço = mediana entre 45 lojas
+2026-10-13,Intermarché,Basmati,Marca de fabricante,Oriente,"Arroz Basmati Taj, emb. 1.5 kg",1500,3.74,2.49,,False,40,2.79,3.74,5601228210391,5601228210391,,Preço = mediana entre 40 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca de fabricante,Cigala,"Arroz Agulha Pronto a Comer, 2 x 125g",250,1.45,5.8,,False,108,1.19,1.89,5601260337025,5601260337025,,Preço = mediana entre 108 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca própria,PorSi,Arroz de Pato 400g,400,3.99,9.97,,False,62,3.98,3.99,5604260277735,5604260277735,,Preço = mediana entre 62 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca própria,PorSi,Arroz de Pato 250g,250,3.29,13.16,,False,23,2.49,3.29,5604260304066,5604260304066,,Preço = mediana entre 23 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca de fabricante,Louro,"Arroz Basmati Pronto a Comer, emb. 250 gr",250,1.55,6.2,,False,29,1.55,1.55,5601537143311,5601537143311,,Preço = mediana entre 29 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca de fabricante,Louro,"Arroz Primavera Pronto a Comer, emb. 250 gr",250,1.99,7.96,,False,59,1.99,1.99,5601537147210,5601537147210,,Preço = mediana entre 59 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca de fabricante,Louro,"Arroz com Feijão Pronto a Comer, emb. 250 gr",250,1.99,7.96,,False,57,1.99,1.99,5601537147012,5601537147012,,Preço = mediana entre 57 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca própria,Intermarche,Arroz Branco 250g,250,1.89,7.56,,False,24,1.89,1.89,5604260361595,5604260361595,,Preço = mediana entre 24 lojas
+2026-10-13,Intermarché,Basmati,Marca própria,PorSi Bio,Bio Arroz Basmati 500g,500,1.79,3.58,,False,100,1.79,2.19,5604260336562,5604260336562,,Preço = mediana entre 100 lojas
+2026-10-13,Intermarché,Agulha,Marca própria,Saint Eloi,Arroz Agulha Europa 1000g,1000,0.89,0.89,,False,67,0.89,0.89,5604260340927,5604260340927,,Preço = mediana entre 67 lojas
+2026-10-13,Intermarché,Basmati,Marca própria,Saint Eloi,Arroz Basmati 1000g,1000,1.89,1.89,,False,70,1.79,1.99,5604260340989,5604260340989,,Preço = mediana entre 70 lojas
+2026-10-13,Intermarché,Vaporizado / Estufado,Marca própria,PorSi,Arroz Vaporizado 1000g,1000,1.35,1.35,,False,17,1.35,1.35,5604260294398,5604260294398,,Preço = mediana entre 17 lojas
+2026-10-13,Intermarché,Carolino,Marca própria,PorSi,Arroz Carolino 1000g,1000,1.15,1.15,,False,24,1.15,1.15,5604260294343,5604260294343,,Preço = mediana entre 24 lojas
+2026-10-13,Intermarché,Basmati,Marca própria,PorSi,Arroz Basmati 4x125g,500,2.15,4.3,,False,43,2.15,2.69,5604260319497,5604260319497,,Preço = mediana entre 43 lojas
+2026-10-13,Intermarché,Thai / Jasmim / Aromático,Marca própria,Saint Eloi,Arroz Thai Jasmim 1000g,1000,1.99,1.99,,False,16,1.99,2.19,5604260320660,5604260320660,,Preço = mediana entre 16 lojas
+2026-10-13,Intermarché,Vaporizado / Estufado,Marca própria,Saint Eloi,Arroz Vaporizado 1000g,1000,1.35,1.35,,False,40,1.15,1.35,5604260341009,5604260341009,,Preço = mediana entre 40 lojas
+2026-10-13,Intermarché,Carolino,Marca própria,Saint Eloi,Arroz Carolino 1000g,1000,1.15,1.15,,False,53,1.15,1.18,5604260340965,5604260340965,,Preço = mediana entre 53 lojas
+2026-10-13,Intermarché,Agulha,Marca própria,Saint Eloi,Arroz Agulha Europa 1k,1000,0.89,0.89,,False,32,0.89,1.15,5604260341030,5604260341030,,Preço = mediana entre 32 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca própria,PorSi,Arroz de Pato 400g,400,3.99,9.97,,False,55,3.99,3.99,5604260331345,5604260331345,,Preço = mediana entre 55 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca de fabricante,Louro,"Arroz de Tomate Pronto a Comer, emb. 250 gr",250,1.99,7.96,,False,13,1.99,1.99,5601537147111,5601537147111,,Preço = mediana entre 13 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca própria,Intermarche,Arroz de Pato 800g,800,10.25,12.81,,False,39,3.99,10.29,5604260361687,5604260361687,,Preço = mediana entre 39 lojas
+2026-10-13,Intermarché,Basmati,Marca própria,PorSi,Arroz Basmati 1000g,1000,1.89,1.89,,False,31,1.89,1.89,5604260294404,5604260294404,,Preço = mediana entre 31 lojas
+2026-10-13,Intermarché,"Risotto (arbório, carnaroli)",Marca própria,PorSi,Arroz Risotto 1000g,1000,1.99,1.99,,False,29,1.99,2,5604260276004,5604260276004,,Preço = mediana entre 29 lojas
+2026-10-13,Intermarché,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,Caçarola,"Arroz selvagem, embalagem de 500g",500,4.74,9.48,,False,26,3.59,4.74,5601255000385,5601255000385,,Preço = mediana entre 26 lojas
+2026-10-13,Intermarché,Thai / Jasmim / Aromático,Marca de fabricante,Dragon Fortune,"Arroz Thai Jasmim, emb. 5 kg",5000,7.99,1.6,,False,16,7.99,7.99,5601537831454,5601537831454,,Preço = mediana entre 16 lojas
+2026-10-13,Intermarché,Thai / Jasmim / Aromático,Marca de fabricante,Dragon for,"Arroz Thai Perfumado, emb. 5 kg",5000,5.99,1.2,,False,10,5.99,5.99,5601537831652,5601537831652,,Preço = mediana entre 10 lojas
+2026-10-13,Intermarché,Basmati,Marca de fabricante,Oriente,"Arroz Gran Basmati Royal, 2kg",2000,4.99,2.5,,False,9,4.99,4.99,5601228211879,5601228211879,,Preço = mediana entre 9 lojas
+2026-10-13,Intermarché,Agulha,Marca de fabricante,Saludães,Arroz agulha | Embalagem de 1kg,1000,1.29,1.29,,False,20,1.29,1.29,5601228226019,5601228226019,,Preço = mediana entre 20 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca própria,Itinéraire des Saveurs,Arroz Cantonês 1kg,1000,5.99,5.99,,False,24,3.69,5.99,3250390037477,3250390037477,,Preço = mediana entre 24 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca própria,Intermarche,Arroz de Pato 250g,250,3.29,13.16,,False,41,2.99,3.78,5604260361793,5604260361793,,Preço = mediana entre 41 lojas
+2026-10-13,Intermarché,Agulha,Marca própria,PorSi,Arroz Agulha Europa 1000g,1000,1.15,1.15,,False,15,1.15,1.25,5604260294367,5604260294367,,Preço = mediana entre 15 lojas
+2026-10-13,Intermarché,Vaporizado / Estufado,Marca própria,Saint Eloi,Arroz Vaporizado 1000g,1000,1.35,1.35,,False,40,1.35,1.35,5604260341047,5604260341047,,Preço = mediana entre 40 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca de fabricante,Ta-Tung,"Arroz 3 Delícias, emb. 250g",250,3.59,14.36,,False,12,3.59,3.99,8436558315822,8436558315822,,Preço = mediana entre 12 lojas
+2026-10-13,Intermarché,Paelha / Bomba,Marca de fabricante,Plaza sol,Arroz para paella plaza del sol | Embalagem de 1 kg,1000,5.29,5.29,,False,13,5.29,5.41,8429874212012,8429874212012,,Preço = mediana entre 13 lojas
+2026-10-13,Intermarché,Sushi / Poke,Marca de fabricante,Enso,Arroz para sushi enso | Embalagem de 250g,250,5.8,23.2,,False,2,5.79,5.82,8858960300287,8858960300287,,Preço = mediana entre 2 lojas
+2026-10-13,Intermarché,Thai / Jasmim / Aromático,Marca própria,PorSi Select,Arroz Aromático De Punjab 1000G,1000,2.69,2.69,,False,5,2.69,2.69,5604260320127,5604260320127,,Preço = mediana entre 5 lojas
+2026-10-13,Intermarché,Thai / Jasmim / Aromático,Marca de fabricante,Sabormundo,"Arroz Thai Jasmine 100%, emb. 5 kg",5000,9.6,1.92,,False,8,8.99,12.59,5600396641808,5600396641808,,Preço = mediana entre 8 lojas
+2026-10-13,Intermarché,Thai / Jasmim / Aromático,Marca de fabricante,Santiago,"Arroz Agulha Perfumado Sabura, emb. 5 kg",5000,10,2.0,,False,7,9.99,10,5600396641877,5600396641877,,Preço = mediana entre 7 lojas
+2026-10-13,Intermarché,Thai / Jasmim / Aromático,Marca de fabricante,Sabura,"Arroz Perfumado, emb. 1 kg",1000,1.95,1.95,,False,9,1.95,2.19,5600396642249,5600396642249,,Preço = mediana entre 9 lojas
+2026-10-13,Intermarché,"Especialidades (selvagem, negro, vermelho)",Marca de fabricante,Caçarola,"Arroz selvagem, embalagem de 500 g",500,4.74,9.48,,False,1,4.74,4.74,5601255500038,5601255500038,,Preço = mediana entre 1 lojas
+2026-10-13,Intermarché,Pronto a comer / preparados,Marca de fabricante,Cigala,"Arroz Integral Pronto a Comer sem Glúten, 2x125g",250,1.89,7.56,,False,1,1.89,1.89,5601260305024,5601260305024,,Preço = mediana entre 1 lojas
+2026-10-13,Intermarché,Basmati,Marca própria,PorSi,Arroz basmati | Embalagem de 1 kg,1000,1.89,1.89,,False,1,1.89,1.89,5604260260096,5604260260096,,Preço = mediana entre 1 lojas
+2026-10-13,Intermarché,Vaporizado / Estufado,Marca própria,PorSi,Arroz vaporizado | Embalagem de 1 kg,1000,1.35,1.35,,False,1,1.35,1.35,5604260260102,5604260260102,,Preço = mediana entre 1 lojas
+2026-10-13,Intermarché,Carolino,Marca de fabricante,Cigala,Arroz carolino gigante | Embalagem de 1 kg,1000,1.43,1.43,,False,1,1.43,1.43,5601260066109,5601260066109,,Preço = mediana entre 1 lojas
+2026-10-13,Intermarché,Vaporizado / Estufado,Marca de fabricante,Caçarola,Arroz carolino vaporizado | Embalagem de 1 kg,1000,2.15,2.15,,False,1,2.15,2.15,5601255324221,5601255324221,,Preço = mediana entre 1 lojas
+2026-10-13,Intermarché,Vaporizado / Estufado,Premium / Bio,Tilda,"Arroz basmati vaporizado, 250g",250,2.34,9.36,,False,4,2.19,2.99,5011157888101,5011157888101,,Preço = mediana entre 4 lojas

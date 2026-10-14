@@ -1,0 +1,302 @@
+<title>Preços do Arroz no Retalho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cabeçalho com a data da recolha → matriz-resumo (mediana €/kg por tipo × cadeia, clicável)
+   → detalhe do tipo escolhido (linhas Mín/Máx/Média/Mediana por cadeia + lista de produtos) → notas de método. */
+:root {
+  --bg: #f4f5ef;          /* casca de arroz: neutro com viés verde */
+  --surface: #ffffff;
+  --fg: #1c2318;
+  --muted: #5d6857;
+  --line: #dde1d3;
+  --accent: #2e6a3a;      /* verde de canteiro */
+  --accent-soft: #e3eedf;
+  --heat: #c08a2a;        /* ocre: mais caro */
+  --cheap: #2e6a3a;
+  --promo: #9a5b12;
+  --promo-bg: #f8ead2;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121510; --surface: #1a1e17; --fg: #e5e9dd; --muted: #9da795; --line: #2d3429;
+    --accent: #86c28d; --accent-soft: #223024; --heat: #d8a446; --cheap: #86c28d;
+    --promo: #e6b56a; --promo-bg: #352a17; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121510; --surface: #1a1e17; --fg: #e5e9dd; --muted: #9da795; --line: #2d3429;
+  --accent: #86c28d; --accent-soft: #223024; --heat: #d8a446; --cheap: #86c28d;
+  --promo: #e6b56a; --promo-bg: #352a17; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.3rem; font-weight: 700; }
+h3 { font-size: 1rem; font-weight: 500; }
+p { margin: 0; }
+.eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+.muted { color: var(--muted); }
+.num { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+
+header { display: grid; gap: 10px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); font-size: 0.9rem; }
+.meta b { color: var(--fg); font-weight: 600; }
+.warn { background: var(--promo-bg); color: var(--promo); padding: 8px 12px; border-radius: var(--radius); font-size: 0.9rem; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button { font: inherit; font-size: 0.88rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); padding: 5px 13px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+button:focus-visible, select:focus-visible, input:focus-visible, th[tabindex]:focus-visible, tr[tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+label.ctl { display: inline-flex; gap: 8px; align-items: center; font-size: 0.88rem; color: var(--muted); }
+select, input[type="search"] { font: inherit; font-size: 0.92rem; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 10px; }
+input[type="search"] { width: min(240px, 100%); }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; }
+.scroll { overflow-x: auto; min-width: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; white-space: nowrap; }
+td.r, th.r { text-align: right; }
+
+/* Matriz-resumo */
+#matriz td.cell { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; white-space: nowrap; }
+#matriz td.cell small { display: block; font-size: 0.7rem; color: var(--muted); font-family: var(--font-body); }
+#matriz tbody tr { cursor: pointer; }
+#matriz tbody tr:hover td:first-child, #matriz tbody tr[aria-selected="true"] td:first-child { color: var(--accent); }
+#matriz tbody tr[aria-selected="true"] td:first-child { font-weight: 600; box-shadow: inset 3px 0 0 var(--accent); }
+#matriz td.tipo { min-width: 190px; }
+#matriz td.todas, #matriz th.todas { border-left: 2px solid var(--line); }
+.legend { display: flex; gap: 8px; align-items: center; font-size: 0.8rem; color: var(--muted); flex-wrap: wrap; }
+.ramp { width: 120px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, color-mix(in oklab, var(--heat) 4%, var(--surface)), color-mix(in oklab, var(--heat) 55%, var(--surface))); border: 1px solid var(--line); }
+
+/* Estatísticas do tipo */
+#stats th.r, #stats td.r { min-width: 92px; }
+#stats tbody th { text-transform: none; letter-spacing: 0; font-size: 0.9rem; color: var(--fg); }
+#stats td.lo { color: var(--cheap); font-weight: 500; }
+#stats td.hi { color: var(--heat); font-weight: 500; }
+#stats tr.count td, #stats tr.count th { color: var(--muted); font-size: 0.82rem; }
+#stats td.todas, #stats th.todas { border-left: 2px solid var(--line); background: var(--accent-soft); }
+
+/* Produtos */
+#produtos th[data-k] { cursor: pointer; user-select: none; }
+#produtos th[data-k]::after { content: ""; margin-left: 4px; }
+#produtos th[aria-sort="ascending"]::after { content: "▲"; font-size: 0.6rem; }
+#produtos th[aria-sort="descending"]::after { content: "▼"; font-size: 0.6rem; }
+#produtos td.prod { min-width: 220px; }
+#produtos td.cad { white-space: nowrap; font-weight: 600; }
+.pill { display: inline-block; font-size: 0.72rem; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+.pill.promo { background: var(--promo-bg); color: var(--promo); }
+.pill.seg-p { background: var(--accent-soft); color: var(--accent); }
+.pill.seg-f { border: 1px solid var(--line); color: var(--muted); }
+.pill.seg-b { border: 1px solid var(--heat); color: var(--heat); }
+.sub { display: block; font-size: 0.78rem; color: var(--muted); }
+td.num .sub { white-space: nowrap; }
+td.prod a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+td.prod a:hover { text-decoration-color: var(--accent); }
+.bar { display: block; height: 4px; border-radius: 2px; background: color-mix(in oklab, var(--heat) 60%, var(--surface)); margin-top: 4px; }
+
+.notes { display: grid; gap: 10px; font-size: 0.9rem; color: var(--muted); max-width: 75ch; }
+.notes h2 { color: var(--fg); font-size: 1.05rem; }
+.notes ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.empty { color: var(--muted); padding: 12px 0; }
+@media (max-width: 640px) { .wrap { padding-inline: 16px; } .panel { padding: 14px; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Observatório do Arroz · Retalho em Portugal</span>
+    <h1>Preços do arroz nos supermercados online</h1>
+    <div class="meta" id="meta"></div>
+    <div class="warn" id="erros" hidden></div>
+  </header>
+
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Segmento de marca" id="segmentos"></div>
+  </div>
+
+  <section class="panel" aria-labelledby="t-matriz">
+    <div class="panel-head">
+      <h2 id="t-matriz">Mediana do preço por kg</h2>
+      <div class="legend"><span>mais barato</span><span class="ramp" aria-hidden="true"></span><span>mais caro (dentro de cada tipo)</span></div>
+    </div>
+    <p class="muted" style="font-size:.88rem">Escolha um tipo de arroz para ver todos os produtos e as linhas de mínimo, máximo, média e mediana.</p>
+    <div class="scroll"><table id="matriz"></table></div>
+  </section>
+
+  <section class="panel" id="detalhe" aria-labelledby="t-tipo">
+    <div class="panel-head">
+      <h2 id="t-tipo"></h2>
+      <label class="ctl" for="tipo">Tipo de arroz <select id="tipo"></select></label>
+    </div>
+    <div class="scroll"><table id="stats"></table></div>
+    <div class="panel-head">
+      <h3 id="t-prod"></h3>
+      <input type="search" id="pesquisa" placeholder="Filtrar por produto ou marca" aria-label="Filtrar produtos">
+    </div>
+    <div class="scroll"><table id="produtos"></table></div>
+  </section>
+
+  <section class="notes" aria-labelledby="t-notas">
+    <h2 id="t-notas">Como estes números são feitos</h2>
+    <ul>
+      <li>Recolha das lojas online de Continente, Pingo Doce, Auchan, Intermarché e El Corte Inglés, na categoria de arroz de cada site. Lidl, Aldi e Mercadona não vendem mercearia online em Portugal e ficam fora desta recolha.</li>
+      <li>Todas as estatísticas usam o preço por kg: o indicado pelo site ou, quando falta, o preço a dividir pelo peso da embalagem. Mínimo, máximo, média e mediana contam cada produto uma vez.</li>
+      <li>Intermarché: cada loja é independente e define os seus preços. O preço mostrado é a mediana entre as lojas com loja online; o intervalo por baixo vai da loja mais barata à mais cara.</li>
+      <li>«Promo» assinala produtos com preço riscado ou abaixo do PVP recomendado. O preço usado é sempre o que o cliente paga nesse dia.</li>
+      <li>Tipo e segmento são atribuídos por palavras-chave no nome e na marca. Marca própria inclui as linhas biológicas e premium das cadeias. Arroz doce já feito, tortitas, bebidas e farinhas ficam de fora.</li>
+      <li>Os preços online podem diferir dos da loja física.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+const DADOS = /*__DADOS__*/null;
+
+(async function () {
+  let d = DADOS;
+  if (!d) {
+    try { d = await (await fetch("data/latest.json", { cache: "no-store" })).json(); }
+    catch (e) { document.getElementById("meta").textContent = "Não foi possível carregar data/latest.json."; return; }
+  }
+  const CADEIAS = ["Continente", "Pingo Doce", "Auchan", "Intermarché", "El Corte Inglés"].filter(c => d.cadeias.includes(c));
+  const TODAS = "Todas as cadeias";
+  const TIPOS = ["Agulha", "Carolino", "Basmati", "Thai / Jasmim / Aromático", "Vaporizado / Estufado", "Integral",
+    "Risotto (arbório, carnaroli)", "Paelha / Bomba", "Sushi / Poke", "Especialidades (selvagem, negro, vermelho)",
+    "Pronto a comer / preparados", "Outros"].filter(t => d.produtos.some(p => p.tipo === t));
+  const SEGS = ["Todos", "Marca própria", "Marca de fabricante", "Premium / Bio"];
+  const st = { seg: "Todos", tipo: TIPOS[0], q: "", sort: "eur_kg", dir: 1 };
+  try { const s = JSON.parse(localStorage.getItem("arroz-ui") || "{}"); if (TIPOS.includes(s.tipo)) st.tipo = s.tipo; if (SEGS.includes(s.seg)) st.seg = s.seg; } catch (e) {}
+  const guardar = () => { try { localStorage.setItem("arroz-ui", JSON.stringify({ tipo: st.tipo, seg: st.seg })); } catch (e) {} };
+
+  const nf = new Intl.NumberFormat("pt-PT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const eur = v => (v === null || v === undefined || v === "") ? "–" : nf.format(+v) + " €";
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const idx = {};
+  d.estatisticas.forEach(e => { idx[e.tipo + "|" + e.cadeia + "|" + e.segmento] = e; });
+  const stat = (t, c, s) => idx[t + "|" + c + "|" + s];
+  const dataPt = new Date(d.data + "T12:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long", year: "numeric" });
+
+  document.getElementById("meta").innerHTML =
+    `<span>Recolha de <b>${esc(dataPt)}</b></span><span><b>${d.produtos.length}</b> produtos</span><span><b>${CADEIAS.length}</b> cadeias</span>` +
+    (d.produtos.find(p => p.n_lojas) ? `<span>Intermarché: <b>${Math.max(...d.produtos.map(p => +p.n_lojas || 0))}</b> lojas</span>` : "");
+  const errs = Object.entries(d.erros || {});
+  if (errs.length) { const e = document.getElementById("erros"); e.hidden = false; e.textContent = "A última recolha falhou em: " + errs.map(x => x[0]).join(", ") + ". Para essas cadeias mostram-se os preços da recolha anterior."; }
+
+  const segBox = document.getElementById("segmentos");
+  segBox.innerHTML = SEGS.map(s => `<button type="button" data-s="${esc(s)}" aria-pressed="${s === st.seg}">${esc(s)}</button>`).join("");
+  segBox.addEventListener("click", ev => { const b = ev.target.closest("button"); if (!b) return; st.seg = b.dataset.s; guardar(); render(); });
+  const selTipo = document.getElementById("tipo");
+  selTipo.innerHTML = TIPOS.map(t => `<option>${esc(t)}</option>`).join("");
+  selTipo.addEventListener("change", () => { st.tipo = selTipo.value; guardar(); render(); });
+  document.getElementById("pesquisa").addEventListener("input", ev => { st.q = ev.target.value.trim().toLowerCase(); renderProdutos(); });
+
+  function heat(v, lo, hi) {
+    if (v == null || hi <= lo) return "";
+    const k = Math.round(4 + 51 * (v - lo) / (hi - lo));
+    return `background: color-mix(in oklab, var(--heat) ${k}%, var(--surface))`;
+  }
+
+  function renderMatriz() {
+    const cols = [...CADEIAS, TODAS];
+    let h = `<thead><tr><th>Tipo de arroz</th>${cols.map(c => `<th class="r${c === TODAS ? " todas" : ""}">${esc(c === TODAS ? "Todas" : c)}</th>`).join("")}</tr></thead><tbody>`;
+    for (const t of TIPOS) {
+      const vals = CADEIAS.map(c => stat(t, c, st.seg)?.mediana).filter(v => v != null);
+      const lo = Math.min(...vals), hi = Math.max(...vals);
+      h += `<tr tabindex="0" data-t="${esc(t)}" aria-selected="${t === st.tipo}"><td class="tipo">${esc(t)}</td>`;
+      for (const c of cols) {
+        const e = stat(t, c, st.seg);
+        h += e ? `<td class="cell${c === TODAS ? " todas" : ""}" style="${c === TODAS ? "" : heat(e.mediana, lo, hi)}">${nf.format(e.mediana)}<small>${e.n} prod.</small></td>`
+               : `<td class="cell${c === TODAS ? " todas" : ""}"><span class="muted">–</span></td>`;
+      }
+      h += "</tr>";
+    }
+    const m = document.getElementById("matriz");
+    m.innerHTML = h + "</tbody>";
+    m.querySelectorAll("tbody tr").forEach(tr => {
+      const go = () => { st.tipo = tr.dataset.t; guardar(); render(); document.getElementById("detalhe").scrollIntoView({ block: "start" }); };
+      tr.addEventListener("click", go);
+      tr.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(); } });
+    });
+  }
+
+  function renderStats() {
+    const cols = [...CADEIAS, TODAS];
+    const linhas = [["Mínimo", "min"], ["Máximo", "max"], ["Média", "media"], ["Mediana", "mediana"]];
+    let h = `<thead><tr><th>€/kg</th>${cols.map(c => `<th class="r${c === TODAS ? " todas" : ""}">${esc(c === TODAS ? "Todas" : c)}</th>`).join("")}</tr></thead><tbody>`;
+    for (const [lab, k] of linhas) {
+      const vals = CADEIAS.map(c => stat(st.tipo, c, st.seg)?.[k]).filter(v => v != null);
+      const lo = Math.min(...vals), hi = Math.max(...vals);
+      h += `<tr><th scope="row">${lab}</th>`;
+      for (const c of cols) {
+        const v = stat(st.tipo, c, st.seg)?.[k];
+        const cls = c === TODAS ? " todas" : (vals.length > 1 && v === lo ? " lo" : (vals.length > 1 && v === hi ? " hi" : ""));
+        h += `<td class="r num${cls}">${v == null ? "–" : nf.format(v)}</td>`;
+      }
+      h += "</tr>";
+    }
+    h += `<tr class="count"><th scope="row">Nº de produtos</th>${cols.map(c => `<td class="r num${c === TODAS ? " todas" : ""}">${stat(st.tipo, c, st.seg)?.n ?? 0}</td>`).join("")}</tr>`;
+    document.getElementById("stats").innerHTML = h + "</tbody>";
+  }
+
+  const COLS = [
+    ["cadeia", "Supermercado"], ["nome", "Produto"], ["segmento", "Segmento"],
+    ["peso_g", "Emb.", "r"], ["preco", "Preço", "r"], ["eur_kg", "€/kg", "r"]
+  ];
+  function renderProdutos() {
+    let ps = d.produtos.filter(p => p.tipo === st.tipo && (st.seg === "Todos" || p.segmento === st.seg));
+    const total = ps.length;
+    if (st.q) ps = ps.filter(p => (p.nome + " " + p.marca + " " + p.cadeia).toLowerCase().includes(st.q));
+    const k = st.sort;
+    ps.sort((a, b) => {
+      const x = a[k], y = b[k];
+      const r = (typeof x === "number" || typeof y === "number") ? ((+x || 0) - (+y || 0)) : String(x).localeCompare(String(y), "pt");
+      return r * st.dir || (+a.eur_kg - +b.eur_kg);
+    });
+    const maxKg = Math.max(...ps.map(p => +p.eur_kg || 0), 0.01);
+    document.getElementById("t-prod").textContent = st.q ? `${ps.length} de ${total} produtos` : `${total} produtos`;
+    let h = `<thead><tr>${COLS.map(([key, lab, al]) => `<th data-k="${key}" tabindex="0" class="${al || ""}" aria-sort="${key === k ? (st.dir > 0 ? "ascending" : "descending") : "none"}">${lab}</th>`).join("")}</tr></thead><tbody>`;
+    if (!ps.length) h += `<tr><td colspan="6" class="empty">Nenhum produto com este filtro.</td></tr>`;
+    for (const p of ps) {
+      const segc = p.segmento === "Marca própria" ? "seg-p" : p.segmento === "Premium / Bio" ? "seg-b" : "seg-f";
+      const desc = p.promo === true || p.promo === "True" ? (p.preco_ref ? Math.round(100 * (1 - p.preco / p.preco_ref)) : null) : null;
+      const peso = p.peso_g ? (p.peso_g >= 1000 ? nf.format(p.peso_g / 1000).replace(/,00$/, "") + " kg" : Math.round(p.peso_g) + " g") : "–";
+      const lojas = p.n_lojas ? `<span class="sub">${eur(p.preco_min_lojas)} a ${eur(p.preco_max_lojas)} · ${p.n_lojas} lojas</span>` : "";
+      const ref = p.preco_ref && +p.preco_ref > +p.preco ? `<span class="sub"><s>${eur(p.preco_ref)}</s></span>` : "";
+      const nota = p.nota && !p.n_lojas ? `<span class="sub">${esc(p.nota)}</span>` : "";
+      const nome = p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.nome)}</a>` : esc(p.nome);
+      h += `<tr><td class="cad">${esc(p.cadeia)}</td>
+        <td class="prod">${nome} <span class="sub">${esc(p.marca)}</span>${nota}</td>
+        <td><span class="pill ${segc}">${esc(p.segmento)}</span>${desc != null && desc > 0 ? ` <span class="pill promo">Promo −${desc}%</span>` : (p.promo === true ? ' <span class="pill promo">Promo</span>' : "")}</td>
+        <td class="r num">${peso}</td>
+        <td class="r num">${eur(p.preco)}${ref}${lojas}</td>
+        <td class="r num"><b>${nf.format(+p.eur_kg)}</b><span class="bar" style="width:${Math.max(4, 100 * (+p.eur_kg) / maxKg)}%"></span></td></tr>`;
+    }
+    const t = document.getElementById("produtos");
+    t.innerHTML = h + "</tbody>";
+    t.querySelectorAll("th[data-k]").forEach(th => {
+      const go = () => { if (st.sort === th.dataset.k) st.dir *= -1; else { st.sort = th.dataset.k; st.dir = 1; } renderProdutos(); };
+      th.addEventListener("click", go);
+      th.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(); } });
+    });
+  }
+
+  function render() {
+    segBox.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.s === st.seg)));
+    selTipo.value = st.tipo;
+    document.getElementById("t-tipo").textContent = st.tipo + (st.seg === "Todos" ? "" : " · " + st.seg);
+    renderMatriz(); renderStats(); renderProdutos();
+  }
+  render();
+})();
+</script>

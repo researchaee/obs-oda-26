@@ -1,0 +1,41 @@
+/* Painel 7 — Preços no retalho */
+.mz-scroll{overflow-x:auto;min-width:0}
+.mz-matrix tbody tr{cursor:pointer}
+.mz-matrix tbody tr:hover td{background:#f4f8f5}
+.mz-matrix td,.mz-matrix th,.mz-stats td,.mz-stats th{white-space:nowrap}
+.mz-row-link{background:0 0;border:0;padding:0;font:inherit;font-weight:700;color:var(--ink);cursor:pointer;text-align:left}
+.mz-row-link:focus-visible{outline:2px solid var(--brand-green);outline-offset:3px}
+.is-current .mz-row-link{color:var(--brand-deep)}
+.mz-matrix .mz-all,.mz-stats .mz-all{border-left:2px solid var(--line);background:#f6f6f2}
+.mz-n{display:block;color:var(--muted);font-size:11px;font-weight:500}
+.mz-lo{color:var(--green)}
+.mz-hi{color:var(--red)}
+.mz-stats tbody th{color:var(--ink);font-size:14px;font-weight:700;text-align:left}
+.mz-count td,.mz-count th{color:var(--muted)!important;font-size:13px!important;font-weight:500!important}
+.mz-dots{display:block;width:100%;height:auto;margin-top:22px;font-family:var(--display)}
+.mz-sub{display:block;color:var(--muted);font-size:12px;font-weight:500;margin-top:2px}
+.mz-seg{display:inline-block;border:1px solid var(--line);color:var(--muted);font-size:11px;padding:2px 7px;white-space:nowrap}
+.mz-promo{display:inline-block;background:#fff4d6;color:var(--gold);font-size:11px;font-weight:800;padding:2px 7px;margin-left:6px;white-space:nowrap}
+.mz-products td{vertical-align:top}
+.mz-products td.num .quote-bar{width:110px;margin-top:6px;margin-left:auto}
+.mz-products a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.mz-products a:hover{text-decoration-color:var(--gold)}
+#retail-products .chart-actions{gap:8px}
+/* Navegação com 8 entradas e página inicial com 7 painéis */
+.site-header .top-panel-nav{grid-template-columns:repeat(8,minmax(92px,1fr))}
+@media (width<=1450px){.site-header .top-panel-nav{grid-template-columns:repeat(8,minmax(88px,1fr))}}
+@media (width<=900px){.site-header .top-panel-nav{grid-template-columns:repeat(8,118px)}}
+.panel-launcher{grid-template-columns:repeat(4,minmax(0,1fr))}
+.panel-launcher .panel-card:last-child:nth-child(4n+3){grid-column:span 2}
+@media (width<=1280px){.panel-launcher{grid-template-columns:repeat(3,minmax(0,1fr))}.panel-launcher .panel-card:last-child:nth-child(4n+3){grid-column:auto}.panel-launcher .panel-card:last-child:nth-child(3n+1){grid-column:1/-1;min-height:0}}
+@media (width<=1180px){.panel-launcher{grid-template-columns:repeat(2,minmax(0,1fr))}.panel-launcher .panel-card:last-child:nth-child(3n+1){grid-column:auto}.panel-launcher .panel-card:last-child:nth-child(odd){grid-column:1/-1;min-height:0}}
+@media (width<=900px){.panel-launcher{grid-template-columns:minmax(0,1fr)}.panel-launcher .panel-card:last-child:nth-child(odd){grid-column:auto}}
+@media (width<=700px){.mz-products td.num .quote-bar{width:60px}}
+#retail-products .visual-head{flex-direction:column;align-items:stretch}
+#retail-products .visual-head .chart-actions{justify-content:flex-start}
+.mz-products td:nth-child(2){min-width:240px}
+.mz-stats{table-layout:fixed}
+.mz-stats th:first-child{width:150px}
+@media (width<=700px){.mz-stats{table-layout:auto}.mz-products td:nth-child(2){min-width:180px}}
+.mz-filter label{max-width:100%;min-width:0;flex-wrap:wrap}
+.mz-filter select{max-width:100%;min-width:0}
