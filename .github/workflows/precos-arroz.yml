@@ -1,0 +1,40 @@
+# Recolha semanal dos preços de arroz nos supermercados online.
+# Copiar este ficheiro para .github/workflows/ na RAIZ do repositório
+# (a pasta precos-arroz/ fica ao lado de observatorio-maizoryza/).
+name: Preços do arroz (retalho)
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"   # segundas-feiras, 06:17 UTC
+  workflow_dispatch:        # botão «Run workflow» para correr à mão
+
+permissions:
+  contents: write
+
+jobs:
+  recolha:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: precos-arroz
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q
+      - name: Recolher preços
+        run: python -m scraper.run
+      - name: Atualizar o observatório e o dashboard
+        run: |
+          python -m tools.merge_into_observatory
+          python -m tools.build_dashboard
+      - name: Guardar dados no repositório
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ index.html ../observatorio-maizoryza/observatory-data.json
+          git diff --cached --quiet || git commit -m "Preços do arroz: recolha de $(date +%F)"
+          git push
