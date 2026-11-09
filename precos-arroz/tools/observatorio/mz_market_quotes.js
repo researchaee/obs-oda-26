@@ -6,12 +6,18 @@ var MzQuoteCropLabels = {
   durum_wheat: `Trigo duro`,
   barley: `Cevada`,
   oats: `Aveia`,
+  rye: `Centeio`,
   triticale: `Triticale`
 };
 
 function MzMarketQuotes({ records, country }) {
   let allRows = records
-    .filter((row) => row.country_code === country && row.source === `ISMEA`)
+    .filter(
+      (row) =>
+        row.country_code === country &&
+        row.source === `Comissão Europeia` &&
+        row.crop !== `rice`
+    )
     .sort(
       (a, b) =>
         (a.crop === `rice` ? -1 : b.crop === `rice` ? 1 : 0) ||
@@ -25,10 +31,11 @@ function MzMarketQuotes({ records, country }) {
   let [crop, setCrop] = (0, l.useState)(`all`);
   let rows = allRows.filter((row) => crop === `all` || row.crop === crop);
   if (!allRows.length) return null;
+  let sourceLabel = `Comissão Europeia · Cereals prices`;
 
   return (0, T.jsxs)(`section`, {
     className: `visual-card`,
-    id: `quotes-ismea-cereals`,
+    id: `quotes-eu-cereals`,
     children: [
       (0, T.jsxs)(`div`, {
         className: `visual-head`,
@@ -37,13 +44,9 @@ function MzMarketQuotes({ records, country }) {
             children: [
               (0, T.jsx)(`p`, {
                 className: `chart-note`,
-                children: `ISMEA Mercati · valores por produto, praça e condição, em €/t.`
+                children: `Última cotação publicada por produto, praça e condição, em €/t.`
               })
             ]
-          }),
-          (0, T.jsx)(B, {
-            href: rows[0].source_url,
-            children: `ISMEA Mercati`
           })
         ]
       }),
@@ -126,6 +129,10 @@ function MzMarketQuotes({ records, country }) {
             })
           ]
         })
+      }),
+      (0, T.jsx)(B, {
+        href: rows[0].source_url,
+        children: sourceLabel
       })
     ]
   });

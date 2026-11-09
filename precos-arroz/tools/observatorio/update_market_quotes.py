@@ -2,14 +2,23 @@
 
 from __future__ import annotations
 
+import base64
+import io
 import json
+import math
 import re
+import secrets
 import unicodedata
+import xml.etree.ElementTree as ET
+import zipfile
 from datetime import date, datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode, urljoin
 from urllib.request import Request, urlopen
+
+import requests
+import websocket
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -17,6 +26,32 @@ DATA_PATH = ROOT / "observatorio-maizoryza" / "observatory-data.json"
 ISMEA_URL = "https://www.ismeamercati.it/flex/cm/pages/ServeBLOB.php/L/IT/IDPagina/849/UT/systemPrint"
 SEVILLA_URL = "https://lonjadesevilla.com/consultor-precios/"
 SEVILLA_ENDPOINT = "https://lonjadesevilla.com/wp-content/themes/salient-child/ajaxPrecios.php"
+EU_CEREALS_URL = "https://agridata.ec.europa.eu/extensions/DashboardCereals/ExtCerealsPrice.html"
+EU_CEREALS_APP_ID = "5e97b24c-b841-494a-b34b-119ac2caa765"
+EU_CEREALS_SHEET_ID = "cf43a3de-5293-4e88-99b5-a2c0737644ef"
+EU_CEREALS_TABLE_ID = "FmjsK"
+EU_CEREALS_COUNTRIES = {
+    "Bulgaria": ("BG", "Bulgária"),
+    "France": ("FR", "França"),
+    "Greece": ("EL", "Grécia"),
+    "Portugal": ("PT", "Portugal"),
+}
+EU_CEREALS_PRODUCTS = {
+    "Breadmaking common wheat": ("soft_wheat", "Trigo mole panificável"),
+    "Breadmaking common wheat - TVT": ("soft_wheat", "Trigo mole panificável — TVT"),
+    "Durum wheat": ("durum_wheat", "Trigo duro"),
+    "Feed barley": ("barley", "Cevada para ração"),
+    "Feed maize": ("maize", "Milho para ração"),
+    "Feed oats": ("oats", "Aveia para ração"),
+    "Feed rye": ("rye", "Centeio para ração"),
+    "Feed wheat": ("soft_wheat", "Trigo para ração"),
+    "Malting barley": ("barley", "Cevada para malte"),
+    "Milling oats": ("oats", "Aveia"),
+    "Milling rye": ("rye", "Centeio"),
+    "Milling wheat": ("soft_wheat", "Trigo mole"),
+    "Rye of breadmaking quality": ("rye", "Centeio panificável"),
+    "Triticale": ("triticale", "Triticale"),
+}
 USER_AGENT = "Observatorio-de-Precos-do-Arroz/1.0"
 
 
@@ -183,6 +218,267 @@ def ismea_records() -> list[dict[str, object]]:
     ]
 
 
+def qlik_call(
+    connection: websocket.WebSocket,
+    request_id: int,
+    method: str,
+    handle: int,
+    params: list[object],
+) -> dict[str, object]:
+    connection.send(
+        json.dumps(
+            {
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "handle": handle,
+                "method": method,
+                "params": params,
+            }
+        )
+    )
+    while True:
+        response = json.loads(connection.recv())
+        if not isinstance(response, dict):
+            raise RuntimeError(f"Resposta inválida da API Qlik ({method}).")
+        if response.get("id") != request_id:
+            continue
+        if "error" in response:
+            raise RuntimeError(f"Falha na API Qlik ({method}): {response['error']}")
+        result = response.get("result")
+        if not isinstance(result, dict):
+            raise RuntimeError(f"Resposta inválida da API Qlik ({method}).")
+        return result
+
+
+def qlik_handle(result: dict[str, object], method: str) -> int:
+    returned = result.get("qReturn")
+    if not isinstance(returned, dict):
+        raise RuntimeError(f"A API Qlik não devolveu um objeto para {method}.")
+    handle = returned.get("qHandle")
+    if not isinstance(handle, int):
+        raise RuntimeError(f"A API Qlik não devolveu um identificador para {method}.")
+    return handle
+
+
+def excel_cell_value(cell: ET.Element, shared_strings: list[str]) -> str:
+    value = cell.find("{http://schemas.openxmlformats.org/spreadsheetml/2006/main}v")
+    if value is None or value.text is None:
+        inline_text = cell.findall(
+            ".//{http://schemas.openxmlformats.org/spreadsheetml/2006/main}t"
+        )
+        return "".join(text.text or "" for text in inline_text)
+    if cell.get("t") == "s":
+        return shared_strings[int(value.text)]
+    return value.text
+
+
+def excel_column_index(reference: str) -> int:
+    column = re.match(r"[A-Z]+", reference)
+    if column is None:
+        raise RuntimeError(f"Referência de célula Excel inválida: {reference}")
+    index = 0
+    for character in column.group():
+        index = index * 26 + ord(character) - ord("A") + 1
+    return index - 1
+
+
+def excel_date(value: str) -> date:
+    try:
+        return (datetime(1899, 12, 30) + timedelta(days=float(value))).date()
+    except ValueError:
+        for date_format in ("%d/%m/%Y", "%Y-%m-%d"):
+            try:
+                return datetime.strptime(value, date_format).date()
+            except ValueError:
+                continue
+    raise RuntimeError(f"Data de cotação Excel inválida: {value}")
+
+
+def parse_eu_cereals_export(content: bytes) -> list[dict[str, object]]:
+    namespace = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+    with zipfile.ZipFile(io.BytesIO(content)) as workbook:
+        strings_root = ET.fromstring(workbook.read("xl/sharedStrings.xml"))
+        shared_strings = [
+            "".join(text.text or "" for text in item.findall(f".//{namespace}t"))
+            for item in strings_root.findall(f"{namespace}si")
+        ]
+        sheet = ET.fromstring(workbook.read("xl/worksheets/sheet1.xml"))
+
+    xml_rows = sheet.findall(f".//{namespace}sheetData/{namespace}row")
+    if len(xml_rows) < 2:
+        raise RuntimeError("A exportação Cereals prices não contém linhas de dados.")
+
+    def row_values(xml_row: ET.Element) -> list[str]:
+        values: list[str] = []
+        for cell in xml_row.findall(f"{namespace}c"):
+            index = excel_column_index(cell.get("r", ""))
+            if len(values) <= index:
+                values.extend([""] * (index + 1 - len(values)))
+            values[index] = excel_cell_value(cell, shared_strings)
+        return values
+
+    headers = row_values(xml_rows[0])
+    required_headers = (
+        "Reference period",
+        "Member State",
+        "Product Name",
+        "Market Name",
+        "Stage Name",
+        "Price (€/Tonne)",
+    )
+    missing = [header for header in required_headers if header not in headers]
+    if missing:
+        raise RuntimeError(
+            f"A exportação Cereals prices mudou de formato; faltam colunas: {', '.join(missing)}."
+        )
+    columns = {header: headers.index(header) for header in required_headers}
+    histories: dict[
+        tuple[str, str, str, str, str], list[tuple[date, float]]
+    ] = {}
+
+    for xml_row in xml_rows[1:]:
+        values = row_values(xml_row)
+        country_name = values[columns["Member State"]]
+        country = EU_CEREALS_COUNTRIES.get(country_name)
+        product = EU_CEREALS_PRODUCTS.get(values[columns["Product Name"]])
+        price_text = values[columns["Price (€/Tonne)"]]
+        if country is None or product is None or not price_text:
+            continue
+        try:
+            price = float(price_text)
+        except ValueError as error:
+            raise RuntimeError(f"Preço inválido na exportação Cereals prices: {price_text}") from error
+        if not math.isfinite(price) or price <= 0:
+            continue
+
+        quote_date = excel_date(values[columns["Reference period"]])
+        market = values[columns["Market Name"]]
+        stage = values[columns["Stage Name"]]
+        code = country[0]
+        crop, localized_product = product
+        key = (code, crop, localized_product, market, stage)
+        histories.setdefault(key, []).append((quote_date, price))
+
+    expected_countries = {country[0] for country in EU_CEREALS_COUNTRIES.values()}
+    available_countries = {key[0] for key in histories}
+    missing_countries = sorted(expected_countries - available_countries)
+    if missing_countries:
+        raise RuntimeError(
+            "A exportação Cereals prices não contém preços para: "
+            + ", ".join(missing_countries)
+        )
+
+    records: list[dict[str, object]] = []
+    for (code, crop, product, market, raw_stage), quotes in histories.items():
+        quotes.sort(key=lambda quote: quote[0], reverse=True)
+        quote_date, price = quotes[0]
+        previous = next((quote for quote in quotes[1:] if quote[0] < quote_date), None)
+        weekly_change = None
+        if previous is not None and quote_date - previous[0] == timedelta(days=7):
+            weekly_change = round((price / previous[1] - 1) * 100, 1)
+        localized_country = next(
+            name for country_code, name in EU_CEREALS_COUNTRIES.values() if country_code == code
+        )
+        stage = {
+            "Departure from farm or from production area - on truck or other transport means":
+                "À saída da exploração ou da zona de produção, em camião",
+            "Departure from silo - after some storage - on truck or other transport means":
+                "À saída do silo, após armazenagem, em camião",
+            "Shipped to the place (port), unloaded, on truck leaving port":
+                "Desembarcado no porto, em camião à saída",
+            "National Average - Not Specified": "Média nacional — fase não especificada",
+        }.get(raw_stage, raw_stage)
+        records.append(
+            {
+                "crop": crop,
+                "country_code": code,
+                "country": localized_country,
+                "product": product,
+                "market": market,
+                "stage": stage,
+                "price_eur_t": price,
+                "date": quote_date.isoformat(),
+                "weekly_change_pct": weekly_change,
+                "source": "Comissão Europeia",
+                "source_url": EU_CEREALS_URL,
+            }
+        )
+    return records
+
+
+def eu_cereals_records() -> list[dict[str, object]]:
+    base_url = "https://agridata.ec.europa.eu"
+    reload_url = (
+        f"{base_url}/single/?appid={EU_CEREALS_APP_ID}"
+        f"&sheet={EU_CEREALS_SHEET_ID}&opt=ctxmenu"
+    )
+    session = requests.Session()
+    session.headers.update({"User-Agent": USER_AGENT})
+    bootstrap = session.get(reload_url, timeout=30)
+    bootstrap.raise_for_status()
+
+    token = base64.urlsafe_b64encode(secrets.token_bytes(16)).decode().rstrip("=")
+    socket_url = (
+        f"wss://agridata.ec.europa.eu/app/{EU_CEREALS_APP_ID}"
+        f"?reloadUri={quote(reload_url, safe='')}&qlik-csrf-token={token}"
+    )
+    cookie = "; ".join(f"{name}={value}" for name, value in session.cookies.items())
+    connection = websocket.create_connection(
+        socket_url,
+        timeout=120,
+        origin=base_url,
+        cookie=cookie,
+    )
+    try:
+        document = qlik_call(
+            connection,
+            1,
+            "OpenDoc",
+            -1,
+            [EU_CEREALS_APP_ID, "", "", "", False],
+        )
+        document_handle = qlik_handle(document, "OpenDoc")
+        field = qlik_call(connection, 2, "GetField", document_handle, ["Member State Name"])
+        field_handle = qlik_handle(field, "GetField")
+        countries = [{"qText": country} for country in EU_CEREALS_COUNTRIES]
+        selection = qlik_call(
+            connection,
+            3,
+            "SelectValues",
+            field_handle,
+            [countries, False, False],
+        )
+        if selection.get("qReturn") is not True:
+            raise RuntimeError("A API Qlik não aplicou os filtros de país solicitados.")
+        table = qlik_call(
+            connection,
+            4,
+            "GetObject",
+            document_handle,
+            [EU_CEREALS_TABLE_ID],
+        )
+        table_handle = qlik_handle(table, "GetObject")
+        export = qlik_call(
+            connection,
+            5,
+            "ExportData",
+            table_handle,
+            ["OOXML", "/qHyperCubeDef", "", "A", True],
+        )
+    finally:
+        connection.close()
+
+    export_path = export.get("qUrl")
+    if not isinstance(export_path, str) or not export_path:
+        raise RuntimeError("A API Qlik não devolveu o endereço da exportação Cereals prices.")
+    export_url = urljoin(base_url, export_path)
+    response = session.get(export_url, timeout=120)
+    response.raise_for_status()
+    if not response.content.startswith(b"PK"):
+        raise RuntimeError("A API Cereals prices não devolveu uma exportação Excel válida.")
+    return parse_eu_cereals_export(response.content)
+
+
 def sevilla_crop(header: str) -> tuple[str, str, str] | None:
     normalized = unaccent(header)
     if normalized.startswith("trigo blando"):
@@ -286,6 +582,7 @@ def main() -> None:
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     ismea = ismea_records()
     sevilla = sevilla_records(today)
+    eu_cereals = eu_cereals_records()
 
     old_sevilla = data["quotes"]["sevilla"]
     sunflower = []
@@ -394,14 +691,51 @@ def main() -> None:
         }
         for row in sevilla_rows
     ]
+    eu_source = next(
+        (source for source in data["sources"] if source.get("source") == "Comissão Europeia"),
+        None,
+    )
+    if eu_source is None:
+        data["sources"].append(
+            {
+                "source": "Comissão Europeia",
+                "authority": "European Commission — DG AGRI",
+                "api": "Dashboard Cereals Price — exportação pública do Data Explorer",
+                "url": EU_CEREALS_URL,
+                "used_for": "Cotações de cereais por produto, mercado, fase e data",
+                "coverage": "Portugal, Grécia, Bulgária e França",
+                "status": "Integrada na página Cotações",
+                "notes": (
+                    "São usados apenas preços publicados na exportação oficial. "
+                    "Não são estimados valores para semanas ou mercados sem cotação."
+                ),
+            }
+        )
+    else:
+        eu_source.update(
+            {
+                "authority": "European Commission — DG AGRI",
+                "api": "Dashboard Cereals Price — exportação pública do Data Explorer",
+                "url": EU_CEREALS_URL,
+                "used_for": "Cotações de cereais por produto, mercado, fase e data",
+                "coverage": "Portugal, Grécia, Bulgária e França",
+                "status": "Integrada na página Cotações",
+                "notes": (
+                    "São usados apenas preços publicados na exportação oficial. "
+                    "Não são estimados valores para semanas ou mercados sem cotação."
+                ),
+            }
+        )
     data["quotes"]["market_prices"] = {
         "retrieved": today.isoformat(),
         "unit": "EUR/t",
-        "records": existing_market_records + ismea + sevilla_market_records,
-        "sources": ["ISMEA Mercati", "Lonja de Sevilla"],
+        "records": existing_market_records + ismea + sevilla_market_records + eu_cereals,
+        "sources": ["ISMEA Mercati", "Lonja de Sevilla", "Comissão Europeia"],
         "method": (
             "Cotações por praça e produto. A página pública do ISMEA é lida integralmente; "
-            "a Lonja de Sevilla é consultada pelo respetivo formulário de preços."
+            "a Lonja de Sevilla é consultada pelo respetivo formulário de preços; os cereais "
+            "dos restantes países são obtidos na exportação oficial Cereals prices da Comissão "
+            "Europeia."
         ),
     }
 
@@ -450,7 +784,8 @@ def main() -> None:
     print(
         f"Atualizadas {len(rice)} cotações ISMEA de arroz em {len(markets)} praças "
         f"({', '.join(markets)}); {len(ismea) - len(rice)} cotações ISMEA de outras culturas; "
-        f"{len(sevilla_rows)} linhas Lonja de Sevilla. Culturas: {', '.join(crops)}."
+        f"{len(sevilla_rows)} linhas Lonja de Sevilla; {len(eu_cereals)} cotações da Comissão "
+        f"Europeia. Culturas: {', '.join(crops)}."
     )
 
 

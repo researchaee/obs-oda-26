@@ -59,6 +59,16 @@ def patch_italy_quote_table(s: str) -> str:
     obsolete_table = "(0,T.jsx)(MzMarketQuotes,{records:t,country:Ee,countryLabel:Re(Ee)}),"
     if obsolete_table in s:
         s = sub1(s, obsolete_table, "", "tabela sem número")
+    cereal_chart = "(0,T.jsx)(MzMarketQuotes,{records:t,country:Ee})"
+    if s.count(cereal_chart) > 1:
+        raise SystemExit("[gráfico de cereais] encontrei chamadas duplicadas.")
+    if cereal_chart not in s:
+        s = sub1(
+            s,
+            "(0,T.jsx)(B,{links:ue})]})})]})},Bt=()=>",
+            "(0,T.jsx)(B,{links:ue})]})}),(0,T.jsx)(MzMarketQuotes,{records:t,country:Ee})]})},Bt=()=>",
+            "gráfico de cereais no fim do painel",
+        )
     return s
 
 
@@ -228,8 +238,10 @@ def main():
     if not quotes_only:
         css += "\n" + (AQUI / "mz_retail.css").read_text(encoding="utf-8")
     market_quotes_css = (AQUI / "mz_market_quotes.css").read_text(encoding="utf-8").strip()
-    if market_quotes_css not in css:
-        css += "\n" + market_quotes_css
+    old_quotes_css = css.find(".dashboard-main{grid-template-columns:minmax(0,1fr)}")
+    if old_quotes_css >= 0:
+        css = css[:old_quotes_css].rstrip()
+    css += "\n" + market_quotes_css
     js_novo, css_novo = nome_hash("index", js, "js"), nome_hash("index", css, "css")
     (site / "assets" / js_novo).write_text(js, encoding="utf-8")
     (site / "assets" / css_novo).write_text(css, encoding="utf-8")

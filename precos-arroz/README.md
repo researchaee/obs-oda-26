@@ -25,18 +25,19 @@ cd precos-arroz && python -m tools.merge_into_observatory
 ```
 
 O script verifica cada alteração e pára sem estragar nada se o bundle for diferente.
-O painel de retalho e o componente de cotações ISMEA (`tools/observatorio/mz_market_quotes.js`)
+O painel de retalho e o componente de cotações (`tools/observatorio/mz_market_quotes.js`)
 estão fora do código-fonte original; quando houver código-fonte, passar ambos para lá.
 
-Para atualizar as cotações oficiais de mercado (ISMEA Mercati e Lonja de Sevilla), executar
-na raiz do repositório:
+Para atualizar as cotações oficiais de mercado (ISMEA Mercati, Lonja de Sevilla e Comissão
+Europeia), executar na raiz do repositório:
 
 ```bash
 python precos-arroz/tools/observatorio/update_market_quotes.py
 ```
 
-Este importador atualiza a página «Cotações» e mantém o painel comparativo limitado às
-culturas que já contém.
+Este importador atualiza a página «Cotações», incluindo os cereais de Portugal, Grécia,
+Bulgária e França publicados no dashboard oficial da Comissão Europeia. Mantém o painel
+comparativo limitado às culturas que já contém.
 
 ## Correr à mão (no teu computador)
 

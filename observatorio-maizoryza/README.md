@@ -28,5 +28,7 @@ Para atualizar as cotações oficiais, executar na raiz do repositório:
 python precos-arroz/tools/observatorio/update_market_quotes.py
 ```
 
-O importador lê a tabela pública completa do ISMEA e o consultor oficial da Lonja de
-Sevilla. Não acrescenta as culturas de cereais ao painel comparativo.
+O importador lê a tabela pública completa do ISMEA, o consultor oficial da Lonja de
+Sevilla e a exportação do dashboard oficial Cereals prices da Comissão Europeia para
+Portugal, Grécia, Bulgária e França. Só são usados preços publicados, sem estimativas.
+As cotações de cereais são adicionadas ao painel «Cotações», não ao painel comparativo.
