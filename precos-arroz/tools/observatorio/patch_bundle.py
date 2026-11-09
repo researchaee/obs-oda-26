@@ -25,6 +25,43 @@ def sub1(s: str, antigo: str, novo: str, nome: str) -> str:
     return s.replace(antigo, novo)
 
 
+def patch_italy_quote_table(s: str) -> str:
+    old_title = "Cotações de mercado do arroz por variedade, Itália — praças de ${p.join(` e `)} (EUR/t), última data publicada ${_}"
+    new_title = "Cotações de arroz por variedade — Itália"
+    if old_title in s:
+        s = sub1(s, old_title, new_title, "título do gráfico 02")
+    elif s.count(new_title) != 1:
+        raise SystemExit("[título do gráfico 02] texto esperado não encontrado.")
+
+    price_prefix = "(0,T.jsxs)(`td`,{className:`num`,children:[(0,T.jsx)(`b`,{children:n?o(n.price_eur_t):`—`}),n&&a(n.price_eur_t,"
+    if price_prefix in s:
+        if s.count(price_prefix) != 1:
+            raise SystemExit("[preços do gráfico 02] esperava 1 ocorrência.")
+        start = s.index(price_prefix)
+        end = s.index(")]})", start) + len(")]})")
+        price_cell = s[start:end]
+        price_cell = price_cell.replace(
+            "className:`num`,",
+            "className:`num`,\"data-label\":`${t} · €/t`,",
+            1,
+        )
+        s = s[:start] + price_cell + s[end:]
+    elif s.count('"data-label":`${t} · €/t`') != 1:
+        raise SystemExit("[preços do gráfico 02] célula esperada não encontrada.")
+
+    old_change_cell = "(0,T.jsx)(`td`,{className:`num quote-change ${(n?.weekly_change_pct??0)<0?`down`:(n?.weekly_change_pct??0)>0?`up`:``}`,children:y(n?.weekly_change_pct)})"
+    new_change_cell = "(0,T.jsx)(`td`,{className:`num quote-change ${(n?.weekly_change_pct??0)<0?`down`:(n?.weekly_change_pct??0)>0?`up`:``}`,\"data-label\":`${t} · variação`,children:y(n?.weekly_change_pct)})"
+    if old_change_cell in s:
+        s = sub1(s, old_change_cell, new_change_cell, "variações do gráfico 02")
+    elif s.count('"data-label":`${t} · variação`') != 1:
+        raise SystemExit("[variações do gráfico 02] célula esperada não encontrada.")
+
+    obsolete_table = "(0,T.jsx)(MzMarketQuotes,{records:t,country:Ee,countryLabel:Re(Ee)}),"
+    if obsolete_table in s:
+        s = sub1(s, obsolete_table, "", "tabela sem número")
+    return s
+
+
 def patch_js(s: str) -> str:
     if "function MzRetail(" in s:
         raise SystemExit("O bundle já tem o painel de retalho.")
@@ -62,11 +99,14 @@ def patch_market_quotes(s: str) -> str:
         if s.count("function MzMarketQuotes(") != 1:
             raise SystemExit("Esperava um único componente de cotações ISMEA no bundle.")
         inicio = s.index("function MzMarketQuotes(")
+        inicio_rotulos = s.find("var MzQuoteCropLabels =")
+        if 0 <= inicio_rotulos < inicio:
+            inicio = inicio_rotulos
         fim = s.find("\nfunction pe(", inicio)
         if fim < 0:
             raise SystemExit("Não foi possível localizar o fim do componente de cotações ISMEA.")
         componente = (AQUI / "mz_market_quotes.js").read_text(encoding="utf-8").strip()
-        return s[:inicio] + componente + s[fim:]
+        return patch_italy_quote_table(s[:inicio] + componente + s[fim:])
 
     s = sub1(
         s,
@@ -108,7 +148,7 @@ def patch_market_quotes(s: str) -> str:
     s = sub1(
         s,
         "return(0,T.jsxs)(T.Fragment,{children:[(0,T.jsx)(pe,{page:`prices`}),(0,T.jsxs)(`div`,{className:`month-filter quote-country-filter`",
-        "return(0,T.jsxs)(T.Fragment,{children:[(0,T.jsx)(pe,{page:`prices`}),(0,T.jsx)(MzMarketQuotes,{records:t,country:Ee,countryLabel:Re(Ee)}),(0,T.jsxs)(`div`,{className:`month-filter quote-country-filter`",
+        "return(0,T.jsxs)(T.Fragment,{children:[(0,T.jsx)(pe,{page:`prices`}),(0,T.jsxs)(`div`,{className:`month-filter quote-country-filter`",
         "tabela de cereais ISMEA",
     )
     s = sub1(
@@ -164,7 +204,7 @@ def patch_market_quotes(s: str) -> str:
         "Kt=[`home`,`production`,`trade`,`consumption`,`prices`,`retail`,`crops`,`inputs`]",
         "ordem de navegação",
     )
-    return s
+    return patch_italy_quote_table(s)
 
 
 def nome_hash(prefixo: str, conteudo: str, ext: str) -> str:
@@ -187,6 +227,9 @@ def main():
     css = (site / "assets" / css_antigo).read_text(encoding="utf-8")
     if not quotes_only:
         css += "\n" + (AQUI / "mz_retail.css").read_text(encoding="utf-8")
+    market_quotes_css = (AQUI / "mz_market_quotes.css").read_text(encoding="utf-8").strip()
+    if market_quotes_css not in css:
+        css += "\n" + market_quotes_css
     js_novo, css_novo = nome_hash("index", js, "js"), nome_hash("index", css, "css")
     (site / "assets" / js_novo).write_text(js, encoding="utf-8")
     (site / "assets" / css_novo).write_text(css, encoding="utf-8")

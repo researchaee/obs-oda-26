@@ -9,7 +9,7 @@ var MzQuoteCropLabels = {
   triticale: `Triticale`
 };
 
-function MzMarketQuotes({ records, country, countryLabel }) {
+function MzMarketQuotes({ records, country }) {
   let allRows = records
     .filter((row) => row.country_code === country && row.source === `ISMEA`)
     .sort(
@@ -35,10 +35,6 @@ function MzMarketQuotes({ records, country, countryLabel }) {
         children: [
           (0, T.jsxs)(`div`, {
             children: [
-              (0, T.jsx)(`h2`, {
-                className: `chart-title`,
-                children: `Cotações de cereais — ${countryLabel}`
-              }),
               (0, T.jsx)(`p`, {
                 className: `chart-note`,
                 children: `ISMEA Mercati · valores por produto, praça e condição, em €/t.`
@@ -101,17 +97,22 @@ function MzMarketQuotes({ records, country, countryLabel }) {
                   `tr`,
                   {
                     children: [
-                      (0, T.jsx)(`td`, { children: MzQuoteCropLabels[row.crop] ?? row.crop }),
-                      (0, T.jsx)(`td`, { children: row.product }),
-                      (0, T.jsx)(`td`, { children: row.market }),
-                      (0, T.jsx)(`td`, { children: row.stage }),
-                      (0, T.jsx)(`td`, { children: row.date }),
+                      (0, T.jsx)(`td`, {
+                        "data-label": `Cultura`,
+                        children: MzQuoteCropLabels[row.crop] ?? row.crop
+                      }),
+                      (0, T.jsx)(`td`, { "data-label": `Produto`, children: row.product }),
+                      (0, T.jsx)(`td`, { "data-label": `Praça`, children: row.market }),
+                      (0, T.jsx)(`td`, { "data-label": `Condição`, children: row.stage }),
+                      (0, T.jsx)(`td`, { "data-label": `Data`, children: row.date }),
                       (0, T.jsx)(`td`, {
                         className: `num`,
+                        "data-label": `Cotação (€/t)`,
                         children: row.price_eur_t == null ? `—` : `${N(row.price_eur_t, 1)}`
                       }),
                       (0, T.jsx)(`td`, {
                         className: `num`,
+                        "data-label": `Variação semanal`,
                         children:
                           row.weekly_change_pct == null
                             ? `—`

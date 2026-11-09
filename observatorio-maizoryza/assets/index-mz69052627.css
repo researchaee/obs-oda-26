@@ -41,3 +41,118 @@
 @media (width<=700px){.mz-stats{table-layout:auto}.mz-products td:nth-child(2){min-width:180px}}
 .mz-filter label{max-width:100%;min-width:0;flex-wrap:wrap}
 .mz-filter select{max-width:100%;min-width:0}
+
+#quotes-ismea-cereals .quote-table{min-width:900px}
+#quotes-ismea-cereals .quote-table th,#quotes-ismea-cereals .quote-table td{white-space:nowrap}
+@media (width<=700px){#quotes-ismea-cereals .visual-head{flex-direction:column;align-items:stretch}}
+#quotes-ismea-cereals .quote-table{min-width:900px}
+#quotes-ismea-cereals .quote-table th,#quotes-ismea-cereals .quote-table td{white-space:nowrap}
+@media (width<=700px){#quotes-ismea-cereals .visual-head{flex-direction:column;align-items:stretch}#quotes-ismea-cereals .visual-head>div:first-child{display:block}}
+.dashboard-main{grid-template-columns:minmax(0,1fr)}
+#quotes-ismea-cereals{min-width:0;max-width:100%}
+#quotes-ismea-cereals .mz-scroll{min-width:0;max-width:100%;overflow-x:visible}
+#quotes-ismea-cereals .quote-table{width:100%;min-width:0;table-layout:fixed}
+#quotes-ismea-cereals .quote-table th,#quotes-ismea-cereals .quote-table td{white-space:normal;overflow-wrap:anywhere}
+#quotes-ismea-cereals .quote-table thead th.num{white-space:normal}
+#quotes-ismea-cereals .quote-table td.num{white-space:nowrap}
+@media (width<=700px){
+  #quotes-ismea-cereals .quote-table,#quotes-ismea-cereals .quote-table tbody{display:block}
+  #quotes-ismea-cereals .quote-table thead{display:none}
+  #quotes-ismea-cereals .quote-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;padding:13px 8px;border-bottom:1px solid var(--line)}
+  #quotes-ismea-cereals .quote-table tbody td{display:flex;flex-direction:column;min-width:0;border:0;padding:0;white-space:normal;text-align:left;overflow-wrap:anywhere}
+  #quotes-ismea-cereals .quote-table tbody td::before{content:attr(data-label);color:var(--muted);font-size:11px;font-weight:700}
+  #quotes-ismea-cereals .quote-table tbody td:nth-child(2){grid-column:1/-1;font-weight:700}
+}
+.dashboard-main{grid-template-columns:minmax(0,1fr)}
+#quotes-ismea-cereals{min-width:0;max-width:100%}
+#quotes-ismea-cereals .mz-scroll{min-width:0;max-width:100%;overflow-x:visible}
+#quotes-ismea-cereals .quote-table{width:100%;min-width:0;table-layout:fixed}
+#quotes-ismea-cereals .quote-table th,#quotes-ismea-cereals .quote-table td{white-space:normal;overflow-wrap:anywhere}
+#quotes-ismea-cereals .quote-table thead th.num{white-space:normal}
+#quotes-ismea-cereals .quote-table td.num{white-space:nowrap}
+#quotes-ismea .quote-table{width:100%;min-width:0;table-layout:fixed}
+#quotes-ismea .quote-table th,#quotes-ismea .quote-table td{white-space:normal;overflow-wrap:anywhere}
+@media (width<=700px){
+  /* The complete quotation list below replaces the wide rice-market matrix on mobile. */
+  #quotes-ismea{display:none}
+  #quotes-ismea-cereals .quote-table,#quotes-ismea-cereals .quote-table tbody{display:block}
+  #quotes-ismea-cereals .quote-table thead{display:none}
+  #quotes-ismea-cereals .quote-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;padding:13px 8px;border-bottom:1px solid var(--line)}
+  #quotes-ismea-cereals .quote-table tbody td{display:flex;flex-direction:column;min-width:0;border:0;padding:0;white-space:normal;text-align:left;overflow-wrap:anywhere}
+  #quotes-ismea-cereals .quote-table tbody td::before{content:attr(data-label);color:var(--muted);font-size:11px;font-weight:700}
+  #quotes-ismea-cereals .quote-table tbody td:nth-child(2){grid-column:1/-1;font-weight:700}
+}
+.dashboard-main{grid-template-columns:minmax(0,1fr)}
+#quotes-ismea-cereals{min-width:0;max-width:100%}
+#quotes-ismea-cereals .mz-scroll{min-width:0;max-width:100%;overflow-x:visible}
+#quotes-ismea-cereals .quote-table{width:100%;min-width:0;table-layout:fixed}
+#quotes-ismea-cereals .quote-table th,#quotes-ismea-cereals .quote-table td{white-space:normal;overflow-wrap:anywhere}
+#quotes-ismea-cereals .quote-table thead th.num{white-space:normal}
+#quotes-ismea-cereals .quote-table td.num{white-space:nowrap}
+#quotes-ismea .quote-table{width:100%;min-width:0;table-layout:fixed}
+#quotes-ismea .quote-table th,#quotes-ismea .quote-table td{white-space:normal;overflow-wrap:anywhere}
+@media (width<=700px){
+  /* The complete quotation list below replaces the wide rice-market matrix on mobile. */
+  #quotes-ismea{display:none}
+  #quotes-ismea-cereals .quote-table,#quotes-ismea-cereals .quote-table tbody{display:block}
+  #quotes-ismea-cereals .quote-table thead{display:none}
+  #quotes-ismea-cereals .quote-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;padding:13px 8px;border-bottom:1px solid var(--line)}
+  #quotes-ismea-cereals .quote-table tbody td{display:flex;flex-direction:column;min-width:0;border:0;padding:0;white-space:normal;text-align:left;overflow-wrap:anywhere}
+  #quotes-ismea-cereals .quote-table tbody td::before{content:attr(data-label);color:var(--muted);font-size:11px;font-weight:700}
+  #quotes-ismea-cereals .quote-table tbody td:nth-child(2){grid-column:1/-1;font-weight:700}
+  #quotes-ismea-cereals .quote-table tbody td:first-child{order:1}
+}
+.dashboard-main{grid-template-columns:minmax(0,1fr)}
+#quotes-ismea-cereals{min-width:0;max-width:100%}
+#quotes-ismea-cereals .mz-scroll{min-width:0;max-width:100%;overflow-x:visible}
+#quotes-ismea-cereals .quote-table{width:100%;min-width:0;table-layout:fixed}
+#quotes-ismea-cereals .quote-table th,#quotes-ismea-cereals .quote-table td{white-space:normal;overflow-wrap:anywhere}
+#quotes-ismea-cereals .quote-table thead th.num{white-space:normal}
+#quotes-ismea-cereals .quote-table td.num{white-space:nowrap}
+#quotes-ismea .quote-table{width:100%;min-width:0;table-layout:fixed}
+#quotes-ismea .quote-table th,#quotes-ismea .quote-table td{white-space:normal;overflow-wrap:anywhere}
+@media (width<=900px){
+  #quotes-ismea .quote-table,#quotes-ismea .quote-table tbody{display:block}
+  #quotes-ismea .quote-table thead{display:none}
+  #quotes-ismea .quote-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;padding:13px 8px;border-bottom:1px solid var(--line)}
+  #quotes-ismea .quote-table tbody td{display:flex;flex-direction:column;min-width:0;border:0;padding:0;white-space:normal;text-align:left;overflow-wrap:anywhere}
+  #quotes-ismea .quote-table tbody td:first-child{grid-column:1/-1;color:var(--ink);font-weight:700}
+  #quotes-ismea .quote-table tbody td:not(:first-child)::before{content:attr(data-label);color:var(--muted);font-size:11px;font-weight:700}
+  #quotes-ismea .quote-bar{width:100%;max-width:100%;margin-left:0}
+}
+@media (width<=700px){
+  #quotes-ismea-cereals .quote-table,#quotes-ismea-cereals .quote-table tbody{display:block}
+  #quotes-ismea-cereals .quote-table thead{display:none}
+  #quotes-ismea-cereals .quote-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;padding:13px 8px;border-bottom:1px solid var(--line)}
+  #quotes-ismea-cereals .quote-table tbody td{display:flex;flex-direction:column;min-width:0;border:0;padding:0;white-space:normal;text-align:left;overflow-wrap:anywhere}
+  #quotes-ismea-cereals .quote-table tbody td::before{content:attr(data-label);color:var(--muted);font-size:11px;font-weight:700}
+  #quotes-ismea-cereals .quote-table tbody td:nth-child(2){grid-column:1/-1;font-weight:700}
+  #quotes-ismea-cereals .quote-table tbody td:first-child{order:1}
+}
+.dashboard-main{grid-template-columns:minmax(0,1fr)}
+#quotes-ismea-cereals{min-width:0;max-width:100%}
+#quotes-ismea-cereals .mz-scroll{min-width:0;max-width:100%;overflow-x:visible}
+#quotes-ismea-cereals .quote-table{width:100%;min-width:0;table-layout:fixed}
+#quotes-ismea-cereals .quote-table th,#quotes-ismea-cereals .quote-table td{white-space:normal;overflow-wrap:anywhere}
+#quotes-ismea-cereals .quote-table thead th.num{white-space:normal}
+#quotes-ismea-cereals .quote-table td.num{white-space:nowrap}
+#quotes-ismea .quote-table{width:100%;min-width:0;table-layout:fixed}
+#quotes-ismea .quote-table th,#quotes-ismea .quote-table td{white-space:normal;overflow-wrap:anywhere}
+@media (width<=1450px){
+  #quotes-ismea .quote-table,#quotes-ismea .quote-table tbody{display:block}
+  #quotes-ismea .quote-table thead{display:none}
+  #quotes-ismea .quote-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;padding:13px 8px;border-bottom:1px solid var(--line)}
+  #quotes-ismea .quote-table tbody td{display:flex;flex-direction:column;min-width:0;border:0;padding:0;white-space:normal;text-align:left;overflow-wrap:anywhere}
+  #quotes-ismea .quote-table tbody td:first-child{grid-column:1/-1;color:var(--ink);font-weight:700}
+  #quotes-ismea .quote-table tbody td:not(:first-child)::before{content:attr(data-label);color:var(--muted);font-size:11px;font-weight:700}
+  #quotes-ismea .quote-bar{width:100%;max-width:100%;margin-left:0}
+}
+@media (width<=700px){
+  #quotes-ismea-cereals .quote-table,#quotes-ismea-cereals .quote-table tbody{display:block}
+  #quotes-ismea-cereals .quote-table thead{display:none}
+  #quotes-ismea-cereals .quote-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;padding:13px 8px;border-bottom:1px solid var(--line)}
+  #quotes-ismea-cereals .quote-table tbody td{display:flex;flex-direction:column;min-width:0;border:0;padding:0;white-space:normal;text-align:left;overflow-wrap:anywhere}
+  #quotes-ismea-cereals .quote-table tbody td::before{content:attr(data-label);color:var(--muted);font-size:11px;font-weight:700}
+  #quotes-ismea-cereals .quote-table tbody td:nth-child(2){grid-column:1/-1;font-weight:700}
+  #quotes-ismea-cereals .quote-table tbody td:first-child{order:1}
+}
