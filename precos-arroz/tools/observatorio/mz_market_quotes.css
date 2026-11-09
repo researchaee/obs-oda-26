@@ -7,6 +7,13 @@
 #quotes-ismea-cereals .quote-table td.num{white-space:nowrap}
 #quotes-ismea .quote-table{width:100%;min-width:0;table-layout:fixed}
 #quotes-ismea .quote-table th,#quotes-ismea .quote-table td{white-space:normal;overflow-wrap:anywhere}
+@media (width>1450px){
+  #quotes-ismea .quote-table th:first-child,#quotes-ismea .quote-table td:first-child{width:20%}
+  #quotes-ismea .quote-table tbody td:nth-child(2n){width:5.5%;font-size:12px}
+  #quotes-ismea .quote-table tbody td:nth-child(2n+3){width:6%;font-size:12px}
+  #quotes-ismea .quote-table th,#quotes-ismea .quote-table td{padding:8px 4px}
+  #quotes-ismea .quote-table td.num .quote-bar{width:100%;min-width:0;max-width:100%;box-sizing:border-box;margin:6px 0 0}
+}
 @media (width<=1450px){
   #quotes-ismea .quote-table,#quotes-ismea .quote-table tbody{display:block}
   #quotes-ismea .quote-table thead{display:none}
