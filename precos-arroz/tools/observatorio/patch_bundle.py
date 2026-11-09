@@ -1,6 +1,7 @@
-"""Acrescenta o Painel 7 «Preços no retalho» ao site construído do observatório (vaga 13).
+"""Aplica os painéis de cotações e retalho ao site construído do observatório (vaga 13).
 
     python tools/observatorio/patch_bundle.py <raiz-do-repositório>
+    python tools/observatorio/patch_bundle.py --quotes-only <raiz-do-repositório>
 
 O repositório só tem o site construído, por isso o painel é injetado no bundle
 JavaScript já minificado, reutilizando os componentes do próprio site (cabeçalho
@@ -53,6 +54,109 @@ def patch_js(s: str) -> str:
     s = sub1(s, "i===`inputs`?[`Quanto subiram os adubos em Portugal?`",
              "i===`retail`?[`Quanto custa o arroz agulha nos supermercados?`,`Onde está mais barato o arroz carolino?`,`Qual o preço do arroz basmati no Continente?`]:"
              "i===`inputs`?[`Quanto subiram os adubos em Portugal?`", "sugestões")
+    return patch_market_quotes(s)
+
+
+def patch_market_quotes(s: str) -> str:
+    if "function MzMarketQuotes(" in s:
+        raise SystemExit("As alterações de cotações já estão aplicadas.")
+
+    s = sub1(
+        s,
+        "crops:{number:`04`,title:`Arroz, milho e girassol: comparação entre culturas`,navTitle:`Três culturas`,kicker:`Comparação de três culturas`,color:D.amberText},"
+        "prices:{number:`05`,title:`Cotações`,navTitle:`Cotações`,kicker:`Preços de mercado do arroz`,color:D.greenDark},"
+        "inputs:{number:`06`,title:`Inputs agrícolas`,navTitle:`Inputs agrícolas`,kicker:`Custos de produção agrícola`,color:D.amberText},"
+        "retail:{number:`07`,title:`Preços do arroz no retalho`,navTitle:`Preços no retalho`,kicker:`Preço ao consumidor em Portugal`,color:D.greenDark}}",
+        "crops:{number:`06`,title:`Arroz, milho e girassol: comparação entre culturas`,navTitle:`Outras culturas`,kicker:`Painel comparativo`,color:D.amberText},"
+        "prices:{number:`04`,title:`Cotações`,navTitle:`Cotações`,kicker:`Cotações de mercado do arroz e de outras culturas`,color:D.greenDark},"
+        "inputs:{number:`07`,title:`Inputs agrícolas`,navTitle:`Inputs agrícolas`,kicker:`Custos de produção agrícola`,color:D.amberText},"
+        "retail:{number:`05`,title:`Preços do arroz no retalho`,navTitle:`Preços no retalho`,kicker:`Preço ao consumidor em Portugal`,color:D.greenDark}}",
+        "números e títulos dos painéis",
+    )
+    s = sub1(
+        s,
+        "function pe({page:e,children:t}){",
+        (AQUI / "mz_market_quotes.js").read_text(encoding="utf-8").strip() + "\nfunction pe({page:e,children:t}){",
+        "componente de cotações",
+    )
+    s = sub1(
+        s,
+        "t=e.crop_comparison.market_prices.records,n=e=>t.filter(t=>t.source===e)",
+        "t=e.quotes?.market_prices?.records??e.crop_comparison.market_prices.records,n=e=>t.filter(t=>t.source===e)",
+        "dados do painel",
+    )
+    s = sub1(s, "f=n(`ISMEA`),p=Array.from", "f=n(`ISMEA`).filter(e=>e.crop===`rice`),p=Array.from", "cotações de arroz")
+    s = sub1(
+        s,
+        "m=Array.from(new Set(f.map(e=>e.product))).sort((e,t)=>e.localeCompare(t,`pt`))",
+        "m=Array.from(new Set([...f.map(e=>e.product),...(Ee===`IT`?[`Ribe`]:[])])).sort((e,t)=>e.localeCompare(t,`pt`))",
+        "variedade Ribe",
+    )
+    s = sub1(
+        s,
+        "Cotações semanais do ISMEA nas praças de ${p.join(` e `)}, para arroz em casca (risone) por variedade. ${p.map(e=>`${e}: ${g(e).toLowerCase()}`).join(`; `)}. A variação é face à semana anterior.",
+        "Cotações semanais do ISMEA nas praças de ${p.join(` e `)}, para arroz em casca (risone) por variedade. ${p.map(e=>`${e}: ${g(e).toLowerCase()}`).join(`; `)}. ${f.some(e=>e.product===`Ribe`)?`Ribe: com cotação publicada.`:`Ribe: sem cotação na última publicação consultada.`} A variação é face à semana anterior.",
+        "nota sobre a variedade Ribe",
+    )
+    s = sub1(
+        s,
+        "return(0,T.jsxs)(T.Fragment,{children:[(0,T.jsx)(pe,{page:`prices`}),(0,T.jsxs)(`div`,{className:`month-filter quote-country-filter`",
+        "return(0,T.jsxs)(T.Fragment,{children:[(0,T.jsx)(pe,{page:`prices`}),(0,T.jsx)(MzMarketQuotes,{records:t,country:Ee,countryLabel:Re(Ee)}),(0,T.jsxs)(`div`,{className:`month-filter quote-country-filter`",
+        "tabela de cereais ISMEA",
+    )
+    s = sub1(
+        s,
+        "b.filter(e=>ce.rows.some(t=>t.crop===e)).map(t=>(0,T.jsxs)(`tbody`,{children:[(0,T.jsx)(`tr`,{className:`quote-group`,children:(0,T.jsx)(`th`,{colSpan:5,children:e.crop_comparison.crops[t].label})})",
+        "Array.from(new Set(ce.rows.map(e=>e.crop))).map(t=>(0,T.jsxs)(`tbody`,{children:[(0,T.jsx)(`tr`,{className:`quote-group`,children:(0,T.jsx)(`th`,{colSpan:6,children:e.crop_comparison.crops[t]?.label??MzQuoteCropLabels[t]??t})})",
+        "culturas da Lonja",
+    )
+    inicio = s.index("id:`quotes-sevilla`")
+    fim = s.index("id:`quotes-salamanca`", inicio)
+    sevilha = s[inicio:fim]
+    sevilha = sub1(
+        sevilha,
+        "(0,T.jsx)(`th`,{children:`Produto`}),(0,T.jsx)(`th`,{className:`num`,children:`€/t`})",
+        "(0,T.jsx)(`th`,{children:`Produto`}),(0,T.jsx)(`th`,{children:`Data`}),(0,T.jsx)(`th`,{className:`num`,children:`€/t`})",
+        "data das cotações Sevilla",
+    )
+    sevilha = sub1(
+        sevilha,
+        "(0,T.jsx)(`td`,{children:e.product}),(0,T.jsx)(`td`,{className:`num`,children:(0,T.jsx)(`b`,{children:e.price==null?`S/O`:o(e.price)})})",
+        "(0,T.jsx)(`td`,{children:e.product}),(0,T.jsx)(`td`,{children:x(e.quote_date??ce.session_date)}),(0,T.jsx)(`td`,{className:`num`,children:(0,T.jsx)(`b`,{children:e.price==null?`S/O`:o(e.price)})})",
+        "data das cotações Sevilla",
+    )
+    s = s[:inicio] + sevilha + s[fim:]
+    s = sub1(s, "title:`Lonja de Sevilla — milho e girassol`", "title:`Lonja de Sevilla — milho, girassol e cereais`", "título Sevilla")
+    s = sub1(
+        s,
+        "A coluna anterior é a sessão de ${x(ce.previous_session)}; próxima sessão a ${x(ce.next_session)}. O histórico consulta-se no consultor de preços da Lonja.",
+        "A coluna anterior é a sessão de ${x(ce.previous_session)}. O histórico consulta-se no consultor de preços da Lonja.",
+        "nota da Lonja",
+    )
+    s = sub1(
+        s,
+        "rows:ce.rows.map(e=>[e.product,x(ce.session_date),e.price,e.previous,e.volume])",
+        "rows:ce.rows.map(e=>[e.product,x(e.quote_date??ce.session_date),e.price,e.previous,e.volume])",
+        "exportação Sevilla",
+    )
+    nome_antigo = "Observatório de arroz, milho e girassol"
+    if s.count(nome_antigo) != 2:
+        raise SystemExit(
+            "[identidade do observatório] esperava 2 ocorrências, "
+            f"encontrei {s.count(nome_antigo)}. Bundle diferente do da vaga 13?"
+        )
+    s = s.replace(nome_antigo, "Observatório de Preços do Arroz")
+    s = s.replace("Maizoryza — Observatório do arroz", "Observatório de Preços do Arroz")
+    s = s.replace("`05 — Cotações`", "`04 — Cotações`")
+    s = s.replace("`04 — Arroz, milho e girassol`", "`06 — Arroz, milho e girassol`")
+    s = s.replace("`06 — Inputs agrícolas`", "`07 — Inputs agrícolas`")
+    s = s.replace("`07 — Preços no retalho`", "`05 — Preços no retalho`")
+    s = sub1(
+        s,
+        "Kt=[`home`,`production`,`trade`,`consumption`,`crops`,`prices`,`inputs`,`retail`]",
+        "Kt=[`home`,`production`,`trade`,`consumption`,`prices`,`retail`,`crops`,`inputs`]",
+        "ordem de navegação",
+    )
     return s
 
 
@@ -62,21 +166,35 @@ def nome_hash(prefixo: str, conteudo: str, ext: str) -> str:
 
 
 def main():
-    raiz = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(".")
+    args = sys.argv[1:]
+    quotes_only = bool(args and args[0] == "--quotes-only")
+    if quotes_only:
+        args = args[1:]
+    raiz = Path(args[0]) if args else Path(".")
     site = raiz / "observatorio-maizoryza"
     idx = (site / "index.html").read_text(encoding="utf-8")
     js_antigo = re.search(r"assets/(index-[\w-]+\.js)", idx).group(1)
     css_antigo = re.search(r"assets/(index-[\w-]+\.css)", idx).group(1)
-    js = patch_js((site / "assets" / js_antigo).read_text(encoding="utf-8"))
-    css = (site / "assets" / css_antigo).read_text(encoding="utf-8") + "\n" + (AQUI / "mz_retail.css").read_text(encoding="utf-8")
+    js_original = (site / "assets" / js_antigo).read_text(encoding="utf-8")
+    js = patch_market_quotes(js_original) if quotes_only else patch_js(js_original)
+    css = (site / "assets" / css_antigo).read_text(encoding="utf-8")
+    if not quotes_only:
+        css += "\n" + (AQUI / "mz_retail.css").read_text(encoding="utf-8")
     js_novo, css_novo = nome_hash("index", js, "js"), nome_hash("index", css, "css")
     (site / "assets" / js_novo).write_text(js, encoding="utf-8")
     (site / "assets" / css_novo).write_text(css, encoding="utf-8")
     for f in (site / "index.html", raiz / "index.html"):
         t = f.read_text(encoding="utf-8").replace(js_antigo, js_novo).replace(css_antigo, css_novo)
+        t = t.replace("<title>Observatório Maizoryza</title>", "<title>Observatório de Preços do Arroz</title>")
+        t = t.replace(
+            "Produção, comércio, consumo e preços de arroz, milho e girassol na Europa, a partir de fontes estatísticas oficiais.",
+            "Produção, comércio, consumo e cotações do arroz; painel comparativo de outras culturas.",
+        )
         f.write_text(t, encoding="utf-8")
-    (site / "assets" / js_antigo).unlink()
-    (site / "assets" / css_antigo).unlink()
+    if js_antigo != js_novo:
+        (site / "assets" / js_antigo).unlink()
+    if css_antigo != css_novo:
+        (site / "assets" / css_antigo).unlink()
     print(f"JS {js_antigo} -> {js_novo}\nCSS {css_antigo} -> {css_novo}")
 
 

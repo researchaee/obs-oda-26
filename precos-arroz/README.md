@@ -6,7 +6,7 @@ Auchan, Intermarché e El Corte Inglés, com um dashboard por tipo de arroz
 
 ## Onde aparece
 
-- **No observatório:** Painel 7 «Preços no retalho» (navegação, cartão na página inicial,
+- **No observatório:** Painel 5 «Preços no retalho» (navegação, cartão na página inicial,
   respostas do Assistente IA e entradas no catálogo de fontes). Os dados vão para a chave
   `retail` de `observatorio-maizoryza/observatory-data.json`, e o histórico para `history.retail`.
 - **Página à parte (opcional):** `precos-arroz/index.html`.
@@ -16,7 +16,7 @@ scraper, atualiza o `observatory-data.json` e faz commit sozinha às segundas-fe
 
 ## Se substituir o site por um build novo
 
-O painel 7 foi injetado no site construído (o código-fonte da vaga 13 não estava disponível).
+O painel 5 foi injetado no site construído (o código-fonte da vaga 13 não estava disponível).
 Se publicar um build novo do observatório, volte a aplicá-lo:
 
 ```bash
@@ -25,7 +25,18 @@ cd precos-arroz && python -m tools.merge_into_observatory
 ```
 
 O script verifica cada alteração e pára sem estragar nada se o bundle for diferente.
-O ideal, quando houver código-fonte, é passar o painel (`tools/observatorio/mz_retail.js`) para lá.
+O painel de retalho e o componente de cotações ISMEA (`tools/observatorio/mz_market_quotes.js`)
+estão fora do código-fonte original; quando houver código-fonte, passar ambos para lá.
+
+Para atualizar as cotações oficiais de mercado (ISMEA Mercati e Lonja de Sevilla), executar
+na raiz do repositório:
+
+```bash
+python precos-arroz/tools/observatorio/update_market_quotes.py
+```
+
+Este importador atualiza a página «Cotações» e mantém o painel comparativo limitado às
+culturas que já contém.
 
 ## Correr à mão (no teu computador)
 
@@ -34,7 +45,7 @@ cd precos-arroz
 pip install -r requirements.txt
 python -m scraper.run                      # todas as cadeias (Intermarché: ~150 lojas, 5–10 min)
 python -m scraper.run --intermarche-lojas 10   # teste rápido
-python -m tools.merge_into_observatory     # leva os dados para o observatório (painel 7)
+python -m tools.merge_into_observatory     # leva os dados para o observatório (painel 5)
 python -m tools.build_dashboard            # atualiza a página à parte precos-arroz/index.html
 ```
 
