@@ -59,7 +59,14 @@ def patch_js(s: str) -> str:
 
 def patch_market_quotes(s: str) -> str:
     if "function MzMarketQuotes(" in s:
-        raise SystemExit("As alterações de cotações já estão aplicadas.")
+        if s.count("function MzMarketQuotes(") != 1:
+            raise SystemExit("Esperava um único componente de cotações ISMEA no bundle.")
+        inicio = s.index("function MzMarketQuotes(")
+        fim = s.find("\nfunction pe(", inicio)
+        if fim < 0:
+            raise SystemExit("Não foi possível localizar o fim do componente de cotações ISMEA.")
+        componente = (AQUI / "mz_market_quotes.js").read_text(encoding="utf-8").strip()
+        return s[:inicio] + componente + s[fim:]
 
     s = sub1(
         s,
