@@ -133,7 +133,10 @@ def patch_home_cards(s: str) -> str:
         cards = [card if card.endswith("}") else card + "}" for card in cards]
     else:
         segments = body.split("},{page:`")
-        cards = [segments[0] + "}"] + ["{page:`" + segment + "}" for segment in segments[1:]]
+        cards = [segments[0] + "}"] + [
+            card if card.endswith("}") else card + "}"
+            for card in ("{page:`" + segment for segment in segments[1:])
+        ]
     by_page: dict[str, str] = {}
     for card in cards:
         match = re.match(r"\{page:`([^`]+)`", card)
