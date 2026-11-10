@@ -72,24 +72,101 @@ def patch_italy_quote_table(s: str) -> str:
     return s
 
 
+def patch_crops_quotes(s: str) -> str:
+    call = "(0,T.jsx)(MzMarketQuotes,{records:e.quotes?.market_prices?.records??e.crop_comparison.market_prices.records,country:c}),"
+    if call in s:
+        return s
+    return sub1(
+        s,
+        "(0,T.jsxs)(`section`,{className:`visual-card`,id:`crop-evolution`,",
+        call + "(0,T.jsxs)(`section`,{className:`visual-card`,id:`crop-evolution`,",
+        "cotações no painel comparativo",
+    )
+
+
+def patch_current_navigation(s: str) -> str:
+    panel_numbers = (
+        ("consumption", "03", "02"),
+        ("trade", "06", "03"),
+        ("retail", "05", "04"),
+        ("prices", "04", "05"),
+        ("inputs", "02", "06"),
+    )
+    for page, old_number, new_number in panel_numbers:
+        old = f"{page}:{{number:`{old_number}`"
+        new = f"{page}:{{number:`{new_number}`"
+        if old in s:
+            s = sub1(s, old, new, f"número do painel {page}")
+        elif s.count(new) != 1:
+            raise SystemExit(f"[número do painel {page}] número atual inesperado.")
+
+    old_order = "Kt=[`home`,`production`,`inputs`,`consumption`,`prices`,`retail`,`trade`,`crops`]"
+    new_order = "Kt=[`home`,`production`,`consumption`,`trade`,`retail`,`prices`,`inputs`,`crops`]"
+    if old_order in s:
+        s = sub1(s, old_order, new_order, "ordem dos painéis")
+    elif s.count(new_order) != 1:
+        raise SystemExit("[ordem dos painéis] sequência atual inesperada.")
+
+    old_button = "className:i===e?`active`:``,onClick:()=>Ve(e),children:"
+    new_button = 'className:i===e?`active`:``, "data-panel-spacer":e===`prices`?`true`:void 0,onClick:()=>Ve(e),children:'
+    if '"data-panel-spacer":e===`prices`' not in s:
+        s = sub1(s, old_button, new_button, "espaçamento antes das cotações")
+    return s
+
+
+def patch_home_cards(s: str) -> str:
+    start_marker = "x=[{page:`"
+    end_marker = "];return(0,T.jsxs)(T.Fragment,{children:[(0,T.jsxs)(`section`,{className:`intro-hero`"
+    if s.count(start_marker) != 1 or s.count(end_marker) != 1:
+        raise SystemExit("[cartões iniciais] não foi possível localizar a lista de painéis.")
+    start = s.index(start_marker)
+    end = s.index(end_marker, start)
+    body = s[start + len("x=["):end]
+    retail_marker = ",...(e.retail?[MzRetailCard(e.retail)]:[])"
+    has_retail = body.count(retail_marker) == 1
+    if has_retail:
+        body = body.replace(retail_marker, "", 1)
+
+    if body.count(",{page:`") > body.count("},{page:`"):
+        segments = body.split(",{page:`")
+        cards = [segments[0]] + ["{page:`" + segment for segment in segments[1:]]
+        cards = [card if card.endswith("}") else card + "}" for card in cards]
+    else:
+        segments = body.split("},{page:`")
+        cards = [segments[0] + "}"] + ["{page:`" + segment + "}" for segment in segments[1:]]
+    by_page: dict[str, str] = {}
+    for card in cards:
+        match = re.match(r"\{page:`([^`]+)`", card)
+        if not match or match.group(1) in by_page:
+            raise SystemExit("[cartões iniciais] formato ou painel duplicado na lista.")
+        by_page[match.group(1)] = card
+    order = ("production", "consumption", "trade", "retail", "prices", "inputs", "crops")
+    if set(by_page) != set(order) - {"retail"}:
+        if set(by_page) == set(order) and not has_retail:
+            pass
+        else:
+            raise SystemExit("[cartões iniciais] a lista de painéis não corresponde ao esperado.")
+    units = [
+        by_page[page] if page != "retail" else "...(e.retail?[MzRetailCard(e.retail)]:[])"
+        for page in order
+    ]
+    return s[:start] + "x=[" + ",".join(units) + s[end:]
+
+
 def patch_js(s: str) -> str:
     if "function MzRetail(" in s:
         raise SystemExit("O bundle já tem o painel de retalho.")
-    # 1. Definições e numeração dos painéis
-    s = sub1(s, "trade:{number:`02`,title:`Comércio internacional de arroz`",
-             "trade:{number:`06`,title:`Comércio internacional de arroz`", "número do comércio internacional")
-    s = sub1(s, "crops:{number:`05`,title:`Arroz, milho e girassol: comparação entre culturas`",
-             "crops:{number:`07`,title:`Arroz, milho e girassol: comparação entre culturas`", "número do painel comparativo")
+    # 1. Definição do painel de retalho
     s = sub1(s, "inputs:{number:`06`,title:`Inputs agrícolas`,navTitle:`Inputs agrícolas`,kicker:`Custos de produção agrícola`,color:D.amberText}}",
-             "inputs:{number:`02`,title:`Inputs agrícolas`,navTitle:`Inputs agrícolas`,kicker:`Custos de produção agrícola`,color:D.amberText},"
-             "retail:{number:`05`,title:`Preços do arroz no retalho`,navTitle:`Preços no retalho`,kicker:`Preço ao consumidor em Portugal`,color:D.greenDark}}",
+             "inputs:{number:`06`,title:`Inputs agrícolas`,navTitle:`Inputs agrícolas`,kicker:`Custos de produção agrícola`,color:D.amberText},"
+             "retail:{number:`07`,title:`Preços do arroz no retalho`,navTitle:`Preços no retalho`,kicker:`Preço ao consumidor em Portugal`,color:D.greenDark}}",
              "páginas")
     # 2. Componentes (antes do primeiro componente do site)
     s = sub1(s, "function pe({page:e,children:t}){", (AQUI / "mz_retail.js").read_text(encoding="utf-8").strip() + "\nfunction pe({page:e,children:t}){", "componente")
     # 3. Encaminhamento e navegação
     s = sub1(s, "i===`inputs`?Bt():null,Kt=[`home`,`production`,`trade`,`consumption`,`crops`,`prices`,`inputs`]",
              "i===`inputs`?Bt():i===`retail`?(e.retail?(0,T.jsx)(MzRetail,{data:e.retail,history:e.history?.retail}):(0,T.jsxs)(T.Fragment,{children:[(0,T.jsx)(pe,{page:`retail`}),(0,T.jsx)(`div`,{className:`empty-state`,children:`Os preços no retalho não estão disponíveis.`})]})):null,"
-             "Kt=[`home`,`production`,`inputs`,`consumption`,`prices`,`retail`,`trade`,`crops`]",
+             "Kt=[`home`,`production`,`trade`,`consumption`,`crops`,`prices`,`inputs`,`retail`]",
              "navegação")
     # 4. Sem painel de filtros lateral (os filtros estão no próprio painel)
     s = sub1(s, "if(!e||i===`home`||i===`prices`)return null;", "if(!e||i===`home`||i===`prices`||i===`retail`)return null;", "filtros")
@@ -120,7 +197,10 @@ def patch_market_quotes(s: str) -> str:
         if fim < 0:
             raise SystemExit("Não foi possível localizar o fim do componente de cotações ISMEA.")
         componente = (AQUI / "mz_market_quotes.js").read_text(encoding="utf-8").strip()
-        return patch_italy_quote_table(s[:inicio] + componente + s[fim:])
+        s = s[:inicio] + componente + s[fim:]
+        return patch_current_navigation(
+            patch_home_cards(patch_crops_quotes(patch_italy_quote_table(s)))
+        )
 
     s = sub1(
         s,
@@ -128,12 +208,16 @@ def patch_market_quotes(s: str) -> str:
         "prices:{number:`05`,title:`Cotações`,navTitle:`Cotações`,kicker:`Preços de mercado do arroz`,color:D.greenDark},"
         "inputs:{number:`06`,title:`Inputs agrícolas`,navTitle:`Inputs agrícolas`,kicker:`Custos de produção agrícola`,color:D.amberText},"
         "retail:{number:`07`,title:`Preços do arroz no retalho`,navTitle:`Preços no retalho`,kicker:`Preço ao consumidor em Portugal`,color:D.greenDark}}",
-        "crops:{number:`06`,title:`Arroz, milho e girassol: comparação entre culturas`,navTitle:`Outras culturas`,kicker:`Painel comparativo`,color:D.amberText},"
-        "prices:{number:`04`,title:`Cotações`,navTitle:`Cotações`,kicker:`Cotações de mercado do arroz e de outras culturas`,color:D.greenDark},"
-        "inputs:{number:`07`,title:`Inputs agrícolas`,navTitle:`Inputs agrícolas`,kicker:`Custos de produção agrícola`,color:D.amberText},"
-        "retail:{number:`05`,title:`Preços do arroz no retalho`,navTitle:`Preços no retalho`,kicker:`Preço ao consumidor em Portugal`,color:D.greenDark}}",
+        "crops:{number:`07`,title:`Arroz, milho e girassol: comparação entre culturas`,navTitle:`Outras culturas`,kicker:`Painel comparativo`,color:D.amberText},"
+        "prices:{number:`05`,title:`Cotações`,navTitle:`Cotações`,kicker:`Cotações de mercado do arroz e de outras culturas`,color:D.greenDark},"
+        "inputs:{number:`06`,title:`Inputs agrícolas`,navTitle:`Inputs agrícolas`,kicker:`Custos de produção agrícola`,color:D.amberText},"
+        "retail:{number:`04`,title:`Preços do arroz no retalho`,navTitle:`Preços no retalho`,kicker:`Preço ao consumidor em Portugal`,color:D.greenDark}}",
         "números e títulos dos painéis",
     )
+    s = sub1(s, "trade:{number:`02`,title:`Comércio internacional de arroz`",
+             "trade:{number:`03`,title:`Comércio internacional de arroz`", "número do comércio internacional")
+    s = sub1(s, "consumption:{number:`03`,title:`Consumo e autoaprovisionamento`",
+             "consumption:{number:`02`,title:`Consumo e autoaprovisionamento`", "número do consumo")
     s = sub1(
         s,
         "function pe({page:e,children:t}){",
@@ -208,17 +292,17 @@ def patch_market_quotes(s: str) -> str:
         )
     s = s.replace(nome_antigo, "Observatório de Preços do Arroz")
     s = s.replace("Maizoryza — Observatório do arroz", "Observatório de Preços do Arroz")
-    s = s.replace("`05 — Cotações`", "`04 — Cotações`")
-    s = s.replace("`04 — Arroz, milho e girassol`", "`06 — Arroz, milho e girassol`")
-    s = s.replace("`06 — Inputs agrícolas`", "`07 — Inputs agrícolas`")
-    s = s.replace("`07 — Preços no retalho`", "`05 — Preços no retalho`")
+    s = s.replace("`04 — Arroz, milho e girassol`", "`07 — Arroz, milho e girassol`")
+    s = s.replace("`07 — Preços no retalho`", "`04 — Preços no retalho`")
     s = sub1(
         s,
         "Kt=[`home`,`production`,`trade`,`consumption`,`crops`,`prices`,`inputs`,`retail`]",
-        "Kt=[`home`,`production`,`trade`,`consumption`,`prices`,`retail`,`crops`,`inputs`]",
+        "Kt=[`home`,`production`,`consumption`,`trade`,`retail`,`prices`,`inputs`,`crops`]",
         "ordem de navegação",
     )
-    return patch_italy_quote_table(s)
+    return patch_current_navigation(
+        patch_home_cards(patch_crops_quotes(patch_italy_quote_table(s)))
+    )
 
 
 def nome_hash(prefixo: str, conteudo: str, ext: str) -> str:

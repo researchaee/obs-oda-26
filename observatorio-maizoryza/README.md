@@ -5,9 +5,10 @@ comparativo de outras culturas mantém-se separado e limitado a arroz, milho e g
 Desenvolvido pela Consulai.
 
 Este repositório contém o site já construído, pronto para o GitHub Pages. A navegação
-apresenta Produção e preços, Inputs agrícolas, Consumo, Cotações, Preços no retalho,
-Comércio internacional e Outras culturas. O painel de retalho foi acrescentado a
-13/10/2026 (ver `../precos-arroz/README.md`).
+apresenta Produção e preços, Consumo, Comércio internacional, Preços no retalho,
+Cotações, Inputs agrícolas e Outras culturas. As cotações incluem girassol; o painel
+comparativo também apresenta as cotações de cereais. O painel de retalho foi
+acrescentado a 13/10/2026 (ver `../precos-arroz/README.md`).
 
 Na página «Cotações», os preços de arroz e de outras culturas são apresentados por
 país, produto e praça. As cotações ISMEA incluem todas as praças publicadas; a página

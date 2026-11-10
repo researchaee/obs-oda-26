@@ -49,6 +49,7 @@
 #quotes-ismea-cereals .quote-table th,#quotes-ismea-cereals .quote-table td{white-space:nowrap}
 @media (width<=700px){#quotes-ismea-cereals .visual-head{flex-direction:column;align-items:stretch}#quotes-ismea-cereals .visual-head>div:first-child{display:block}}
 .dashboard-main{grid-template-columns:minmax(0,1fr)}
+.site-header .top-panel-nav button[data-panel-spacer=true]{margin-left:12px}
 #quotes-eu-cereals{min-width:0;max-width:100%}
 #quotes-eu-cereals .mz-scroll{min-width:0;max-width:100%;overflow-x:visible}
 #quotes-eu-cereals .quote-table{width:100%;min-width:0;table-layout:fixed}

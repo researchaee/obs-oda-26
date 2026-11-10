@@ -15,8 +15,8 @@ function MzMarketQuotes({ records, country }) {
     .filter(
       (row) =>
         row.country_code === country &&
-        row.source === `Comissão Europeia` &&
-        row.crop !== `rice`
+        ((row.source === `Comissão Europeia` && row.crop !== `rice`) ||
+          row.crop === `sunflower`)
     )
     .sort(
       (a, b) =>
@@ -31,7 +31,9 @@ function MzMarketQuotes({ records, country }) {
   let [crop, setCrop] = (0, l.useState)(`all`);
   let rows = allRows.filter((row) => crop === `all` || row.crop === crop);
   if (!allRows.length) return null;
-  let sourceLabel = `Comissão Europeia · Cereals prices`;
+  let sources = Array.from(
+    new Map(rows.map((row) => [row.source, row.source_url])).entries()
+  ).map(([label, href]) => ({ label, href }));
 
   return (0, T.jsxs)(`section`, {
     className: `visual-card`,
@@ -42,6 +44,10 @@ function MzMarketQuotes({ records, country }) {
         children: [
           (0, T.jsxs)(`div`, {
             children: [
+              (0, T.jsx)(`h2`, {
+                className: `chart-title`,
+                children: `Últimas cotações de cereais e girassol`
+              }),
               (0, T.jsx)(`p`, {
                 className: `chart-note`,
                 children: `Última cotação publicada por produto, praça e condição, em €/t.`
@@ -90,7 +96,8 @@ function MzMarketQuotes({ records, country }) {
                   (0, T.jsx)(`th`, { children: `Condição` }),
                   (0, T.jsx)(`th`, { children: `Data` }),
                   (0, T.jsx)(`th`, { className: `num`, children: `Cotação (€/t)` }),
-                  (0, T.jsx)(`th`, { className: `num`, children: `Variação semanal` })
+                  (0, T.jsx)(`th`, { className: `num`, children: `Variação semanal` }),
+                  (0, T.jsx)(`th`, { children: `Fonte` })
                 ]
               })
             }),
@@ -120,6 +127,13 @@ function MzMarketQuotes({ records, country }) {
                           row.weekly_change_pct == null
                             ? `—`
                             : `${N(row.weekly_change_pct, 1)}%`
+                      }),
+                      (0, T.jsx)(`td`, {
+                        "data-label": `Fonte`,
+                        children: (0, T.jsx)(B, {
+                          href: row.source_url,
+                          children: row.source
+                        })
                       })
                     ]
                   },
@@ -130,10 +144,7 @@ function MzMarketQuotes({ records, country }) {
           ]
         })
       }),
-      (0, T.jsx)(B, {
-        href: rows[0].source_url,
-        children: sourceLabel
-      })
+      (0, T.jsx)(B, { links: sources })
     ]
   });
 }
