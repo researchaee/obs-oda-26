@@ -23,6 +23,9 @@ Se publicar um build novo do observatório, volte a aplicá-lo:
 python precos-arroz/tools/observatorio/patch_bundle.py .
 cd precos-arroz && python -m tools.merge_into_observatory
 cd .. && python precos-arroz/tools/observatorio/patch_vaga15.py .
+python precos-arroz/tools/observatorio/patch_vaga16.py .
+python precos-arroz/tools/observatorio/patch_vaga17.py .
+python precos-arroz/tools/observatorio/patch_vaga18.py .
 ```
 
 O script verifica cada alteração e pára sem estragar nada se o bundle for diferente.

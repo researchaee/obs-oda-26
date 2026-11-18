@@ -44,6 +44,13 @@ não estima preços para variedades sem cotação, como Ribe quando ausente da f
 - Bundle alterado por `precos-arroz/tools/observatorio/patch_vaga17.py`, a correr depois de
   `patch_vaga16.py`.
 
+## Alterações de 18/11/2026 (vaga 18)
+
+- Painel 7, gráfico 02: trigo mole, trigo duro, cevada, aveia, centeio e triticale passam a ter
+  ilustrações próprias, ao estilo dos ícones de arroz, milho e girassol.
+- Bundle alterado por `precos-arroz/tools/observatorio/patch_vaga18.py`, a correr depois de
+  `patch_vaga17.py`.
+
 ## Publicar
 1. Settings › Pages › Build and deployment › Source: **Deploy from a branch**.
 2. Branch: **main**, pasta **/ (root)** › Save.
