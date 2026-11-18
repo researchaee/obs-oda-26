@@ -10,6 +10,26 @@ var MzQuoteCropLabels = {
   triticale: `Triticale`
 };
 
+var MzCountryPT = {
+  AT: `Áustria`, BE: `Bélgica`, BG: `Bulgária`, CY: `Chipre`, CZ: `Chéquia`, DE: `Alemanha`,
+  DK: `Dinamarca`, EE: `Estónia`, EL: `Grécia`, ES: `Espanha`, FI: `Finlândia`, FR: `França`,
+  HR: `Croácia`, HU: `Hungria`, IE: `Irlanda`, IT: `Itália`, LT: `Lituânia`, LU: `Luxemburgo`,
+  LV: `Letónia`, MT: `Malta`, NL: `Países Baixos`, PL: `Polónia`, PT: `Portugal`, RO: `Roménia`,
+  SE: `Suécia`, SI: `Eslovénia`, SK: `Eslováquia`
+};
+
+function MzQuoteDate(value) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(value ?? ``))
+    ? String(value).split(`-`).reverse().join(`/`)
+    : value;
+}
+
+function MzHasEuQuotes(records, country) {
+  return records.some(
+    (row) => row.country_code === country && row.source === `Comissão Europeia` && row.crop !== `rice`
+  );
+}
+
 function MzMarketQuotes({ records, country }) {
   let allRows = records
     .filter(
@@ -29,7 +49,8 @@ function MzMarketQuotes({ records, country }) {
         a.market.localeCompare(b.market, `pt`)
     );
   let [crop, setCrop] = (0, l.useState)(`all`);
-  let rows = allRows.filter((row) => crop === `all` || row.crop === crop);
+  let activeCrop = allRows.some((row) => row.crop === crop) ? crop : `all`;
+  let rows = allRows.filter((row) => activeCrop === `all` || row.crop === activeCrop);
   if (!allRows.length) return null;
   let sources = Array.from(
     new Map(rows.map((row) => [row.source, row.source_url])).entries()
@@ -50,7 +71,7 @@ function MzMarketQuotes({ records, country }) {
               }),
               (0, T.jsx)(`p`, {
                 className: `chart-note`,
-                children: `Última cotação publicada por produto, praça e condição, em €/t.`
+                children: `${MzCountryPT[country] ?? country}. Última cotação publicada por produto, praça e condição, em €/t.`
               })
             ]
           })
@@ -64,7 +85,7 @@ function MzMarketQuotes({ records, country }) {
               `Cultura`,
               (0, T.jsxs)(`select`, {
                 "aria-label": `Filtrar por cultura`,
-                value: crop,
+                value: activeCrop,
                 onChange: (event) => setCrop(event.target.value),
                 children: [
                   (0, T.jsx)(`option`, { value: `all`, children: `Todas as culturas` }),
@@ -114,7 +135,7 @@ function MzMarketQuotes({ records, country }) {
                       (0, T.jsx)(`td`, { "data-label": `Produto`, children: row.product }),
                       (0, T.jsx)(`td`, { "data-label": `Praça`, children: row.market }),
                       (0, T.jsx)(`td`, { "data-label": `Condição`, children: row.stage }),
-                      (0, T.jsx)(`td`, { "data-label": `Data`, children: row.date }),
+                      (0, T.jsx)(`td`, { "data-label": `Data`, children: MzQuoteDate(row.date) }),
                       (0, T.jsx)(`td`, {
                         className: `num`,
                         "data-label": `Cotação (€/t)`,
@@ -143,6 +164,10 @@ function MzMarketQuotes({ records, country }) {
             })
           ]
         })
+      }),
+      (0, T.jsx)(`p`, {
+        className: `visual-method`,
+        children: `No girassol entram a semente, o óleo bruto e o bagaço. Nas cotações da Comissão Europeia (DG AGRI), a data é o início da semana de referência e só aparecem séries com preço publicado desde novembro de 2024. Cada Estado-Membro escolhe as praças e as condições de entrega que comunica, por isso os preços de países diferentes não são diretamente comparáveis.`
       }),
       (0, T.jsx)(B, { links: sources })
     ]

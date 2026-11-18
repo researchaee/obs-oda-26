@@ -31,11 +31,42 @@ EU_CEREALS_APP_ID = "5e97b24c-b841-494a-b34b-119ac2caa765"
 EU_CEREALS_SHEET_ID = "cf43a3de-5293-4e88-99b5-a2c0737644ef"
 EU_CEREALS_TABLE_ID = "FmjsK"
 EU_CEREALS_COUNTRIES = {
-    "Bulgaria": ("BG", "Bulgária"),
-    "France": ("FR", "França"),
-    "Greece": ("EL", "Grécia"),
-    "Portugal": ("PT", "Portugal"),
+    "Austria": ("AT", "Áustria"), "Belgium": ("BE", "Bélgica"), "Bulgaria": ("BG", "Bulgária"),
+    "Croatia": ("HR", "Croácia"), "Cyprus": ("CY", "Chipre"), "Czechia": ("CZ", "Chéquia"),
+    "Denmark": ("DK", "Dinamarca"), "Estonia": ("EE", "Estónia"), "Finland": ("FI", "Finlândia"),
+    "France": ("FR", "França"), "Germany": ("DE", "Alemanha"), "Greece": ("EL", "Grécia"),
+    "Hungary": ("HU", "Hungria"), "Ireland": ("IE", "Irlanda"), "Italy": ("IT", "Itália"),
+    "Latvia": ("LV", "Letónia"), "Lithuania": ("LT", "Lituânia"), "Luxembourg": ("LU", "Luxemburgo"),
+    "Malta": ("MT", "Malta"), "Netherlands": ("NL", "Países Baixos"), "Poland": ("PL", "Polónia"),
+    "Portugal": ("PT", "Portugal"), "Romania": ("RO", "Roménia"), "Slovakia": ("SK", "Eslováquia"),
+    "Slovenia": ("SI", "Eslovénia"), "Spain": ("ES", "Espanha"), "Sweden": ("SE", "Suécia"),
 }
+EU_COUNTRY_BY_CODE = {code: name for code, name in EU_CEREALS_COUNTRIES.values()}
+# Só se mostram séries com cotação nos últimos dois anos.
+EU_QUOTES_MAX_AGE_DAYS = 730
+EU_OILSEEDS_URL = "https://agridata.ec.europa.eu/extensions/DashboardCereals/OilseedPrices-m.html"
+EU_OILSEEDS_APP_ID = "e5a4000d-66b6-483c-b98c-766201c9d7f3"
+EU_STAGES = {
+    "National Average - Not Specified": "Média nacional — fase não especificada",
+    "Departure from silo - after some storage - on truck or other transport means": "À saída do silo, após armazenagem, em camião",
+    "Departure from farm or from production area - on truck or other transport means": "À saída da exploração ou da zona de produção, em camião",
+    "Shipped to the place (port), unloaded, on truck leaving port": "Desembarcado no porto, em camião à saída",
+    "Deliver to first customer - silo or processing plant - on truck or other transport means": "Entregue ao primeiro comprador (silo ou indústria), em camião",
+    "Rendu Port - Delivered": "Entregue no porto (rendu port)",
+    "Price at farm gate": "À porta da exploração",
+    "Delivered to processor after one intermediary": "Entregue à indústria, após um intermediário",
+    "Delivered to processor after one intermediary - grains exchange quotation": "Entregue à indústria, após um intermediário (cotação de bolsa)",
+    "Free On Board - Incoterm": "FOB (franco a bordo)",
+    "Cost, Insurance and Freight - Incoterm": "CIF (custo, seguro e frete)",
+    "Delivered to a port silo, by train or truck or barge - grain exchange quotation": "Entregue em silo portuário (cotação de bolsa)",
+    "Ribatejo e Oeste - Not Defined": "Não definida",
+    "DEPSILO": "À saída do silo", "DEPSILO-GEX": "À saída do silo (cotação de bolsa)",
+    "DEPSILO GEX": "À saída do silo (cotação de bolsa)", "DEPPROC": "À saída da unidade de transformação",
+    "DELPROC": "Entregue na unidade de transformação", "DELFIRST": "Entregue ao primeiro comprador",
+    "DEPPROD": "À saída da exploração", "FGATE": "À porta da fábrica", "FOB": "FOB (franco a bordo)",
+    "Départ": "À partida (départ)", "ex-factory": "À saída da fábrica", "Not Defined": "Não definida",
+}
+EU_MARKETS = {"National Average": "Média nacional", "Not Defined": "Não definida", "Average": "Média"}
 EU_CEREALS_PRODUCTS = {
     "Breadmaking common wheat": ("soft_wheat", "Trigo mole panificável"),
     "Breadmaking common wheat - TVT": ("soft_wheat", "Trigo mole panificável — TVT"),
@@ -46,6 +77,9 @@ EU_CEREALS_PRODUCTS = {
     "Feed rye": ("rye", "Centeio para ração"),
     "Feed wheat": ("soft_wheat", "Trigo para ração"),
     "Malting barley": ("barley", "Cevada para malte"),
+    "Malting barley - M2RH": ("barley", "Cevada para malte — M2RH"),
+    "Malting barley - M6RH": ("barley", "Cevada para malte — M6RH"),
+    "Malting barley - M2RP": ("barley", "Cevada para malte — M2RP"),
     "Milling oats": ("oats", "Aveia"),
     "Milling rye": ("rye", "Centeio"),
     "Milling wheat": ("soft_wheat", "Trigo mole"),
@@ -362,45 +396,43 @@ def parse_eu_cereals_export(content: bytes) -> list[dict[str, object]]:
     expected_countries = {country[0] for country in EU_CEREALS_COUNTRIES.values()}
     available_countries = {key[0] for key in histories}
     missing_countries = sorted(expected_countries - available_countries)
-    if missing_countries:
+    if not available_countries:
         raise RuntimeError(
             "A exportação Cereals prices não contém preços para: "
             + ", ".join(missing_countries)
         )
 
+    return eu_latest_records(histories, EU_CEREALS_URL)
+
+
+def eu_latest_records(
+    histories: dict[tuple[str, str, str, str, str], list[tuple[date, float]]], source_url: str
+) -> list[dict[str, object]]:
+    """Última cotação de cada série (país, cultura, produto, praça, fase) e variação semanal."""
+    cutoff = datetime.now(timezone.utc).date() - timedelta(days=EU_QUOTES_MAX_AGE_DAYS)
     records: list[dict[str, object]] = []
     for (code, crop, product, market, raw_stage), quotes in histories.items():
         quotes.sort(key=lambda quote: quote[0], reverse=True)
         quote_date, price = quotes[0]
+        if quote_date < cutoff:
+            continue
         previous = next((quote for quote in quotes[1:] if quote[0] < quote_date), None)
         weekly_change = None
         if previous is not None and quote_date - previous[0] == timedelta(days=7):
             weekly_change = round((price / previous[1] - 1) * 100, 1)
-        localized_country = next(
-            name for country_code, name in EU_CEREALS_COUNTRIES.values() if country_code == code
-        )
-        stage = {
-            "Departure from farm or from production area - on truck or other transport means":
-                "À saída da exploração ou da zona de produção, em camião",
-            "Departure from silo - after some storage - on truck or other transport means":
-                "À saída do silo, após armazenagem, em camião",
-            "Shipped to the place (port), unloaded, on truck leaving port":
-                "Desembarcado no porto, em camião à saída",
-            "National Average - Not Specified": "Média nacional — fase não especificada",
-        }.get(raw_stage, raw_stage)
         records.append(
             {
                 "crop": crop,
                 "country_code": code,
-                "country": localized_country,
+                "country": EU_COUNTRY_BY_CODE[code],
                 "product": product,
-                "market": market,
-                "stage": stage,
-                "price_eur_t": price,
+                "market": EU_MARKETS.get(market, market),
+                "stage": EU_STAGES.get(raw_stage, raw_stage),
+                "price_eur_t": round(price, 2),
                 "date": quote_date.isoformat(),
                 "weekly_change_pct": weekly_change,
                 "source": "Comissão Europeia",
-                "source_url": EU_CEREALS_URL,
+                "source_url": source_url,
             }
         )
     return records
@@ -477,6 +509,97 @@ def eu_cereals_records() -> list[dict[str, object]]:
     if not response.content.startswith(b"PK"):
         raise RuntimeError("A API Cereals prices não devolveu uma exportação Excel válida.")
     return parse_eu_cereals_export(response.content)
+
+
+def eu_sunflower_name(product: str, kind: str) -> str | None:
+    if product == "Sunflower seed":
+        return {"High-oleic": "Girassol alto oleico (semente)", "Standard": "Girassol convencional (semente)"}.get(kind, "Girassol (semente)")
+    if product == "Crude sunflower oil":
+        return {"High-oleic": "Óleo de girassol bruto, alto oleico", "Standard": "Óleo de girassol bruto, convencional"}.get(kind, "Óleo de girassol bruto")
+    if product == "Sunflower seed meal":
+        return {
+            "High-oleic": "Bagaço de girassol, alto oleico",
+            "Above 35% protein content": "Bagaço de girassol, mais de 35% de proteína",
+            "From dehulled seeds": "Bagaço de girassol, de semente descascada",
+        }.get(kind, "Bagaço de girassol")
+    return None
+
+
+def eu_sunflower_records() -> list[dict[str, object]]:
+    """Cotações de girassol (semente, óleo bruto, bagaço) do painel Oilseeds prices da DG AGRI.
+
+    A API REST da DG AGRI (api.tech.ec.europa.eu/agrifood) devolvia erro 500 em novembro de 2026,
+    por isso os dados são lidos do motor Qlik do painel público, como nos cereais, mas através de
+    um hipercubo (dimensões: produto, tipo, país, praça, fase, data e preço)."""
+    base_url = "https://agridata.ec.europa.eu"
+    reload_url = f"{base_url}/single/?appid={EU_OILSEEDS_APP_ID}&opt=ctxmenu"
+    session = requests.Session()
+    session.headers.update({"User-Agent": USER_AGENT})
+    session.get(EU_OILSEEDS_URL, timeout=30).raise_for_status()
+    token = base64.urlsafe_b64encode(secrets.token_bytes(16)).decode().rstrip("=")
+    socket_url = (
+        f"wss://agridata.ec.europa.eu/app/{EU_OILSEEDS_APP_ID}"
+        f"?reloadUri={quote(reload_url, safe='')}&qlik-csrf-token={token}"
+    )
+    cookie = "; ".join(f"{name}={value}" for name, value in session.cookies.items())
+    connection = websocket.create_connection(socket_url, timeout=120, origin=base_url, cookie=cookie)
+    dims = ["PRODUCT", "PRODUCT_TYPE", "MS_CODE", "MARKET_NAME", "MARKET_STAGE", "BEGIN_DATE", "EU_PRICE"]
+    rows: list[list[str]] = []
+    try:
+        document = qlik_call(connection, 1, "OpenDoc", -1, [EU_OILSEEDS_APP_ID, "", "", "", False])
+        document_handle = qlik_handle(document, "OpenDoc")
+        cube = qlik_call(
+            connection,
+            2,
+            "CreateSessionObject",
+            document_handle,
+            [{
+                "qInfo": {"qType": "mz-sunflower"},
+                "qHyperCubeDef": {
+                    "qDimensions": [{"qDef": {"qFieldDefs": [field]}} for field in dims],
+                    "qMeasures": [{"qDef": {"qDef": "Count(1)"}}],
+                    "qSuppressZero": False,
+                },
+            }],
+        )
+        cube_handle = qlik_handle(cube, "CreateSessionObject")
+        layout = qlik_call(connection, 3, "GetLayout", cube_handle, [])
+        height = layout["qLayout"]["qHyperCube"]["qSize"]["qcy"]
+        width = len(dims) + 1
+        step = 10000 // width
+        request_id = 4
+        for top in range(0, height, step):
+            page = qlik_call(
+                connection,
+                request_id,
+                "GetHyperCubeData",
+                cube_handle,
+                ["/qHyperCubeDef", [{"qTop": top, "qLeft": 0, "qWidth": width, "qHeight": step}]],
+            )
+            request_id += 1
+            for matrix_row in page["qDataPages"][0]["qMatrix"]:
+                rows.append([cell.get("qText", "") for cell in matrix_row[: len(dims)]])
+    finally:
+        connection.close()
+
+    histories: dict[tuple[str, str, str, str, str], list[tuple[date, float]]] = {}
+    for product, kind, code, market, stage, begin, price_text in rows:
+        name = eu_sunflower_name(product, kind)
+        if name is None or code not in EU_COUNTRY_BY_CODE:
+            continue
+        try:
+            price = float(price_text)
+        except ValueError:
+            continue
+        if not math.isfinite(price) or price <= 0:
+            continue
+        key = (code, "sunflower", name, market, stage)
+        quote_date = date.fromisoformat(begin[:10])
+        if all(existing[0] != quote_date for existing in histories.get(key, [])):
+            histories.setdefault(key, []).append((quote_date, price))
+    if not histories:
+        raise RuntimeError("O painel Oilseeds prices não devolveu cotações de girassol.")
+    return eu_latest_records(histories, EU_OILSEEDS_URL)
 
 
 def sevilla_crop(header: str) -> tuple[str, str, str] | None:
@@ -582,7 +705,7 @@ def main() -> None:
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     ismea = ismea_records()
     sevilla = sevilla_records(today)
-    eu_cereals = eu_cereals_records()
+    eu_cereals = eu_cereals_records() + eu_sunflower_records()
 
     old_sevilla = data["quotes"]["sevilla"]
     sunflower = []
@@ -700,10 +823,10 @@ def main() -> None:
             {
                 "source": "Comissão Europeia",
                 "authority": "European Commission — DG AGRI",
-                "api": "Dashboard Cereals Price — exportação pública do Data Explorer",
+                "api": "Painéis Cereals prices e Oilseeds prices do Agri-food data portal (motor Qlik público)",
                 "url": EU_CEREALS_URL,
-                "used_for": "Cotações de cereais por produto, mercado, fase e data",
-                "coverage": "Portugal, Grécia, Bulgária e França",
+                "used_for": "Cotações semanais de cereais e de girassol (semente, óleo bruto e bagaço) por produto, praça, fase e data",
+                "coverage": "Estados-Membros da UE com cotação publicada nos últimos dois anos",
                 "status": "Integrada na página Cotações",
                 "notes": (
                     "São usados apenas preços publicados na exportação oficial. "
@@ -715,10 +838,10 @@ def main() -> None:
         eu_source.update(
             {
                 "authority": "European Commission — DG AGRI",
-                "api": "Dashboard Cereals Price — exportação pública do Data Explorer",
+                "api": "Painéis Cereals prices e Oilseeds prices do Agri-food data portal (motor Qlik público)",
                 "url": EU_CEREALS_URL,
-                "used_for": "Cotações de cereais por produto, mercado, fase e data",
-                "coverage": "Portugal, Grécia, Bulgária e França",
+                "used_for": "Cotações semanais de cereais e de girassol (semente, óleo bruto e bagaço) por produto, praça, fase e data",
+                "coverage": "Estados-Membros da UE com cotação publicada nos últimos dois anos",
                 "status": "Integrada na página Cotações",
                 "notes": (
                     "São usados apenas preços publicados na exportação oficial. "
@@ -734,8 +857,8 @@ def main() -> None:
         "method": (
             "Cotações por praça e produto. A página pública do ISMEA é lida integralmente; "
             "a Lonja de Sevilla é consultada pelo respetivo formulário de preços; os cereais "
-            "dos restantes países são obtidos na exportação oficial Cereals prices da Comissão "
-            "Europeia."
+            "e o girassol de todos os Estados-Membros vêm dos painéis oficiais Cereals prices e "
+            "Oilseeds prices da Comissão Europeia (DG AGRI)."
         ),
     }
 

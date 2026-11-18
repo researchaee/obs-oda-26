@@ -14,6 +14,36 @@ Na página «Cotações», os preços de arroz e de outras culturas são apresen
 país, produto e praça. As cotações ISMEA incluem todas as praças publicadas; a página
 não estima preços para variedades sem cotação, como Ribe quando ausente da fonte.
 
+## Alterações de 18/11/2026 (vaga 15)
+
+- Gráficos de grãos (Painel 1, gráfico 02, e Painel 3, gráfico 02): cada grão vale uma quantidade
+  redonda, indicada na legenda (por exemplo, 1 grão = 50 mil t); o último grão aparece cortado na
+  fração certa.
+- Painel 1, gráfico 04: acrescentada Espanha (província de Sevilha), em percentagem da área semeada
+  por variedade, a partir dos boletins finais da RAIF (Junta de Andalucía) de 2022, 2024 e 2025.
+- Painel 5 «Cotações»: cereais e girassol (semente, óleo bruto e bagaço) da DG AGRI para todos os
+  Estados-Membros com cotação publicada; a lista de países passa a incluí-los.
+- O bundle foi alterado por `precos-arroz/tools/observatorio/patch_vaga15.py`. Num build novo,
+  correr `patch_bundle.py` e depois `patch_vaga15.py`.
+
+## Alterações de 18/11/2026 (vaga 16)
+
+- Painel 7 «Outras culturas»: o quadro de cotações saiu (continua na página Cotações) e a comparação
+  entre culturas passa a incluir todas as culturas das cotações (arroz, milho, girassol, trigo mole,
+  trigo duro, cevada, aveia, centeio e triticale), com as mesmas fontes dos gráficos: Eurostat
+  apro_cpsh1 (produção, 2021 a 2025), Comext DS-045409 (comércio, 2015 a 2025) e apri_ap_crpouta
+  (preço na produção, 2015 a 2024).
+- Bundle alterado por `precos-arroz/tools/observatorio/patch_vaga16.py`, a correr depois de
+  `patch_vaga15.py`.
+
+## Alterações de 18/11/2026 (vaga 17)
+
+- Painel 7: cada um dos três gráficos tem uma fila de botões «Culturas» para escolher as culturas
+  mostradas. «Todas» repõe todas; com todas ativas, clicar numa cultura mostra só essa; depois,
+  cada clique junta ou retira culturas. O Excel de cada gráfico segue a seleção.
+- Bundle alterado por `precos-arroz/tools/observatorio/patch_vaga17.py`, a correr depois de
+  `patch_vaga16.py`.
+
 ## Publicar
 1. Settings › Pages › Build and deployment › Source: **Deploy from a branch**.
 2. Branch: **main**, pasta **/ (root)** › Save.
@@ -30,6 +60,6 @@ python precos-arroz/tools/observatorio/update_market_quotes.py
 ```
 
 O importador lê a tabela pública completa do ISMEA, o consultor oficial da Lonja de
-Sevilla e a exportação do dashboard oficial Cereals prices da Comissão Europeia para
-Portugal, Grécia, Bulgária e França. Só são usados preços publicados, sem estimativas.
+Sevilla e a exportação do dashboard oficial Cereals prices da Comissão Europeia (DG AGRI)
+para todos os Estados-Membros, incluindo as cotações de girassol do painel Oilseeds prices. Só são usados preços publicados, sem estimativas.
 As cotações de cereais são adicionadas ao painel «Cotações», não ao painel comparativo.

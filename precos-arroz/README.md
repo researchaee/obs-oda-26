@@ -22,6 +22,7 @@ Se publicar um build novo do observatório, volte a aplicá-lo:
 ```bash
 python precos-arroz/tools/observatorio/patch_bundle.py .
 cd precos-arroz && python -m tools.merge_into_observatory
+cd .. && python precos-arroz/tools/observatorio/patch_vaga15.py .
 ```
 
 O script verifica cada alteração e pára sem estragar nada se o bundle for diferente.
@@ -35,8 +36,10 @@ Europeia), executar na raiz do repositório:
 python precos-arroz/tools/observatorio/update_market_quotes.py
 ```
 
-Este importador atualiza a página «Cotações», incluindo os cereais de Portugal, Grécia,
-Bulgária e França publicados no dashboard oficial da Comissão Europeia. Mantém o painel
+Este importador atualiza a página «Cotações», incluindo os cereais e o girassol de todos os
+Estados-Membros publicados nos painéis oficiais Cereals prices e Oilseeds prices da Comissão
+Europeia (DG AGRI). A recolha do girassol (motor Qlik do painel) foi escrita em 18/11/2026 a partir
+da recolha feita no browser e ainda não correu no GitHub Actions: confirmar na primeira execução. Mantém o painel
 comparativo limitado às culturas que já contém.
 
 ## Correr à mão (no teu computador)
