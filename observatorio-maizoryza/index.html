@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}.assistant-jump,.home-assistant,[class*="assistant" i],[id*="assistant" i],[aria-label*="assistente" i],[aria-label*="assistant" i],[class*="chatbot" i],[id*="chatbot" i],[class*="ai-chat" i],[id*="ai-chat" i]{display:none!important}</style></head><body>
 <title>Observatório de Preços do Arroz</title>
 <link rel="icon" type="image/png" href="./favicon.png" />
 <meta name="description" content="Produção, comércio, consumo e cotações do arroz; painel comparativo de outras culturas." />
@@ -6,5 +6,21 @@
 
 <div id="root"></div>
 <script type="module" src="./assets/index-mzad734e80.js"></script>
+<script>
+(() => {
+  const hideAssistant = () => {
+    document.querySelectorAll("#assistant, .chat-panel, .home-assistant, .assistant-jump")
+      .forEach(element => {
+        element.hidden = true;
+        element.style.setProperty("display", "none", "important");
+      });
+  };
+  hideAssistant();
+  new MutationObserver(hideAssistant).observe(document.documentElement, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
 
 </body></html>

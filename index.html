@@ -21,10 +21,31 @@ body{margin:0;background:#faf9f5;color:#141413}
 .chart-legend{max-width:100%;color:#26352c;font-size:15px;line-height:1.55;gap:12px 20px}
 .chart-legend>span{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;text-align:left}
 .symbol-legend{flex-wrap:wrap;justify-content:flex-start;color:#26352c;line-height:1.55}
+.assistant-jump,.home-assistant,
+[class*="assistant" i],[id*="assistant" i],
+[aria-label*="assistente" i],[aria-label*="assistant" i],
+[class*="chatbot" i],[id*="chatbot" i],
+[class*="ai-chat" i],[id*="ai-chat" i]{display:none!important}
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script type="module" src="./assets/index-mzad734e80.js"></script>
+<script>
+(() => {
+  const hideAssistant = () => {
+    document.querySelectorAll("#assistant, .chat-panel, .home-assistant, .assistant-jump")
+      .forEach(element => {
+        element.hidden = true;
+        element.style.setProperty("display", "none", "important");
+      });
+  };
+  hideAssistant();
+  new MutationObserver(hideAssistant).observe(document.documentElement, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
 </body>
 </html>
