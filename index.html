@@ -8,7 +8,20 @@
 <meta name="description" content="Produção, comércio, consumo e cotações do arroz; painel comparativo de outras culturas.">
 <link rel="icon" type="image/png" href="./favicon.png">
 <link rel="stylesheet" href="./assets/index-mzf87023fc.css">
-<style>body{margin:0;background:#faf9f5;color:#141413}</style>
+<style>
+body{margin:0;background:#faf9f5;color:#141413}
+.mz-variety-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.mz-variety-table th,.mz-variety-table td{padding:.55rem .7rem;border-bottom:1px solid #dfe3d8;text-align:right;white-space:nowrap}
+.mz-variety-table th:first-child,.mz-variety-table td:first-child{text-align:left}
+.mz-variety-table th{position:sticky;top:0;background:#f4f5ef;color:#1e2923;z-index:1}
+.mz-variety-table td.num{font-variant-numeric:tabular-nums}
+.mz-variety-table-wrap{max-height:560px;overflow:auto;margin-top:.75rem;border:1px solid #dde1d3;border-radius:8px}
+.axis{fill:#46534a;font-size:13px}
+.series-end-label,.series-end-leader{display:none}
+.chart-legend{max-width:100%;color:#26352c;font-size:15px;line-height:1.55;gap:12px 20px}
+.chart-legend>span{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;text-align:left}
+.symbol-legend{flex-wrap:wrap;justify-content:flex-start;color:#26352c;line-height:1.55}
+</style>
 </head>
 <body>
 <div id="root"></div>
