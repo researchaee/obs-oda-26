@@ -7,7 +7,7 @@
 <title>Observatório de Preços do Arroz</title>
 <meta name="description" content="Produção, comércio, consumo e cotações do arroz; painel comparativo de outras culturas.">
 <link rel="icon" type="image/png" href="./favicon.png">
-<link rel="stylesheet" href="./assets/index-mzf87023fc.css">
+<link rel="stylesheet" href="./assets/index-mzbba56550.css">
 <style>
 body{margin:0;background:#faf9f5;color:#141413}
 .mz-variety-table{width:100%;border-collapse:collapse;font-size:.9rem}
@@ -30,7 +30,7 @@ body{margin:0;background:#faf9f5;color:#141413}
 </head>
 <body>
 <div id="root"></div>
-<script type="module" src="./assets/index-mzad734e80.js"></script>
+<script type="module" src="./assets/index-mzca416312.js"></script>
 <script>
 (() => {
   const hideAssistant = () => {
@@ -40,8 +40,52 @@ body{margin:0;background:#faf9f5;color:#141413}
         element.style.setProperty("display", "none", "important");
       });
   };
-  hideAssistant();
-  new MutationObserver(hideAssistant).observe(document.documentElement, {
+  const fixYearColon = () => {
+    document.querySelectorAll("article small").forEach(el => {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        const fixed = node.nodeValue.replace(/(\b2025|\bEurostat)\s+[—–-]\s+/, "$1: ");
+        if (fixed !== node.nodeValue) node.nodeValue = fixed;
+      }
+    });
+  };
+  const hideAxisLegend = () => {
+    document.querySelectorAll("#production-area-yield span").forEach(el => {
+      if (el.style.display !== "none" && /^Eixo (horizontal|vertical):/.test(el.textContent.trim())) {
+        el.style.setProperty("display", "none", "important");
+      }
+    });
+  };
+  const fixEvolutionRef = () => {
+    document.querySelectorAll("#production-area-yield small").forEach(el => {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        if (node.nodeValue.includes("na evolução")) {
+          node.nodeValue = node.nodeValue.replace("na evolução", "no gráfico de evolução (nº1)");
+        }
+      }
+    });
+  };
+  const fixRankingRef = () => {
+    document.querySelectorAll("#production-ranking small").forEach(el => {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        const fixed = node.nodeValue.replace(/(evolução)(?!\s*\(nº)/, "$1 (nº1)");
+        if (fixed !== node.nodeValue) node.nodeValue = fixed;
+      }
+    });
+  };
+  const VARIETIES_NOTE = "Portugal: área declarada ao IFAP. Itália: área semeada declarada ao Ente Nazionale Risi (Database Superfici), por variedade e grupo varietal. Espanha: apenas a província de Sevilha, com a percentagem da área semeada das principais variedades publicada pela RAIF (Junta de Andalucía) no boletim final da campanha (2022, 2024 e 2025).";
+  const fixVarietiesNote = () => {
+    const p = document.querySelector("#production-varieties > p");
+    if (p && p.textContent.trim().startsWith("Área declarada no IFAP")) p.textContent = VARIETIES_NOTE;
+  };
+  const tidy = () => { hideAssistant(); fixYearColon(); hideAxisLegend(); fixEvolutionRef(); fixRankingRef(); fixVarietiesNote(); };
+  tidy();
+  new MutationObserver(tidy).observe(document.documentElement, {
     childList: true,
     subtree: true
   });

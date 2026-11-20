@@ -51,6 +51,19 @@ não estima preços para variedades sem cotação, como Ribe quando ausente da f
 - Bundle alterado por `precos-arroz/tools/observatorio/patch_vaga18.py`, a correr depois de
   `patch_vaga17.py`.
 
+## Alterações de 19/11/2026 (vaga 19)
+
+- Painel 1, gráfico 04 (área por variedade): por baixo do título ficam, lado a lado, as listas «País» e
+  «Variedade». A variedade escolhida filtra a tabela e o Excel; ao mudar de país volta a «Todas». Os
+  botões de país do canto superior direito saíram. Pedido da Beatriz Cardoso nos comentários do artifact.
+- Painel 1, cartão «Importações de arroz»: o «i» passa a explicar com rigor o indicador (Comext DS-045409,
+  código NC 1006, euros correntes, total anual com peso líquido, linha mensal com variação homóloga,
+  Estados-Membros com comércio total e UE só extra-UE). A correção por script no index.html da raiz saiu.
+- Painel 3, cartão «Importações líquidas»: o «i» passa a ter uma definição curta e simples
+  (importações menos exportações, em toneladas, todo o arroz NC 1006; fonte Eurostat Comext).
+- Bundle alterado por `precos-arroz/tools/observatorio/patch_vaga19.py`, a correr depois de
+  `patch_vaga18.py`.
+
 ## Publicar
 1. Settings › Pages › Build and deployment › Source: **Deploy from a branch**.
 2. Branch: **main**, pasta **/ (root)** › Save.
