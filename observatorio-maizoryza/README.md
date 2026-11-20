@@ -64,6 +64,36 @@ não estima preços para variedades sem cotação, como Ribe quando ausente da f
 - Bundle alterado por `precos-arroz/tools/observatorio/patch_vaga19.py`, a correr depois de
   `patch_vaga18.py`.
 
+## Alterações de 20/11/2026 (vaga 20)
+
+Pedidos da revisão no artifact (comentários da Beatriz Cardoso, aprovados pelo Lourenço), passados para o
+bundle. O que estava remendado por script ou CSS no `index.html` saiu de lá.
+
+- Tabelas ordenáveis por clique no cabeçalho (▲/▼): produtos do retalho (Painel 4, gráfico 03) e variedades
+  de Portugal, Itália e Espanha (Painel 1, gráfico 04). Números e preços ordenam como números, texto por
+  ordem alfabética. Saiu o botão «Ordenar por».
+- Cabeçalho de todos os gráficos: título numa linha, com o «i» e o «Dados em Excel» logo a seguir; filtros
+  na linha de baixo.
+- Painel 5 (Cotações): filtro «Cultura» junto ao «País», ambos no painel lateral «Filtros», como nos outros
+  painéis. Esconde os quadros sem essa cultura e filtra as
+  linhas dos quadros com várias culturas (MAPA, Lonja de Sevilla, FRED/FMI, DG AGRI). O quadro DG AGRI deixou
+  de ter lista de cultura própria.
+- «EUR» passa a «€» em todo o site, incluindo os textos do `observatory-data.json` (convertidos ao ler) e os
+  ficheiros Excel.
+- Painel 7: «Ano comum» passa a «Último ano disponível».
+- Painel 4: nota do gráfico 02 por baixo da legenda («Cada ponto é um produto (€/kg). O traço laranja
+  corresponde à mediana.»); filtros «Tipo de arroz» e «Segmento» no painel lateral «Filtros», como nos
+  outros painéis, visíveis ao longo da página.
+- Painel 3: cartões de importações e exportações com «… t: +x% homólogo».
+- Painel 4: carregar num valor da tabela do gráfico 02 leva ao produto correspondente na tabela 03 (filtra o
+  supermercado, desce até à linha e destaca-a). Média e mediana levam ao produto com o €/kg mais próximo; o
+  «Nº de produtos» mostra todos os produtos desse supermercado.
+- Também passaram para o bundle as correções que a revisão tinha feito por script no artifact: «Recolha de»
+  passa a «Última atualização:» (Painel 4), «·» passa a «-» em todo o site e sai a nota «Valores em mil t»
+  do gráfico de evolução do Painel 2.
+- Bundle alterado por `precos-arroz/tools/observatorio/patch_vaga20.py`, a correr depois de
+  `patch_vaga19.py`.
+
 ## Publicar
 1. Settings › Pages › Build and deployment › Source: **Deploy from a branch**.
 2. Branch: **main**, pasta **/ (root)** › Save.
