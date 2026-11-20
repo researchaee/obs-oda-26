@@ -26,7 +26,9 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m pytest -q
       - name: Recolher preços
-        run: python -m scraper.run
+        # Intermarché e El Corte Inglés bloqueiam o GitHub (403); são recolhidos no PC
+        # pela tarefa agendada precos-arroz/pc/recolha_semanal.bat (segundas, 11:00).
+        run: python -m scraper.run --cadeias continente pingodoce auchan
       - name: Atualizar o observatório e o dashboard
         run: |
           python -m tools.merge_into_observatory

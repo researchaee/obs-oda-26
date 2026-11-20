@@ -45,6 +45,20 @@ Europeia (DG AGRI). A recolha do girassol (motor Qlik do painel) foi escrita em 
 da recolha feita no browser e ainda não correu no GitHub Actions: confirmar na primeira execução. Mantém o painel
 comparativo limitado às culturas que já contém.
 
+## Recolha dividida entre o GitHub e o PC (desde 20/11/2026)
+
+O Intermarché e o El Corte Inglés recusam os pedidos vindos dos servidores do GitHub
+(erro 403 em todas as recolhas automáticas de 19/10 a 16/11). Por isso:
+
+- **GitHub Actions** (segundas, 06:17 UTC) recolhe Continente, Pingo Doce e Auchan.
+- **PC do Lourenço** (tarefa agendada do Windows, segundas às 11:00) recolhe Intermarché e
+  El Corte Inglés com `pc/recolha_semanal.bat`, atualiza o observatório e faz push.
+  Instalação: depois de os ficheiros estarem no GitHub, duplo clique em `pc/instalar_tarefa.bat` (uma vez). Registo de cada execução em
+  `%LOCALAPPDATA%\ObservatorioMaizoryza\recolha.log`.
+
+Cada execução só substitui as cadeias que recolheu; as outras mantêm a última recolha.
+Se uma cadeia ficar mais de 8 dias sem recolha nova, o painel mostra o aviso.
+
 ## Correr à mão (no teu computador)
 
 ```bash
@@ -58,6 +72,7 @@ python -m tools.build_dashboard            # atualiza a página à parte precos-
 
 Se os sites bloquearem os servidores do GitHub (aparece um aviso no dashboard e
 o erro no log do Actions), corre os mesmos comandos no teu computador e faz push.
+Para recolher só algumas cadeias: `python -m scraper.run --cadeias intermarche elcorteingles`.
 
 ## Ficheiros de dados (`data/`)
 
